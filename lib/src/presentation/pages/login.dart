@@ -37,7 +37,12 @@ class _LonginPageState extends State<LonginPage> {
                             : await UserApi.instance.loginWithKakaoAccount();
                         print(token.accessToken);
                         await Future.delayed(const Duration(milliseconds: 700));
-                        Navigator.push(context, CupertinoPageRoute(builder: (context) => TermsOfServicePage()));
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => TermsOfServicePage(),
+                          )
+                        );
                       }
                   ),
                   const SizedBox(
