@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mentos_flutter/src/presentation/pages/terms_of_service.dart';
+import 'package:mentos_flutter/src/util/color/color_style.dart';
 import 'package:mentos_flutter/src/util/enum/SocialType.dart';
 
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
@@ -24,7 +25,11 @@ class _LonginPageState extends State<LonginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
-                child: Image.asset("assets/images/mascot_splash.png"),
+                child: Image.asset(
+                  "assets/images/splash.png",
+                  width: 300,
+                  color: ColorStyles.mainColor,
+                ),
               ),
               Column(
                 children: [
