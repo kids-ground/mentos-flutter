@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
-import 'package:mentos_flutter/src/presentation/pages/login.dart';
+import 'package:mentos_flutter/src/presentation/pages/login/bloc/login_bloc.dart';
+import 'package:mentos_flutter/src/presentation/pages/login/view/login.dart';
 import 'package:mentos_flutter/src/util/color/color_style.dart';
 import 'package:mentos_flutter/src/util/constant/strings.dart';
 
@@ -15,14 +17,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: ColorStyles.black100),
-        fontFamily: 'Pretendard',
-        useMaterial3: true,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => LoginBloc())
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: ColorStyles.black100),
+          fontFamily: 'Pretendard',
+          useMaterial3: true,
+        ),
+        home: const LonginPage(),
       ),
-      home: const LonginPage(),
     );
   }
 }

@@ -2,7 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mentos_flutter/src/presentation/pages/web_view.dart';
+import 'package:mentos_flutter/src/presentation/pages/web_view/view/web_view.dart';
 import 'package:mentos_flutter/src/util/color/color_style.dart';
 
 class TermsOfServicePage extends StatefulWidget {
