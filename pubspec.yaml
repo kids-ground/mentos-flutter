@@ -64,6 +64,9 @@ dev_dependencies:
   json_serializable: ^6.7.0 # toJson, fromJson
   freezed: ^2.3.4 # toString, copyWith ...
 
+  # App Icon
+  flutter_launcher_icons: ^0.13.1
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
