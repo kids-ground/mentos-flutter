@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mentos_flutter/src/presentation/pages/web_view/view/web_view.dart';
-import 'package:mentos_flutter/src/presentation/widgets/button/full_check_button.dart';
+import 'package:mentos_flutter/src/presentation/page/web_view/view/web_view.dart';
+import 'package:mentos_flutter/src/presentation/widget/button/border_line_button.dart';
+import 'package:mentos_flutter/src/presentation/widget/button/full_check_button.dart';
+import 'package:mentos_flutter/src/presentation/widget/button/full_filled_button.dart';
+import 'package:mentos_flutter/src/presentation/widget/view/bottom_dialog_view.dart';
 import 'package:mentos_flutter/src/util/color/color_style.dart';
 
 class TermsOfServicePage extends StatefulWidget {
@@ -34,7 +37,7 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Image.asset(
-                      "assets/images/mascot_greet.png",
+                      "assets/images/mentos.png",
                       width: 70,
                     ),
                     const SizedBox(height: 24),
@@ -106,7 +109,7 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
                 ),
 
                 Container(
-                  width: width - 48,
+                  width: double.infinity,
                   height: 56,
                   child: CupertinoButton(
                     disabledColor: ColorStyles.white700,
@@ -114,84 +117,14 @@ class _TermsOfServicePageState extends State<TermsOfServicePage> {
                     color: ColorStyles.mainColor,
                     padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                     onPressed: button1Selected && button2Selected ? () {
-                      showGeneralDialog(
-                        barrierLabel: "Label",
-                        barrierDismissible: true,
-                        barrierColor: Colors.black.withOpacity(0.5),
-                        transitionDuration: const Duration(milliseconds: 300),
+                      showBottomDialog(
                         context: context,
-                        pageBuilder: (context, anim1, anim2) {
-                          return DefaultTextStyle(
-                            style: Theme.of(context).textTheme.bodyLarge!,
-                            child: SafeArea(
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Container(
-                                  width: double.infinity,
-                                  child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text("🎉 환영합니다!", style: TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w700,
-                                          color: ColorStyles.black1000,
-                                          decoration: null
-                                        )),
-
-                                        const SizedBox(height: 12),
-
-                                        Text("회원가입이 완료되었습니다.\n멘토 등록을 원하신다면 인증하기를 눌러주세요.\n", style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500,
-                                            color: ColorStyles.black100,
-                                            decoration: null
-                                        )),
-
-                                        const SizedBox(height: 12),
-
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                          children: [
-                                            CupertinoButton(
-                                              color: ColorStyles.mainColor,
-                                              onPressed: () { },
-                                              child: Text("시작하기"),
-                                            ),
-
-                                            // const SizedBox(height: 12),
-
-                                            // CupertinoButton(
-                                            //   color: ColorStyles.mainColor,
-                                            //   onPressed: () { },
-                                            //   child: Text("인증하기"),
-                                            // )
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  margin: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                        transitionBuilder: (context, anim1, anim2, child) {
-                          return SlideTransition(
-                            position: Tween(
-                              begin: const Offset(0, 1),
-                              end: const Offset(0, 0)
-                            ).animate(CurvedAnimation(parent: anim1, curve: Curves.ease)),
-                            child: child,
-                          );
-                        },
+                        title: '💡 멘토로 등록하시겠어요?',
+                        body: '회원가입이 완료되었습니다.\n멘토 등록을 원하신다면 등록하기를 눌러주세요.\n',
+                        subButtonTitle: '시작하기',
+                        subButtonOnPressed: () { },
+                        mainButtonTitle: '등록하기',
+                        mainButtonOnPressed: () { }
                       );
                     } : null,
                     child: const Text(
