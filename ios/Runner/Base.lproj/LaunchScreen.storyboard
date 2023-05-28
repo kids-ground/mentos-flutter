@@ -37,8 +37,8 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="LaunchImage" width="1244" height="353"/>
+    <resource>
+        <image name="LaunchImage" width="562" height="517"/>
         <image name="LaunchBackground" width="1" height="1"/>
-    </resources>
+    </resource>
 </document>

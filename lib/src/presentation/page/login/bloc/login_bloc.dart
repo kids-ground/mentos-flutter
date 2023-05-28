@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
-import 'package:mentos_flutter/src/util/resources/logger.dart';
+import 'package:mentos_flutter/src/util/resource/logger.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 part 'login_event.dart';

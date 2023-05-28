@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:mentos_flutter/src/presentation/pages/login/bloc/login_bloc.dart';
-import 'package:mentos_flutter/src/presentation/pages/terms_of_service/view/terms_of_service.dart';
+import 'package:mentos_flutter/src/presentation/page/login/bloc/login_bloc.dart';
+import 'package:mentos_flutter/src/presentation/page/terms_of_service/view/terms_of_service.dart';
 import 'package:mentos_flutter/src/util/color/color_style.dart';
 import 'package:mentos_flutter/src/util/enum/social_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,9 +65,8 @@ class LonginPage extends StatelessWidget {
   }
 
   Widget _buildTopImage() => Image.asset(
-    "assets/images/splash.png",
-    width: 300,
-    color: ColorStyles.mainColor,
+    "assets/images/mentos.png",
+    width: 180,
   );
 }
 
