@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentos_flutter/src/presentation/page/app/bloc/app_bloc.dart';
+import 'package:mentos_flutter/src/presentation/page/main_tab/view/main_tab.dart';
 import 'package:mentos_flutter/src/presentation/page/terms_of_service/bloc/terms_of_service_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/web_view/view/web_view.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/border_line_button.dart';
@@ -112,7 +114,15 @@ class TermsOfServicePage extends StatelessWidget {
                           body: '회원가입이 완료되었습니다.\n멘토 등록을 원하신다면 등록하기를 눌러주세요.\n',
                           subButtonTitle: '시작하기',
                           subButtonOnPressed: () {
-                            // TabView로
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              PageRouteBuilder(
+                                pageBuilder: (context, animation1, animation2) => MainTabPage(),
+                                transitionDuration: Duration.zero,
+                                reverseTransitionDuration: Duration.zero,
+                              ),
+                              (route) => false
+                            );
                           },
                           mainButtonTitle: '등록하기',
                           mainButtonOnPressed: () {
