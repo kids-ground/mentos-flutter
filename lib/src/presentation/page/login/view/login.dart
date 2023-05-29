@@ -1,15 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mentos_flutter/src/presentation/page/login/bloc/login_bloc.dart';
+import 'package:mentos_flutter/src/presentation/page/main_tab/view/main_tab.dart';
 import 'package:mentos_flutter/src/presentation/page/terms_of_service/view/terms_of_service.dart';
 import 'package:mentos_flutter/src/util/color/color_style.dart';
 import 'package:mentos_flutter/src/util/enum/social_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
-class LonginPage extends StatelessWidget {
-  const LonginPage({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,15 @@ class LonginPage extends StatelessWidget {
         listener: (context, state) {
           switch (state.status) {
             case LoginStatus.signIn:
-              return;
+              Navigator.pushAndRemoveUntil(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) => MainTabPage(),
+                  transitionDuration: Duration.zero,
+                  reverseTransitionDuration: Duration.zero,
+                ),
+                (route) => false
+              );
             case LoginStatus.signUp:
               Navigator.push(
                   context,
