@@ -7,7 +7,6 @@ enum LoginStatus {
   signIn
 }
 
-@freezed
 class LoginState extends Equatable {
   const LoginState({
     this.status = LoginStatus.none
