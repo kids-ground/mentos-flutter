@@ -112,7 +112,10 @@ class BottomDialogView extends StatelessWidget {
                             child: BorderLineButton(
                                 title: subButtonTitle ?? "",
                                 height: 48,
-                                onPressed: subButtonOnPressed!
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  subButtonOnPressed!();
+                                }
                             )
                           ),
                           const SizedBox(width: 8,),
@@ -122,7 +125,10 @@ class BottomDialogView extends StatelessWidget {
                           child: FullFilledButton(
                               title: mainButtonTitle,
                               height: 48,
-                              onPressed: mainButtonOnPressed!
+                              onPressed: () {
+                                Navigator.pop(context);
+                                mainButtonOnPressed();
+                              }
                           )
                       )
                     ],
