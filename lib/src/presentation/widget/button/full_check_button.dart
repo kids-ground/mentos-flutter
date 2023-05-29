@@ -5,8 +5,8 @@ import 'package:mentos_flutter/src/util/color/color_style.dart';
 class FullCheckButton extends StatelessWidget {
   FullCheckButton({
     Key? key,
-    required this.width,
-    required this.height,
+    this.width = double.infinity,
+    this.height = double.infinity,
     required this.title,
     required this.isSelected,
     required this.onPress,

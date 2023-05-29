@@ -36,7 +36,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     logger.d('카카오 AccessToken : ${kakakoOAuthToken.accessToken}');
     await Future.delayed(const Duration(milliseconds: 700));
 
-
     emit(state.copyWith(status: LoginStatus.signUp));
   }
 
