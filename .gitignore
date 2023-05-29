@@ -30,3 +30,8 @@ doc/api/
 *.iml
 web/
 macos/
+
+# Pub related
+*.freezed.dart
+*.g.dart
+*.gr.dart
