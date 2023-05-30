@@ -113,7 +113,8 @@ class TermsOfServicePage extends StatelessWidget {
                           title: '💡 멘토로 등록하시겠어요?',
                           body: '회원가입이 완료되었습니다.\n멘토 등록을 원하신다면 등록하기를 눌러주세요.\n',
                           subButtonTitle: '시작하기',
-                          subButtonOnPressed: () {
+                          subButtonOnPressed: () async {
+                            await Future.delayed(Duration(milliseconds: 700));
                             Navigator.pushAndRemoveUntil(
                               context,
                               PageRouteBuilder(
