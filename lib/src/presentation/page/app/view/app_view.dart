@@ -14,7 +14,9 @@ class AppView extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: ColorStyles.black100),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: ColorStyles.black700,
+        ),
         fontFamily: 'Pretendard',
         useMaterial3: true,
       ),
