@@ -206,6 +206,16 @@ class _ContentListItem extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      if (randomValue % 2 == 1)
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0,0,2,0),
+                          child: Image.asset(
+                            'assets/images/certification_mark.png',
+                            width: 16,
+                            height: 16,
+                            color: Colors.green,
+                          ),
+                        ),
                       Text(
                         randomValue % 2 == 1 ? '카카오' : '취준생',
                         maxLines: 3,
@@ -261,7 +271,7 @@ class _ContentListItem extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
-                              color: ColorStyles.black100
+                              color: ColorStyles.black300
                           ),
                         ),
                         const SizedBox(height: 8,),
@@ -292,7 +302,7 @@ class _ContentListItem extends StatelessWidget {
               ],
             ),
 
-            const SizedBox(height: 24,),
+            const SizedBox(height: 16,),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -301,7 +311,25 @@ class _ContentListItem extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '조회 6  ·  채팅 6  ·  32분 전',
+                      '조회 6',
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: ColorStyles.white1000
+                      ),
+                    ),
+                    const SizedBox(width: 16,),
+                    Text(
+                      '채팅 6',
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: ColorStyles.white1000
+                      ),
+                    ),
+                    const SizedBox(width: 16,),
+                    Text(
+                      '32분 전',
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
