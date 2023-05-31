@@ -167,7 +167,7 @@ class _ContentListItem extends StatelessWidget {
               child: Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.fromLTRB(6, 4, 6, 4),
+                    padding: const EdgeInsets.fromLTRB(4, 2, 4, 2),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
                         color: randomValue % 2 == 0 ? ColorStyles.red100 : ColorStyles.blue100
@@ -182,7 +182,7 @@ class _ContentListItem extends StatelessWidget {
                   ),
                   const SizedBox(width: 4,),
                   Container(
-                    padding: const EdgeInsets.fromLTRB(6, 4, 6, 4),
+                    padding: const EdgeInsets.fromLTRB(4, 2, 4, 2),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
                         color: ColorStyles.white300
