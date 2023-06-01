@@ -110,8 +110,8 @@ class TermsOfServicePage extends StatelessWidget {
                         termsOfServceBloC.add(const TermsOfServicePressedStart());
                         showBottomDialog(
                           context: context,
-                          title: '💡 멘토로 등록하시겠어요?',
-                          body: '회원가입이 완료되었습니다.\n멘토 등록을 원하신다면 등록하기를 눌러주세요.\n',
+                          title: '💡 커리어 프로필을 작성하시겠어요?',
+                          body: '커리어 프로필 작성을 통해\n멘티분들께 신뢰받는 멘토가 되어보세요!',
                           subButtonTitle: '시작하기',
                           subButtonOnPressed: () async {
                             await Future.delayed(Duration(milliseconds: 700));
@@ -125,7 +125,7 @@ class TermsOfServicePage extends StatelessWidget {
                               (route) => false
                             );
                           },
-                          mainButtonTitle: '등록하기',
+                          mainButtonTitle: '작성하기',
                           mainButtonOnPressed: () {
                             // 인증 뷰로
                           }
