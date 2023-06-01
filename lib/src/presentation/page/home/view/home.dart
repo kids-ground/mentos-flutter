@@ -151,13 +151,13 @@ class _ContentListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final randomValue = Random().nextInt(10);
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0,0,0,12), // 최외각 패딩
+      padding: const EdgeInsets.fromLTRB(0,0,0,1), // 최외각 패딩
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
           color: ColorStyles.white,
         ),
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 12), // 카드 내 패딩
+        padding: const EdgeInsets.fromLTRB(20, 24, 20, 20), // 카드 내 패딩
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,33 +166,23 @@ class _ContentListItem extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
               child: Row(
                 children: [
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(4, 2, 4, 2),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: randomValue % 2 == 0 ? ColorStyles.red100 : ColorStyles.blue100
-                    ),
-                    child: Text(
-                      randomValue % 2 == 0 ? '멘토링 요청' : '멘토링 제안',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: randomValue % 2 == 0 ? ColorStyles.red1000 : ColorStyles.blue1000
-                      ),
+
+                  Text(
+                    randomValue % 2 == 0 ? '멘토링 요청' : '멘토링 제안',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: randomValue % 2 == 0 ? ColorStyles.red1000 : ColorStyles.blue1000
                     ),
                   ),
-                  const SizedBox(width: 4,),
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(4, 2, 4, 2),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: ColorStyles.white300
-                    ),
-                    child: Text(
-                      randomValue % 2 == 0 ? '소프트웨어 개발' : '마케팅',
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: ColorStyles.black800
-                      ),
+                  const SizedBox(width: 2,),
+
+                  Text(
+                    randomValue % 2 == 0 ? ' · 소프트웨어 개발' : ' · 마케팅',
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: ColorStyles.black800
                     ),
                   ),
                 ],
@@ -206,36 +196,68 @@ class _ContentListItem extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      if (randomValue % 2 == 1)
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0,0,2,0),
-                          child: Image.asset(
-                            'assets/images/certification_mark.png',
-                            width: 16,
-                            height: 16,
-                            color: Colors.green,
-                          ),
+
+                      CachedNetworkImage(
+                        imageUrl: 'https://media.istockphoto.com/id/1430329340/ko/%EC%82%AC%EC%A7%84/%EC%B9%B4%EB%A9%94%EB%9D%BC%EB%A5%BC-%EB%B0%94%EB%9D%BC%EB%B3%B4%EB%A9%B0-%EB%88%84%EC%9B%8C-%EC%9E%88%EB%8A%94-%EB%B9%84%EA%B8%80-%EA%B0%95%EC%95%84%EC%A7%80%EC%9D%98-%EC%95%84%EB%A6%84%EB%8B%A4%EC%9A%B4-%EC%B4%88%EC%83%81%ED%99%94.webp?b=1&s=170667a&w=0&k=20&c=tn4wEgRhROAx-vesouY7TLESLiQaH1r3LVEMZNs6LU8=',
+                        width: 30,
+                        height: 30,
+                        fadeInDuration: const Duration(milliseconds: 200),
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              image: DecorationImage(
+                                  image: imageProvider, fit: BoxFit.cover)),
                         ),
-                      Text(
-                        randomValue % 2 == 1 ? '카카오' : '취준생',
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: ColorStyles.black700
-                        ),
-                      ),
-                      Text(
-                        '  ·  천재개발자',
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: ColorStyles.black500
+                        placeholder: (context, url) => Container(
+                          width: 30,
+                          height: 30,
                         ),
                       ),
 
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8,0,0,0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+
+                            Text(
+                              '천재개발자',
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w500,
+                                  color: ColorStyles.black100
+                              ),
+                            ),
+
+
+                            Row(
+                              children: [
+                                if (randomValue % 2 == 1)
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(0,0,2,0),
+                                    child: Image.asset(
+                                      'assets/images/certification_mark.png',
+                                      width: 13,
+                                      height: 13,
+                                      color: Colors.green[300],
+                                    ),
+                                  ),
+                                Text(
+                                  randomValue % 2 == 1 ? '카카오' : '취준생',
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                      color: ColorStyles.black100
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   )
                 ],
@@ -254,13 +276,13 @@ class _ContentListItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '삼성전자 솦웨',
+                          '삼성전자 DS 지원관련',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w700,
-                            color: ColorStyles.black700
+                            fontSize: 16,
+                            fontWeight: FontWeight.w800,
+                            color: ColorStyles.black1000
                           ),
                         ),
                         const SizedBox(height: 4,),
@@ -270,8 +292,9 @@ class _ContentListItem extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: ColorStyles.black300
+                              fontWeight: FontWeight.w400,
+                              color: ColorStyles.black1000,
+                              height: 1.4
                           ),
                         ),
                         const SizedBox(height: 8,),
@@ -281,7 +304,6 @@ class _ContentListItem extends StatelessWidget {
                 ),
 
 
-                // 이미지가 있다면
                 if (Random().nextInt(10) % 2 == 0)
                   CachedNetworkImage(
                     imageUrl: 'https://media.istockphoto.com/id/1430329340/ko/%EC%82%AC%EC%A7%84/%EC%B9%B4%EB%A9%94%EB%9D%BC%EB%A5%BC-%EB%B0%94%EB%9D%BC%EB%B3%B4%EB%A9%B0-%EB%88%84%EC%9B%8C-%EC%9E%88%EB%8A%94-%EB%B9%84%EA%B8%80-%EA%B0%95%EC%95%84%EC%A7%80%EC%9D%98-%EC%95%84%EB%A6%84%EB%8B%A4%EC%9A%B4-%EC%B4%88%EC%83%81%ED%99%94.webp?b=1&s=170667a&w=0&k=20&c=tn4wEgRhROAx-vesouY7TLESLiQaH1r3LVEMZNs6LU8=',
@@ -301,8 +323,7 @@ class _ContentListItem extends StatelessWidget {
                   ),
               ],
             ),
-
-            const SizedBox(height: 16,),
+            const SizedBox(height: 8,),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -313,8 +334,8 @@ class _ContentListItem extends StatelessWidget {
                     Text(
                       '조회 6',
                       style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
                           color: ColorStyles.white1000
                       ),
                     ),
@@ -322,8 +343,8 @@ class _ContentListItem extends StatelessWidget {
                     Text(
                       '채팅 6',
                       style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
                           color: ColorStyles.white1000
                       ),
                     ),
@@ -331,8 +352,8 @@ class _ContentListItem extends StatelessWidget {
                     Text(
                       '32분 전',
                       style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
                           color: ColorStyles.white1000
                       ),
                     ),
