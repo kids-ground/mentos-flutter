@@ -40,7 +40,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         null,
       titleSpacing: 24,
       leading: leading != null ? Container(
-        margin: const EdgeInsets.fromLTRB(16, 8, 0, 8),
+        margin: const EdgeInsets.fromLTRB(24, 8, 0, 8),
         child: leading,
       ) : null,
       actions: actions,
