@@ -32,7 +32,7 @@ class FullCheckButton extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                   side: BorderSide(
                       color: isSelected ? ColorStyles.mainColor : ColorStyles.white300,
-                      width: 1.5
+                      width: 1
                   )
               )
           ),

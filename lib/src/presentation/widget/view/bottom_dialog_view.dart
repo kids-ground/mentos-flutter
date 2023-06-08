@@ -90,7 +90,7 @@ class BottomDialogView extends StatelessWidget {
                     )
                   ),
 
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 20),
 
                   Text(
                     body,
@@ -102,7 +102,7 @@ class BottomDialogView extends StatelessWidget {
                     )
                   ),
 
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 24),
 
                   Row(
                     children: [

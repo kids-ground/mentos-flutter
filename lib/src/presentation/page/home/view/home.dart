@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 import 'dart:math';
 
@@ -5,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:mentos_flutter/src/presentation/page/home/bloc/home_bloc.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/line_check_button.dart';
@@ -74,6 +76,7 @@ class _CategoryListView extends StatelessWidget {
     final homeBloC = context.read<HomeBloc>();
 
     return BlocBuilder<HomeBloc, HomeState>(
+      buildWhen: (pre, cur) => pre.selectedHomeCategroyId != cur.selectedHomeCategroyId,
       builder: (context, state) => Container(
         height: 12 + 12 + 32,
         child: ListView.builder(
@@ -96,6 +99,10 @@ class _CategoryListView extends StatelessWidget {
   }
 }
 
+
+
+
+
 class _ContentListView extends StatelessWidget {
   const _ContentListView({Key? key}) : super(key: key);
 
@@ -108,15 +115,15 @@ class _ContentListView extends StatelessWidget {
             child: RefreshIndicator(
               onRefresh: () async { },
               child: ListView.builder(
-              itemCount: 100,
-              itemBuilder: (context, index) => _ContentListItem()
+              itemCount: state.list.length,
+              itemBuilder: (context, index) => _ContentListItem(data: state.list[index],)
               ),
             ),
           );
         } else {
           return Expanded(
             child: Container(
-              color: ColorStyles.white300,
+              color: ColorStyles.white100,
               child: CustomScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 slivers: [
@@ -125,11 +132,11 @@ class _ContentListView extends StatelessWidget {
                       return Future.delayed(const Duration(milliseconds: 1000));
                     },
                   ),
-                  const SliverPadding(padding: EdgeInsets.fromLTRB(0, 0, 0, 16),),
+                  const SliverPadding(padding: EdgeInsets.fromLTRB(0, 0, 0, 8),),
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
-                      childCount: 100,
-                      (context, index) => _ContentListItem(),
+                      childCount: state.list.length,
+                      (context, index) => _ContentListItem(data: state.list[index],),
                     ),
                   ),
                 ],
@@ -145,13 +152,15 @@ class _ContentListView extends StatelessWidget {
 class _ContentListItem extends StatelessWidget {
   const _ContentListItem({
     Key? key,
+    required this.data
   }) : super(key: key);
+
+  final MockMentoringData data;
 
   @override
   Widget build(BuildContext context) {
-    final randomValue = Random().nextInt(10);
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0,0,0,1), // 최외각 패딩
+      padding: const EdgeInsets.fromLTRB(0,0,0,12), // 최외각 패딩
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
@@ -166,22 +175,29 @@ class _ContentListItem extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
               child: Row(
                 children: [
-
                   Text(
-                    randomValue % 2 == 0 ? '멘토링 요청' : '멘토링 제안',
+                    data.category,
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
-                      color: randomValue % 2 == 0 ? ColorStyles.red1000 : ColorStyles.blue1000
+                      color: data.category == "멘토링 요청" ? ColorStyles.red1000 : ColorStyles.blue1000
                     ),
                   ),
-                  const SizedBox(width: 2,),
-
+                  const SizedBox(width: 4,),
                   Text(
-                    randomValue % 2 == 0 ? ' · 소프트웨어 개발' : ' · 마케팅',
+                    '·',
                     style: TextStyle(
                         fontSize: 15,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
+                        color: ColorStyles.black800
+                    ),
+                  ),
+                  const SizedBox(width: 4,),
+                  Text(
+                    data.jobDuty,
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
                         color: ColorStyles.black800
                     ),
                   ),
@@ -198,7 +214,7 @@ class _ContentListItem extends StatelessWidget {
                     children: [
 
                       CachedNetworkImage(
-                        imageUrl: 'https://media.istockphoto.com/id/1430329340/ko/%EC%82%AC%EC%A7%84/%EC%B9%B4%EB%A9%94%EB%9D%BC%EB%A5%BC-%EB%B0%94%EB%9D%BC%EB%B3%B4%EB%A9%B0-%EB%88%84%EC%9B%8C-%EC%9E%88%EB%8A%94-%EB%B9%84%EA%B8%80-%EA%B0%95%EC%95%84%EC%A7%80%EC%9D%98-%EC%95%84%EB%A6%84%EB%8B%A4%EC%9A%B4-%EC%B4%88%EC%83%81%ED%99%94.webp?b=1&s=170667a&w=0&k=20&c=tn4wEgRhROAx-vesouY7TLESLiQaH1r3LVEMZNs6LU8=',
+                        imageUrl: data.member.thumbnail,
                         width: 30,
                         height: 30,
                         fadeInDuration: const Duration(milliseconds: 200),
@@ -219,9 +235,8 @@ class _ContentListItem extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-
                             Text(
-                              '천재개발자',
+                              data.member.nickname,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   fontSize: 13,
@@ -230,10 +245,9 @@ class _ContentListItem extends StatelessWidget {
                               ),
                             ),
 
-
                             Row(
                               children: [
-                                if (randomValue % 2 == 1)
+                                if (data.member.isCertified)
                                   Padding(
                                     padding: const EdgeInsets.fromLTRB(0,0,2,0),
                                     child: Image.asset(
@@ -244,12 +258,12 @@ class _ContentListItem extends StatelessWidget {
                                     ),
                                   ),
                                 Text(
-                                  randomValue % 2 == 1 ? '카카오' : '취준생',
+                                  data.member.company,
                                   maxLines: 3,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                       fontSize: 14,
-                                      fontWeight: FontWeight.w700,
+                                      fontWeight: FontWeight.w500,
                                       color: ColorStyles.black100
                                   ),
                                 ),
@@ -276,7 +290,7 @@ class _ContentListItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '삼성전자 DS 지원관련',
+                          data.title,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -287,7 +301,7 @@ class _ContentListItem extends StatelessWidget {
                         ),
                         const SizedBox(height: 4,),
                         Text(
-                          '삼성전자 현직자분들께 여쭤보고 질문이 있습니다. 현직자분들 나와주세요!!!, 삼성전자 현직자분들께 여쭤보고 질문이 있습니다. 현직자분들 나와주세요!!!',
+                          data.description,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -304,9 +318,9 @@ class _ContentListItem extends StatelessWidget {
                 ),
 
 
-                if (Random().nextInt(10) % 2 == 0)
+                if (data.thumbnail != null)
                   CachedNetworkImage(
-                    imageUrl: 'https://media.istockphoto.com/id/1430329340/ko/%EC%82%AC%EC%A7%84/%EC%B9%B4%EB%A9%94%EB%9D%BC%EB%A5%BC-%EB%B0%94%EB%9D%BC%EB%B3%B4%EB%A9%B0-%EB%88%84%EC%9B%8C-%EC%9E%88%EB%8A%94-%EB%B9%84%EA%B8%80-%EA%B0%95%EC%95%84%EC%A7%80%EC%9D%98-%EC%95%84%EB%A6%84%EB%8B%A4%EC%9A%B4-%EC%B4%88%EC%83%81%ED%99%94.webp?b=1&s=170667a&w=0&k=20&c=tn4wEgRhROAx-vesouY7TLESLiQaH1r3LVEMZNs6LU8=',
+                    imageUrl: data.thumbnail!,
                     width: 80,
                     height: 80,
                     fadeInDuration: const Duration(milliseconds: 200),
@@ -332,7 +346,7 @@ class _ContentListItem extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '조회 6',
+                      '조회 ${data.hit}',
                       style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -341,7 +355,7 @@ class _ContentListItem extends StatelessWidget {
                     ),
                     const SizedBox(width: 16,),
                     Text(
-                      '채팅 6',
+                      '채팅 ${data.chatCount}',
                       style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -360,7 +374,7 @@ class _ContentListItem extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  '20,000원', // or '제안'
+                  '${new NumberFormat('###,###,###,###').format(data.price)}원', // or '제안'
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
@@ -376,4 +390,76 @@ class _ContentListItem extends StatelessWidget {
   }
 }
 
+// Mock
+class MockMember{
+  const MockMember({
+    required this.nickname,
+    required this.company,
+    this.isCertified = false,
+    required this.thumbnail
+  });
 
+  final String nickname;
+  final String company;
+  final bool isCertified;
+  final String thumbnail;
+}
+
+class MockMentoringData {
+  MockMentoringData({
+    required this.category,
+    required this.jobDuty,
+    required this.member,
+    required this.title,
+    required this.description,
+    required this.hit,
+    required this.chatCount,
+    this.price = 20000,
+    this.thumbnail
+  });
+
+  final String category;
+  final String jobDuty;
+  final MockMember member;
+  final String title;
+  final String description;
+
+  final int hit;
+  final int chatCount;
+  final int price;
+  String? thumbnail;
+}
+
+
+var mockData = [
+  MockMentoringData(
+    category: "멘토링 제안",
+    jobDuty: "소프트웨어 개발",
+    member: MockMember(
+      nickname: "로건",
+      isCertified: true,
+      company: "토스",
+      thumbnail: "https://avatars.githubusercontent.com/u/52196792?v=4"
+    ),
+    title: "토스 오고 싶은 사람!",
+    description: "이번 토스 Next 공채에 들어오고 싶으신분 연락주세요!",
+    hit: 302,
+    chatCount: 3,
+  ),
+
+  MockMentoringData(
+    category: "멘토링 요청",
+    jobDuty: "마케팅",
+    member: MockMember(
+        nickname: "로건",
+        isCertified: true,
+        company: "토스",
+        thumbnail: "https://avatars.githubusercontent.com/u/52196792?v=4"
+    ),
+    title: "마케팅에 대해서 배워보고 싶어요",
+    description: "개발을 하다보니 마케팅에 관해서도 호기심이 생겼습니다. 저에게 마케팅에 대해서 알려주실 분 없을까요??",
+    hit: 27,
+    chatCount: 0,
+    thumbnail: "https://i0.wp.com/blog.codestates.com/wp-content/uploads/2023/02/%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0_%ED%8D%BC%ED%8F%AC%EB%A8%BC%EC%8A%A4%EB%A7%88%EC%BC%80%ED%8C%85%EC%9D%B4%EB%9E%80_%EB%8C%80%ED%91%9C%EC%9D%B4%EB%AF%B8%EC%A7%80.png?resize=750%2C485&ssl=1"
+  )
+];

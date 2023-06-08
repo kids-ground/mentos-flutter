@@ -52,6 +52,9 @@ dependencies:
   # Routing
   auto_route: ^7.3.1
 
+  # ETC
+  intl: ^0.18.1
+
 
 dev_dependencies:
   flutter_test:

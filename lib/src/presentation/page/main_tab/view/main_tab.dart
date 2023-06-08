@@ -40,7 +40,7 @@ class MainTabPage extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => HomeBloc())
+        BlocProvider(create: (context) => HomeBloc()..add(const HomeSelectCategory(selectedHomeCategroyId: 0)))
       ],
       child: BlocBuilder<MainTabBloc, MainTabState>(
         builder: (context, state) => WillPopScope(
