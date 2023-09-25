@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/app/bloc/app_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/main_tab/view/main_tab.dart';
+import 'package:mentos_flutter/src/presentation/page/mentor_profile_modify/view/mentor_profile_modify.dart';
 import 'package:mentos_flutter/src/presentation/page/terms_of_service/bloc/terms_of_service_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/web_view/view/web_view.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/border_line_button.dart';
@@ -18,7 +19,6 @@ class TermsOfServicePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
     final termsOfServceBloC = BlocProvider.of<TermsOfServiceBloc>(context);
 
     return BlocBuilder<TermsOfServiceBloc, TermsOfServiceState>(
@@ -114,7 +114,6 @@ class TermsOfServicePage extends StatelessWidget {
                           body: '커리어 프로필 작성을 통해\n멘티분들께 신뢰받는 멘토가 되어보세요!',
                           subButtonTitle: '시작하기',
                           subButtonOnPressed: () async {
-                            await Future.delayed(Duration(milliseconds: 700));
                             Navigator.pushAndRemoveUntil(
                               context,
                               PageRouteBuilder(
@@ -127,6 +126,11 @@ class TermsOfServicePage extends StatelessWidget {
                           },
                           mainButtonTitle: '작성하기',
                           mainButtonOnPressed: () {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (context) => const MentorProfileModifyPage())
+                                ,(route) => false
+                            );
                             // 인증 뷰로
                           }
                         );
