@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
 import 'package:mentos_flutter/src/util/color/color_style.dart';
 
-class ProfileModifyPage extends StatelessWidget {
-  const ProfileModifyPage({Key? key}) : super(key: key);
+class MentorProfileModifyPage extends StatelessWidget {
+  const MentorProfileModifyPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
