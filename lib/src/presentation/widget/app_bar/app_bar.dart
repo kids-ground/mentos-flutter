@@ -7,7 +7,10 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.leading,
     this.actions,
-    this.bottomLine = true
+    this.bottomLine = true,
+    this.centerTitle = false,
+    this.fontSize = 24,
+    this.fontWeight = FontWeight.w700
   }) : preferredSize = const Size.fromHeight(42), super(key: key);
 
   @override
@@ -17,6 +20,9 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;
   final List<Widget>? actions;
   final bool bottomLine;
+  final bool centerTitle;
+  final double fontSize;
+  final FontWeight fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +35,13 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           width: 0.1,
         ),
       ) : null,
-      centerTitle: false,
+      centerTitle: centerTitle,
       title: title != null ?
         Text(
           title!,
-          style: const TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 24),
+          style: TextStyle(
+            fontWeight: fontWeight,
+            fontSize: fontSize),
           ) :
         null,
       titleSpacing: 24,
