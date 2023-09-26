@@ -7,6 +7,7 @@ class BorderLineButton extends StatelessWidget {
     Key? key,
     required this.title,
     this.fontSize = 18,
+    this.fontWeight = FontWeight.w500,
     this.color = const Color(0xFF1F5CD1),
     this.width = double.infinity,
     this.height = double.infinity,
@@ -15,17 +16,21 @@ class BorderLineButton extends StatelessWidget {
 
   final String title;
   final double fontSize;
+  final FontWeight fontWeight;
   final Color color;
   final double width;
   final double height;
-  final Function() onPressed;
+  final Function()? onPressed;
+
 
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
       color: ColorStyles.white,
       padding: const EdgeInsets.all(0),
+      disabledColor: Colors.transparent,
       onPressed: onPressed,
+
       child: Container(
         alignment: Alignment.center,
         width: width,
@@ -33,15 +38,15 @@ class BorderLineButton extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: color
+              color: onPressed == null ? ColorStyles.white900 : color
             )
         ),
         child: Text(
           title,
           style: TextStyle(
               fontSize: fontSize,
-              fontWeight: FontWeight.w500,
-              color: color,
+              fontWeight: fontWeight,
+              color: onPressed == null ? ColorStyles.white900 : color,
               decoration: null
           )
         ),
