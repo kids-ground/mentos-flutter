@@ -128,7 +128,7 @@ class TermsOfServicePage extends StatelessWidget {
                           mainButtonOnPressed: () {
                             Navigator.pushAndRemoveUntil(
                                 context,
-                                MaterialPageRoute(builder: (context) => const MentorProfileModifyPage())
+                                MaterialPageRoute(builder: (context) => MentorProfileModifyPage())
                                 ,(route) => false
                             );
                             // 인증 뷰로
@@ -184,7 +184,7 @@ class _WebLinkButton extends StatelessWidget {
         width: 30,
         height: 30,
         alignment: Alignment.center,
-        child: Text(
+        child: const Text(
           "확인",
           style: TextStyle(
             decoration: TextDecoration.underline,
