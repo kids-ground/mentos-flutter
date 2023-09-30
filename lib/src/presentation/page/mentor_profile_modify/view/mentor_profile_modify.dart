@@ -15,6 +15,15 @@ class MentorProfileModifyPage extends StatelessWidget {
   MentorProfileModifyPage({Key? key}) : super(key: key);
   final formKey = GlobalKey<FormState>();
 
+  static Route<void> route() {
+    return MaterialPageRoute(
+      builder: (context) => BlocProvider(
+        create: (context) => MentorProfileModifyBloc(),
+        child: MentorProfileModifyPage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final mentorProfileModifyBloC = BlocProvider.of<MentorProfileModifyBloc>(context);

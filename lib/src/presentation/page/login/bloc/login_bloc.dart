@@ -60,6 +60,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     logger.d('애플 AccessToken : ${token.identityToken}');
     await Future.delayed(const Duration(milliseconds: 700));
 
-    emit(state.copyWith(status: LoginStatus.signUp));
+    emit(state.copyWith(status: LoginStatus.signIn));
   }
 }

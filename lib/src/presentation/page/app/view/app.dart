@@ -43,7 +43,7 @@ class AppView extends StatelessWidget {
       ),
       home: BlocBuilder<AppBloc, AppState>(
         buildWhen: (pre, cur) {
-          return pre.status != cur.status && cur.status != AppStatus.registering;
+          return pre.status != cur.status;
         },
         builder: (context, state) {
           switch (state.status) {
@@ -52,7 +52,7 @@ class AppView extends StatelessWidget {
             case AppStatus.registering:
               return const LoginPage();
             case AppStatus.joined:
-              return MainTabPage();
+              return const MainTabPage();
           }
         }
       ),
