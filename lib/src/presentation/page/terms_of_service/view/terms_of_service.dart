@@ -114,6 +114,7 @@ class TermsOfServicePage extends StatelessWidget {
                           body: '커리어 프로필 작성을 통해\n멘티분들께 신뢰받는 멘토가 되어보세요!',
                           subButtonTitle: '시작하기',
                           subButtonOnPressed: () async {
+                            await Future.delayed(Duration(milliseconds: 500));
                             Navigator.pushAndRemoveUntil(
                               context,
                               PageRouteBuilder(
@@ -125,13 +126,21 @@ class TermsOfServicePage extends StatelessWidget {
                             );
                           },
                           mainButtonTitle: '작성하기',
-                          mainButtonOnPressed: () {
+                          mainButtonOnPressed: () async {
+                            await Future.delayed(Duration(milliseconds: 300));
                             Navigator.pushAndRemoveUntil(
+                              context,
+                              PageRouteBuilder(
+                                pageBuilder: (context, animation1, animation2) => MainTabPage(),
+                                transitionDuration: Duration.zero,
+                                reverseTransitionDuration: Duration.zero,
+                              ),
+                              (route) => false
+                            );
+                            Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => MentorProfileModifyPage())
-                                ,(route) => false
                             );
-                            // 인증 뷰로
                           }
                         );
                       } : null,
