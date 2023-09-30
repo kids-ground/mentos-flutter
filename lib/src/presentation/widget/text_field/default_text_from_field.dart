@@ -8,6 +8,7 @@ class DefaultTextFormField extends StatelessWidget {
     required this.onSaved,
     required this.validator,
     this.hintText = "",
+    this.helperText,
     this.isFilled = true,
     this.onEditingComplete,
     this.keyboardType,
@@ -18,6 +19,7 @@ class DefaultTextFormField extends StatelessWidget {
 
   final String label;
   final String hintText;
+  final String? helperText;
   final FormFieldSetter onSaved;
   final ValueChanged<String>? onChanged;
   final FormFieldValidator validator;
@@ -57,25 +59,31 @@ class DefaultTextFormField extends StatelessWidget {
             filled: isFilled,
             counterText: "",
             hintText: hintText,
-            hintStyle: TextStyle(
+            helperText: helperText,
+            helperStyle: const TextStyle(
+              color: ColorStyles.mainColor,
+              fontWeight: FontWeight.w600,
+              fontSize: 14
+            ),
+            hintStyle: const TextStyle(
               color: ColorStyles.white900, // 플레이스홀더 텍스트 색상
             ),
-            errorStyle: TextStyle(
+            errorStyle: const TextStyle(
                 fontSize: 12
             ),
             isDense: true,
-            contentPadding: EdgeInsets.fromLTRB(8, 12, 4, 12),
+            contentPadding: const EdgeInsets.fromLTRB(8, 12, 4, 12),
             // 기본 색상
-            enabledBorder: UnderlineInputBorder(
+            enabledBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: ColorStyles.white200, width: 1.5),
             ),
-            focusedBorder: UnderlineInputBorder(
+            focusedBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: ColorStyles.mainColor, width: 1.5),
             ),
-            errorBorder: UnderlineInputBorder(
+            errorBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: ColorStyles.red1000, width: 1.5),
             ),
-            focusedErrorBorder: UnderlineInputBorder(
+            focusedErrorBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: ColorStyles.red1000, width: 1.5),
             ),
           ),
