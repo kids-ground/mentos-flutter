@@ -34,7 +34,7 @@ class LoginPage extends StatelessWidget {
             case LoginStatus.signUp:
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const TermsOfServicePage())
+                  MaterialPageRoute(builder: (context) => TermsOfServicePage())
               );
             case LoginStatus.failure:
               // 실패 Toast 띄우기

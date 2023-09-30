@@ -1,6 +1,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentos_flutter/src/presentation/page/mentor_profile_modify/bloc/mentor_profile_modify_bloc.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/border_line_button.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/full_filled_button.dart';
@@ -11,23 +13,23 @@ import 'package:mentos_flutter/src/util/constant/strings.dart';
 
 class MentorProfileModifyPage extends StatelessWidget {
   MentorProfileModifyPage({Key? key}) : super(key: key);
-
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    final mentorProfileModifyBloC = BlocProvider.of<MentorProfileModifyBloc>(context);
+
     return Scaffold(
       appBar: CommonAppBar(
         title: '멘토 프로필',
         centerTitle: true,
         fontSize: 20,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          visualDensity: VisualDensity.comfortable,
+          icon: const Icon(Icons.arrow_back_ios),
           padding: EdgeInsets.zero,
-          color: ColorStyles.black100,
+          constraints: const BoxConstraints(),
           onPressed: () {
-
+            Navigator.pop(context);
           },
         )
       ),
