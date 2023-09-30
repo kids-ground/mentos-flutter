@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mentos_flutter/src/config/router/app_router.dart';
 import 'package:mentos_flutter/src/presentation/page/app/bloc/app_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/login/bloc/login_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/login/view/login.dart';
@@ -8,6 +7,7 @@ import 'package:mentos_flutter/src/presentation/page/main_tab/bloc/main_tab_bloc
 import 'package:mentos_flutter/src/presentation/page/main_tab/view/main_tab.dart';
 import 'package:mentos_flutter/src/presentation/page/terms_of_service/bloc/terms_of_service_bloc.dart';
 import 'package:mentos_flutter/src/util/color/color_style.dart';
+import 'package:mentos_flutter/src/util/constant/strings.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -33,12 +33,12 @@ class AppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: appTitle,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: ColorStyles.black700,
         ),
-        fontFamily: 'Pretendard',
+        fontFamily: fontFamilyName,
         useMaterial3: true,
       ),
       home: BlocBuilder<AppBloc, AppState>(
@@ -47,7 +47,7 @@ class AppView extends StatelessWidget {
         },
         builder: (context, state) {
           switch (state.status) {
-            case AppStatus.loading:
+            case AppStatus.loading: // Splash
             case AppStatus.unAuth:
             case AppStatus.registering:
               return const LoginPage();
