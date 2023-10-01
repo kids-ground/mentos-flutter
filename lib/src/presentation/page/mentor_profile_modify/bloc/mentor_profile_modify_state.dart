@@ -2,9 +2,8 @@ part of 'mentor_profile_modify_bloc.dart';
 
 
 // 멘토정보들
-@freezed
 class MentorProfileInfo extends Equatable {
-  const MentorProfileInfo(
+  MentorProfileInfo(
     this.email,
     this.verifyType,
     this.openTalkLink,
@@ -14,13 +13,13 @@ class MentorProfileInfo extends Equatable {
     this.description
   );
 
-  final String email;
-  final MentorVerifyType verifyType;
-  final String openTalkLink;
-  final JobGroup jobGroup;
-  final String detailJob;
-  final String introduction;
-  final String description;
+  String email;
+  MentorVerifyType verifyType;
+  String openTalkLink;
+  JobGroup jobGroup;
+  String detailJob;
+  String introduction;
+  String description;
 
   @override
   List<Object?> get props => [email, verifyType, openTalkLink, jobGroup, detailJob, introduction, description];

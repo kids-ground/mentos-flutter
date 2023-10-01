@@ -17,7 +17,8 @@ class MentorProfileModifyPage extends StatelessWidget {
   static Route<void> route() {
     return MaterialPageRoute(
       builder: (context) => BlocProvider(
-        create: (context) => MentorProfileModifyBloc(),
+        create: (context) => MentorProfileModifyBloc()
+          ..add(const MentorProfileModifyFetchBasicInfo()),
         child: const MentorProfileModifyPage(),
       ),
     );
@@ -63,7 +64,7 @@ class _MentorProfileModifyView extends StatelessWidget {
               padding: const EdgeInsets.all(24),
               child: Form(
                 key: formKey,
-                child: const Column(
+                child: Column(
                   children: [
                     _EmailForm(),
                     _EmailVerifyForm(),
@@ -72,7 +73,7 @@ class _MentorProfileModifyView extends StatelessWidget {
                     _JobDetailForm(),
                     _IntroductionForm(),
                     _DescriptionForm(),
-                    _SaveButton()
+                    _SaveButton(formKey: formKey,)
                   ],
                 ),
               ),
@@ -100,6 +101,7 @@ class _EmailForm extends StatelessWidget {
                 isFilled: false,
                 isRequired: true,
                 keyboardType: TextInputType.emailAddress,
+                onChanged: (v) => context.read<MentorProfileModifyBloc>().add(MentorProfileModifyEmail(email: v)),
                 onSaved: (_){ },
                 validator: (val) {
                   if( (val?.length ?? 0) < 1) return '이메일은 필수사항입니다.';
@@ -109,14 +111,16 @@ class _EmailForm extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 16,),
-          const Column(
+          Column(
             children: [
-              SizedBox(height: 32,),
+              const SizedBox(height: 32,),
               BorderLineButton(
                 title: '인증',
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
-                onPressed: null,
+                onPressed: state.isActiveEmailVerify ? () =>
+                  context.read<MentorProfileModifyBloc>().add(const MentorProfileModifyEmailVerifyPressed())
+                : null,
                 width: 60,
                 height: 28,
               ),
@@ -135,7 +139,7 @@ class _EmailVerifyForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MentorProfileModifyBloc, MentorProfileModifyState>(
       builder: (context, state) => Visibility(
-        visible: false,
+        visible: state.visibleEmailVerify,
         child: Column(
           children: [
             const SizedBox(height: 32,),
@@ -150,22 +154,26 @@ class _EmailVerifyForm extends StatelessWidget {
                       isFilled: false,
                       keyboardType: TextInputType.number,
                       maxLength: 6,
+                      onChanged: (v) => context.read<MentorProfileModifyBloc>().add(MentorProfileModifyEmailVerify(verifyNumber: v)),
                       onSaved: (_){ },
                       validator: (val){
+                        if (!state.visibleEmailVerify) return null;
                         if( (val?.length ?? 0) != 6) return '인증번호는 6자리 입니다';
                         return null;
                       }
                   ),
                 ),
                 const SizedBox(width: 16,),
-                const Column(
+                Column(
                   children: [
-                    SizedBox(height: 32,),
+                    const SizedBox(height: 32,),
                     BorderLineButton(
                       title: '확인',
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
-                      onPressed: null,
+                      onPressed: state.isActiveEmailVerifyConfirm ? () =>
+                          context.read<MentorProfileModifyBloc>().add(const MentorProfileModifyEmailVerifyConfirmPressed())
+                      : null,
                       width: 60,
                       height: 28,
                     ),
@@ -353,6 +361,7 @@ class _IntroductionForm extends StatelessWidget {
               isRequired: true,
               onSaved: (_){},
               validator: (val){
+                if (val?.isEmpty ?? true) return '한 줄 소개를 작성해주세요';
                 if( (val?.length ?? 0) > 30) return '30자 제한입니다';
                 return null;
               }
@@ -390,7 +399,12 @@ class _DescriptionForm extends StatelessWidget {
 }
 
 class _SaveButton extends StatelessWidget {
-  const _SaveButton({Key? key}) : super(key: key);
+  const _SaveButton({
+    Key? key,
+    required this.formKey,
+  }) : super(key: key);
+
+  final GlobalKey<FormState> formKey;
 
   @override
   Widget build(BuildContext context) {
@@ -401,7 +415,11 @@ class _SaveButton extends StatelessWidget {
           FullFilledButton(
               title: '등록하기',
               height: 54,
-              onPressed: (){ }
+              onPressed: (){
+                if (formKey.currentState?.validate() ?? false) {
+                  context.read<MentorProfileModifyBloc>().add(const MentorProfileModifySave());
+                }
+              }
           ),
         ],
       ),

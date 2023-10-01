@@ -8,7 +8,7 @@ class BorderLineButton extends StatelessWidget {
     required this.title,
     this.fontSize = 18,
     this.fontWeight = FontWeight.w500,
-    this.color = const Color(0xFF1F5CD1),
+    this.color = const Color(0xFF1F5CD1), // mainColor
     this.width = double.infinity,
     this.height = double.infinity,
     required this.onPressed

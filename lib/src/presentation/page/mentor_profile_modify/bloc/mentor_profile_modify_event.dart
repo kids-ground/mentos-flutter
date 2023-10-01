@@ -7,6 +7,10 @@ abstract class MentorProfileModifyEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class MentorProfileModifyFetchBasicInfo extends MentorProfileModifyEvent {
+  const MentorProfileModifyFetchBasicInfo();
+}
+
 class MentorProfileModifyEmail extends MentorProfileModifyEvent {
   const MentorProfileModifyEmail({required this.email});
   final String email;
