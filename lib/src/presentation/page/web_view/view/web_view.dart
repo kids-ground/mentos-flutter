@@ -13,6 +13,12 @@ class WebViewPage extends StatelessWidget {
   String webLink;
   WebViewController? _webViewController;
 
+  static Route<void> route({required String title, required String link}) {
+    return MaterialPageRoute(
+      builder: (context) => WebViewPage(title: title, webLink: link)
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     _webViewController = WebViewController()
