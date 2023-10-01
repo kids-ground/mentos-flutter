@@ -2,26 +2,23 @@ part of 'terms_of_service_bloc.dart';
 
 
 class TermsOfServiceState extends Equatable {
-  const TermsOfServiceState({
-    this.isServiceAgree = true,
-    this.isPrivacyAgree = true,
-    this.isMarketingAgree = true,
-  });
+  TermsOfServiceState({
+    Map<TermsOfServiceType, bool>? termsAgree
+  }) : termsAgree = termsAgree ?? { for (var e in TermsOfServiceType.values) e : true };
 
-  final bool isServiceAgree;
-  final bool isPrivacyAgree;
-  final bool isMarketingAgree;
+  final Map<TermsOfServiceType, bool> termsAgree;
 
   TermsOfServiceState copyWith({
-    bool? isServiceAgree,
-    bool? isPrivacyAgree,
-    bool? isMarketingAgree,
+    Map<TermsOfServiceType, bool>? termsAgree
   }) => TermsOfServiceState(
-    isServiceAgree: isServiceAgree ?? this.isServiceAgree,
-    isPrivacyAgree: isPrivacyAgree ?? this.isPrivacyAgree,
-    isMarketingAgree: isMarketingAgree ?? this.isMarketingAgree
+    termsAgree: termsAgree ?? this.termsAgree,
   );
 
+  bool isAgree(TermsOfServiceType type) => termsAgree[type] ?? false;
+  bool get requiredAllAgree => termsAgree.entries
+      .where((element) => element.key.isRequired)
+      .every((element) => element.value);
+
   @override
-  List<Object?> get props => [isServiceAgree, isPrivacyAgree, isMarketingAgree];
+  List<Object?> get props => [termsAgree];
 }

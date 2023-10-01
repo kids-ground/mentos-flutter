@@ -5,32 +5,18 @@ part 'terms_of_service_event.dart';
 part 'terms_of_service_state.dart';
 
 class TermsOfServiceBloc extends Bloc<TermsOfServiceEvent, TermsOfServiceState> {
-  TermsOfServiceBloc(): super(const TermsOfServiceState()) {
-    on<TermsOfServicePressedServiceAgree>(_onPressedServiceAgree);
-    on<TermsOfServicePressedPrivacyAgree>(_onPressedPrivacyAgree);
-    on<TermsOfServicePressedMarketingAgree>(_onPressedMarketingAgree);
+  TermsOfServiceBloc(): super(TermsOfServiceState()) {
+    on<TermsOfServicePressedAgree>(_onPressedAgree);
     on<TermsOfServicePressedStart>(_onPressedStart);
   }
 
-  Future<void> _onPressedServiceAgree(
-    TermsOfServicePressedServiceAgree event,
+  Future<void> _onPressedAgree(
+    TermsOfServicePressedAgree event,
     Emitter<TermsOfServiceState> emit
   ) async {
-    emit(state.copyWith(isServiceAgree: !state.isServiceAgree));
-  }
-
-  Future<void> _onPressedPrivacyAgree(
-    TermsOfServicePressedPrivacyAgree event,
-    Emitter<TermsOfServiceState> emit
-  ) async {
-    emit(state.copyWith(isPrivacyAgree: !state.isPrivacyAgree));
-  }
-
-  Future<void> _onPressedMarketingAgree(
-    TermsOfServicePressedMarketingAgree event,
-    Emitter<TermsOfServiceState> emit
-  ) async {
-    emit(state.copyWith(isMarketingAgree: !state.isMarketingAgree));
+    Map<TermsOfServiceType, bool> newTermsAgree = Map.of(state.termsAgree);
+    newTermsAgree[event.type] = !(newTermsAgree[event.type] ?? false);
+    emit(TermsOfServiceState(termsAgree: newTermsAgree));
   }
 
   Future<void> _onPressedStart(
