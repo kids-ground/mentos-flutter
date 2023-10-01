@@ -15,6 +15,7 @@ class DefaultTextFormField extends StatelessWidget {
     this.onChanged,
     this.maxLength,
     this.maxLines = 1,
+    this.isRequired = false
   }) : super(key: key);
 
   final String label;
@@ -28,6 +29,7 @@ class DefaultTextFormField extends StatelessWidget {
   final int? maxLength;
   final bool isFilled;
   final int maxLines;
+  final bool isRequired;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +45,15 @@ class DefaultTextFormField extends StatelessWidget {
                   color: ColorStyles.black500
               ),
             ),
+            Text(
+              isRequired ? ' *' : '',
+              style: const TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w700,
+                  color: ColorStyles.red1000
+              ),
+            ),
+
           ],
         ),
         SizedBox(height: isFilled ? 8 : 0,),
@@ -52,6 +63,7 @@ class DefaultTextFormField extends StatelessWidget {
           maxLines: maxLines,
           onEditingComplete: onEditingComplete,
           keyboardType: keyboardType,
+          enableInteractiveSelection: true,
           maxLength: maxLength,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
@@ -74,8 +86,8 @@ class DefaultTextFormField extends StatelessWidget {
             isDense: true,
             contentPadding: const EdgeInsets.fromLTRB(8, 12, 4, 12),
             // 기본 색상
-            enabledBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: ColorStyles.white200, width: 1.5),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: isFilled ? ColorStyles.white200 : ColorStyles.white500, width: 1.5),
             ),
             focusedBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: ColorStyles.mainColor, width: 1.5),
