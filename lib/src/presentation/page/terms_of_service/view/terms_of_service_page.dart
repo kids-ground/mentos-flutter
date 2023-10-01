@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/app/bloc/app_bloc.dart';
-import 'package:mentos_flutter/src/presentation/page/mentor_profile_modify/view/mentor_profile_modify.dart';
+import 'package:mentos_flutter/src/presentation/page/mentor_profile_modify/view/mentor_profile_modify_page.dart';
 import 'package:mentos_flutter/src/presentation/page/terms_of_service/bloc/terms_of_service_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/web_view/view/web_view.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/full_check_button.dart';
