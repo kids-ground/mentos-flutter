@@ -5,7 +5,7 @@ import 'package:mentos_flutter/src/presentation/page/home/bloc/home_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/home/view/home.dart';
 import 'package:mentos_flutter/src/presentation/page/main_tab/bloc/main_tab_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/mentor_list/view/mentor_list.dart';
-import 'package:mentos_flutter/src/presentation/page/setting/view/setting.dart';
+import 'package:mentos_flutter/src/presentation/page/setting/view/mypage.dart';
 import 'package:mentos_flutter/src/util/color/color_style.dart';
 
 class MainTabPage extends StatelessWidget {
@@ -38,7 +38,7 @@ class _MainTabView extends StatelessWidget {
     _MainTabPageInfo(page: HomePage(), pageIconPath: "assets/images/home.png", pageName: '홈'),
     _MainTabPageInfo(page: MentorListPage(), pageIconPath: "assets/images/users.png", pageName: '멘토'),
     _MainTabPageInfo(page: ChatListPage(), pageIconPath: "assets/images/chat.png", pageName: '채팅'),
-    _MainTabPageInfo(page: SettingPage(), pageIconPath: "assets/images/setting.png", pageName: '설정'),
+    _MainTabPageInfo(page: MyPagePage(), pageIconPath: "assets/images/mypage.png", pageName: '마이페이지'),
   ];
 
   @override

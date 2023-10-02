@@ -40,6 +40,9 @@ class AppView extends StatelessWidget {
         ),
         fontFamily: fontFamilyName,
         useMaterial3: true,
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        splashFactory: NoSplash.splashFactory,
       ),
       home: BlocBuilder<AppBloc, AppState>(
         buildWhen: (pre, cur) {
