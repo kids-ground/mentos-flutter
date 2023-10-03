@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mentos_flutter/src/presentation/page/mentor_detail/view/mentor_detail_page.dart';
 import 'package:mentos_flutter/src/presentation/page/mentor_profile_modify/view/mentor_profile_modify_page.dart';
 import 'package:mentos_flutter/src/presentation/page/profile_modify/view/profile_modify_page.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
@@ -340,7 +341,9 @@ class _MentorProfileInfo extends StatelessWidget {
           child: CupertinoButton(
             padding: const EdgeInsets.all(0),
             disabledColor: Colors.transparent,
-            onPressed: () { },
+            onPressed: () {
+              Navigator.push(context, MentorDetailPage.route(1));
+            },
             child: Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
