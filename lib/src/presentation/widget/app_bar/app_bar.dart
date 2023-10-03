@@ -41,9 +41,9 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           title!,
           style: TextStyle(
             fontWeight: fontWeight,
-            fontSize: fontSize),
-          ) :
-        null,
+            fontSize: fontSize
+          ),
+        ) : null,
       titleSpacing: 24,
       leading: leading != null ? Container(
         margin: const EdgeInsets.fromLTRB(24, 8, 0, 8),
