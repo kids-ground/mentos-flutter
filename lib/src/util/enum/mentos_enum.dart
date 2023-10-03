@@ -12,6 +12,7 @@ enum JobGroup {
 enum LoadingStatus {
   init,
   loading,
+  ready,
   failure,
   success,
   cancel,
