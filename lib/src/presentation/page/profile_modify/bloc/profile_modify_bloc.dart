@@ -35,7 +35,6 @@ class ProfileModifyBloc extends Bloc<ProfileModifyEvent, ProfileModifyState> {
     ProfileModifySelectedImage event,
     Emitter<ProfileModifyState> emit,
   ) async {
-
     emit(state.copyWith(newProfileImageFile: event.image));
   }
 
@@ -43,13 +42,16 @@ class ProfileModifyBloc extends Bloc<ProfileModifyEvent, ProfileModifyState> {
     ProfileModifyNickname event,
     Emitter<ProfileModifyState> emit,
   ) async {
-
+    emit(state.copyWith(newNickname: event.nickname));
   }
 
   Future<void> _save(
     ProfileModifySave event,
     Emitter<ProfileModifyState> emit,
   ) async {
-
+    // - nickname 및 사진 검증 & 업로드
+    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
+    await Future.delayed(const Duration(milliseconds: 700));
+    emit(state.copyWith(loadingStatus: LoadingStatus.success));
   }
 }

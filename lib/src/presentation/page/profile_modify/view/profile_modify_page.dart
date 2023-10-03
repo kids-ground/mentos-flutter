@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mentos_flutter/src/presentation/page/profile_modify/bloc/profile_modify_bloc.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/routing_app_bar.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/full_filled_button.dart';
+import 'package:mentos_flutter/src/presentation/widget/dialog/loading_dialog.dart';
 import 'package:mentos_flutter/src/presentation/widget/text_field/default_text_from_field.dart';
 import 'package:mentos_flutter/src/util/color/color_style.dart';
 import 'package:mentos_flutter/src/util/enum/mentos_enum.dart';
@@ -29,9 +30,22 @@ class ProfileModifyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<ProfileModifyBloc, ProfileModifyState>(
+      listenWhen: (pre, cur) => pre.loadingStatus != cur.loadingStatus,
       listener: (pre, cur) {
+        switch (cur.loadingStatus) {
+          case LoadingStatus.loading:
+            showLoadingDialog(context);
+          case LoadingStatus.success:
+            showSimpleSnackBar(context, '수정이 완료되었습니다');
+            Navigator.pop(context);
+            Navigator.pop(context);
+          case LoadingStatus.failure:
+            Navigator.pop(context);
+          default:
+            return;
+        }
       },
-      child: _ProfileModifyView()
+      child: const _ProfileModifyView()
     );
   }
 }
