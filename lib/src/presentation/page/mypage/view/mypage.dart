@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mentos_flutter/src/presentation/page/mentor_profile_modify/view/mentor_profile_modify_page.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/border_line_button.dart';
 import 'package:mentos_flutter/src/util/color/color_style.dart';
@@ -90,7 +91,9 @@ class _ProfileInfo extends StatelessWidget {
           color: ColorStyles.white,
           padding: const EdgeInsets.all(0),
           disabledColor: Colors.transparent,
-          onPressed: () { },
+          onPressed: () {
+
+          },
           child: Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -156,7 +159,7 @@ class _MentorProfileInfo extends StatelessWidget {
             const SizedBox(height: 24,),
             buildIntroduction(),
             const SizedBox(height: 24,),
-            buildButtonGroup()
+            buildButtonGroup(context)
           ],
         ),
       ),
@@ -236,7 +239,7 @@ class _MentorProfileInfo extends StatelessWidget {
               )
             ),
           ),
-          SizedBox(width: 16,),
+          const SizedBox(width: 16,),
           Expanded(
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -328,7 +331,7 @@ class _MentorProfileInfo extends StatelessWidget {
     );
   }
 
-  Widget buildButtonGroup() {
+  Widget buildButtonGroup(BuildContext context) {
     // 상세보기 및 수정하기
     return Row(
       children: [
@@ -364,7 +367,9 @@ class _MentorProfileInfo extends StatelessWidget {
           child: CupertinoButton(
             padding: const EdgeInsets.all(0),
             disabledColor: Colors.transparent,
-            onPressed: () { },
+            onPressed: () {
+              Navigator.push(context, MentorProfileModifyPage.route());
+            },
             child: Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),

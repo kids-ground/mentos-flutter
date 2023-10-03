@@ -4,14 +4,14 @@ import 'package:mentos_flutter/src/util/enum/mentos_enum.dart';
 
 class MentorProfileResponse extends Equatable {
   MentorProfileResponse(
-      this.email,
-      this.verifyType,
-      this.openTalkLink,
-      this.jobGroup,
-      this.detailJob,
-      this.introduction,
-      this.description
-      );
+    this.email,
+    this.verifyType,
+    this.openTalkLink,
+    this.jobGroup,
+    this.detailJob,
+    this.introduction,
+    this.description
+  );
 
   String email;
   MentorVerifyType verifyType;
