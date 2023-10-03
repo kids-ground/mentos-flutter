@@ -52,4 +52,6 @@ class ColorStyles {
   static const Color red800 = Color(0xFFF43B5C);
   static const Color red900 = Color(0xFFF32348);
   static const Color red1000 = Color(0xFFF10A34);
+
+  static const Color yellow = Color(0xFFFFDB0F);
 }
