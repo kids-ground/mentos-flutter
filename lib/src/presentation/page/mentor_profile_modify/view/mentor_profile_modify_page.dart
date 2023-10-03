@@ -1,9 +1,8 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/mentor_profile_modify/bloc/mentor_profile_modify_bloc.dart';
-import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
+import 'package:mentos_flutter/src/presentation/widget/app_bar/routing_app_bar.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/border_line_button.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/full_filled_button.dart';
 import 'package:mentos_flutter/src/presentation/widget/text_field/default_text_from_field.dart';
@@ -37,19 +36,7 @@ class _MentorProfileModifyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(
-          title: '멘토 프로필',
-          centerTitle: true,
-          fontSize: 20,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
-            padding: EdgeInsets.zero,
-            constraints: const BoxConstraints(),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          )
-      ),
+      appBar: const RoutingAppBar(title: '멘토 프로필 수정',),
       backgroundColor: ColorStyles.white,
       body: SafeArea(
         child: GestureDetector(

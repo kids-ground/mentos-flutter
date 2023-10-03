@@ -5,7 +5,7 @@ import 'package:mentos_flutter/src/presentation/page/home/bloc/home_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/home/view/home.dart';
 import 'package:mentos_flutter/src/presentation/page/main_tab/bloc/main_tab_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/mentor_list/view/mentor_list.dart';
-import 'package:mentos_flutter/src/presentation/page/setting/view/mypage.dart';
+import 'package:mentos_flutter/src/presentation/page/mypage/view/mypage.dart';
 import 'package:mentos_flutter/src/util/color/color_style.dart';
 
 class MainTabPage extends StatelessWidget {
