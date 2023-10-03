@@ -15,7 +15,9 @@ class DefaultTextFormField extends StatelessWidget {
     this.onChanged,
     this.maxLength,
     this.maxLines = 1,
-    this.isRequired = false
+    this.isRequired = false,
+    this.initialValue,
+    this.controller
   }) : super(key: key);
 
   final String label;
@@ -30,6 +32,8 @@ class DefaultTextFormField extends StatelessWidget {
   final bool isFilled;
   final int maxLines;
   final bool isRequired;
+  final String? initialValue;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -53,19 +57,20 @@ class DefaultTextFormField extends StatelessWidget {
                   color: ColorStyles.red1000
               ),
             ),
-
           ],
         ),
         SizedBox(height: isFilled ? 8 : 0,),
         TextFormField(
           onSaved: onSaved,
           onChanged: onChanged,
+          initialValue: initialValue,
           maxLines: maxLines,
           onEditingComplete: onEditingComplete,
           keyboardType: keyboardType,
           enableInteractiveSelection: true,
           maxLength: maxLength,
           autovalidateMode: AutovalidateMode.onUserInteraction,
+          controller: controller,
           decoration: InputDecoration(
             fillColor: ColorStyles.white200,
             filled: isFilled,
