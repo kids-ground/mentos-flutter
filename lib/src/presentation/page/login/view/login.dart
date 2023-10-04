@@ -6,6 +6,7 @@ import 'package:mentos_flutter/src/presentation/page/app/bloc/app_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/login/bloc/login_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/main_tab/view/main_tab.dart';
 import 'package:mentos_flutter/src/presentation/page/terms_of_service/view/terms_of_service_page.dart';
+import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
 import 'package:mentos_flutter/src/util/color/color_style.dart';
 import 'package:mentos_flutter/src/util/enum/social_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,17 +50,71 @@ class _LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     final loginBloC = BlocProvider.of<LoginBloc>(context);
     return Scaffold(
+      backgroundColor: ColorStyles.white,
       body: SafeArea(
-        child: Center(
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.contain,
+              image: AssetImage("assets/images/background_logo.png"),
+              opacity: 0.3
+            )
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Expanded(
-                child: Image.asset(
-                  "assets/images/mentos.png",
-                  width: 180,
-                )
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "ME",
+                    style: TextStyle(
+                      fontSize: 50,
+                      fontWeight: FontWeight.w900,
+                      color: ColorStyles.black1000,
+                    ),
+                  ),
+                  Text(
+                    "n",
+                    style: TextStyle(
+                      fontSize: 50,
+                      fontWeight: FontWeight.w400,
+                      color: ColorStyles.black1000,
+                    ),
+                  ),
+                  Text(
+                    "T",
+                    style: TextStyle(
+                      fontSize: 50,
+                      fontWeight: FontWeight.w900,
+                      color: ColorStyles.black1000,
+                    ),
+                  ),
+                  Text(
+                    "os",
+                    style: TextStyle(
+                      fontSize: 50,
+                      fontWeight: FontWeight.w400,
+                      color: ColorStyles.black1000,
+                    ),
+                  ),
+                ],
               ),
+              SizedBox(height: 12,),
+              Text(
+                "' 멘토와 멘티의 만남 '",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: ColorStyles.black300,
+                ),
+              ),
+              const SizedBox(height: 100,),
+
               Column(
                 children: [
                   _SocialLoginButton(
@@ -73,7 +128,7 @@ class _LoginView extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 36),
+              SizedBox(height: 24,)
             ],
           ),
         ),
@@ -97,30 +152,28 @@ class _SocialLoginButton extends StatelessWidget {
     final double width = MediaQuery.of(context).size.width;
 
     return Container(
-      width: width - 32,
       height: 52,
       child: CupertinoButton(
-        borderRadius: BorderRadius.circular(16),
-        color: type.backgroundColor,
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+        borderRadius: BorderRadius.circular(8),
+        color: ColorStyles.blueGrey100,
         onPressed: onPressed,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
               type.logo,
-              width: 28,
-              height: 28,
+              width: 18,
+              height: 18,
             ),
+            const SizedBox(width: 8,),
             Text(
               type.loginTitle,
               style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w400,
-                color: type.titleColor,
+                fontSize: 17,
+                fontWeight: FontWeight.w600,
+                color: ColorStyles.black800,
               ),
             ),
-            const SizedBox(width: 28),
           ],
         )
       ),
