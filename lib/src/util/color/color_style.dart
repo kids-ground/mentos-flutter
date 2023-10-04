@@ -54,4 +54,6 @@ class ColorStyles {
   static const Color red1000 = Color(0xFFF10A34);
 
   static const Color yellow = Color(0xFFFFDB0F);
+
+  static const Color blueGrey100 = Color(0xFFECEFF1);
 }
