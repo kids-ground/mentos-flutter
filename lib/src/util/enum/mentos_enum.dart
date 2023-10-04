@@ -5,6 +5,14 @@ enum MentorVerifyType {
   enterpriseVerified // 회사 인증완료
 }
 
+enum JobYear {
+  newbie,
+  junior,
+  middle,
+  senior,
+  principal
+}
+
 enum JobGroup {
   develop, design, marketing, hr
 }
