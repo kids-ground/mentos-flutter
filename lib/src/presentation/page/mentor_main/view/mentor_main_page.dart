@@ -73,76 +73,93 @@ class _ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        CachedNetworkImage(
-          width: width,
-          height: height,
-          imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
-          imageBuilder: (context, imageProvider) => Container(
-            decoration: BoxDecoration(
-              color: ColorStyles.blue300,
-              borderRadius: BorderRadius.all(Radius.circular(width/2)),
-              image: DecorationImage(
-                  image: imageProvider,
-                  fit: BoxFit.cover,
-                  scale: 0.5
-              ),
-            ),
-          ),
-          placeholder: (context, url) => Container(width: width, height: height,),
-        ),
-        const SizedBox(width: 16,),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              "로건",
-              style: const TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.w700,
-                  color: ColorStyles.black1000
+            CachedNetworkImage(
+              width: width,
+              height: height,
+              imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
+              imageBuilder: (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                  color: ColorStyles.blue300,
+                  borderRadius: BorderRadius.all(Radius.circular(width/2)),
+                  image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                      scale: 0.5
+                  ),
+                ),
               ),
+              placeholder: (context, url) => Container(width: width, height: height,),
             ),
-          Text(
-            "Google",
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: ColorStyles.black800
-            ),
-          ),
-            Row(
+            const SizedBox(width: 16,),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "연구개발",
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: ColorStyles.black100
+                const Text(
+                  "로건",
+                  style: const TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w700,
+                      color: ColorStyles.black1000
                   ),
                 ),
-                Text(' ∙ '),
+                const SizedBox(height: 2,),
                 Text(
-                  "AI",
+                  "Google",
                   style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: ColorStyles.black100
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: ColorStyles.black800
                   ),
                 ),
-                Text('  '),
-                Text(
-                  "(3 ~ 4년차)",
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: ColorStyles.black100
-                  ),
+                const SizedBox(height: 4,),
+                Row(
+                  children: [
+                    Text(
+                      "연구개발",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: ColorStyles.black100
+                      ),
+                    ),
+                    Text(' ∙ '),
+                    Text(
+                      "AI",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: ColorStyles.black100
+                      ),
+                    ),
+                    Text('  '),
+                    Text(
+                      "(3 ~ 4년차)",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: ColorStyles.black100
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ],
+        ),
+        const SizedBox(height: 12,),
+        Text(
+          '" 안녕하세요. Google 5년차 소프트웨어 엔지니어입니다. Google에 대해 궁금하신게 있으시다면 주저말고 연락주세요! "',
+          style: TextStyle(
+              fontSize: 16,
+              height: 1.35,
+              fontWeight: FontWeight.w500,
+              color: ColorStyles.black500
+          ),
         ),
       ],
     );
