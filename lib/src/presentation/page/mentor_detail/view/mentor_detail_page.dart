@@ -160,8 +160,6 @@ class _ProfileView extends StatelessWidget {
 
           ],
         ),
-
-
       ],
     );
   }
