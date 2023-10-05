@@ -4,7 +4,7 @@ import 'package:mentos_flutter/src/presentation/page/chat_list/view/chat_list.da
 import 'package:mentos_flutter/src/presentation/page/home/bloc/home_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/home/view/home.dart';
 import 'package:mentos_flutter/src/presentation/page/main_tab/bloc/main_tab_bloc.dart';
-import 'package:mentos_flutter/src/presentation/page/mentor_list/view/mentor_list.dart';
+import 'package:mentos_flutter/src/presentation/page/mentor_main/view/mentor_main_page.dart';
 import 'package:mentos_flutter/src/presentation/page/mypage/view/mypage.dart';
 import 'package:mentos_flutter/src/util/color/color_style.dart';
 
@@ -36,7 +36,7 @@ class _MainTabView extends StatelessWidget {
 
   final List<_MainTabPageInfo> pageInfoList = const [
     _MainTabPageInfo(page: HomePage(), pageIconPath: "assets/images/home.png", pageName: '홈'),
-    _MainTabPageInfo(page: MentorListPage(), pageIconPath: "assets/images/users.png", pageName: '멘토'),
+    _MainTabPageInfo(page: MentorMainPage(), pageIconPath: "assets/images/users.png", pageName: '멘토'),
     // _MainTabPageInfo(page: ChatListPage(), pageIconPath: "assets/images/chat.png", pageName: '채팅'),
     _MainTabPageInfo(page: MyPagePage(), pageIconPath: "assets/images/mypage.png", pageName: '마이페이지'),
   ];

@@ -2,25 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
 import 'package:mentos_flutter/src/util/color/color_style.dart';
 
-class MentorListPage extends StatelessWidget {
-  const MentorListPage({Key? key}) : super(key: key);
+class MentorMainPage extends StatelessWidget {
+  const MentorMainPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const _MentorMainView();
+  }
+}
+
+class _MentorMainView extends StatelessWidget {
+  const _MentorMainView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(
-        title: '멘토',
-        actions: [
-          IconButton(
-            onPressed: () { },
-            padding: const EdgeInsets.fromLTRB(24, 9, 24, 9),
-            icon: Image.asset(
-                "assets/images/plus.png",
-                color: ColorStyles.black700
-            ),
-          )
-        ],
-      ),
+      appBar: const CommonAppBar(title: '멘토',),
       body: SafeArea(
         child: Container(
           alignment: Alignment.center,
@@ -38,3 +35,4 @@ class MentorListPage extends StatelessWidget {
     );
   }
 }
+
