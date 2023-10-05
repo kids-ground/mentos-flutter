@@ -20,17 +20,121 @@ class _MentorMainView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CommonAppBar(title: '멘토',),
+      appBar: const CommonAppBar(title: '멘토', bottomLine: false,),
       body: SafeArea(
         child: Container(
-          alignment: Alignment.center,
-          color: ColorStyles.white200,
-          child: const _MentorListView()
+          color: ColorStyles.white100,
+          child: Column(
+            children: [
+              _MentorFilterView(),
+              Expanded(child: _MentorListView()),
+            ],
+          )
         ),
       ),
     );
   }
 }
+
+class _MentorFilterView extends StatelessWidget {
+  const _MentorFilterView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+      decoration: BoxDecoration(
+        color: ColorStyles.white,
+        border: Border(
+          bottom: BorderSide(
+            width: 0.1,
+            color: ColorStyles.black100
+          ),
+        )
+
+      ),
+      child: Row(
+        children: [
+          CupertinoButton(
+            padding: const EdgeInsets.all(0),
+            color: Colors.transparent,
+            minSize: 0,
+            onPressed: () { },
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.fromLTRB(12, 4, 4, 4),
+              margin: const EdgeInsets.all(0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: ColorStyles.white,
+                  border: Border.all(
+                      color: ColorStyles.white500
+                  )
+              ),
+              child: Row(
+                children: [
+                  Text(
+                    '직군',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: ColorStyles.black500,
+                        decoration: null
+                    )
+                  ),
+                  Icon( // <-- Icon
+                    Icons.arrow_drop_down_rounded,
+                    size: 24.0,
+                    color: ColorStyles.black100,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(width: 8,),
+          CupertinoButton(
+            padding: const EdgeInsets.all(0),
+            color: Colors.transparent,
+            minSize: 0,
+            onPressed: () { },
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.fromLTRB(12, 4, 4, 4),
+              margin: const EdgeInsets.all(0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: ColorStyles.white,
+                  border: Border.all(
+                      color: ColorStyles.white500
+                  )
+              ),
+              child: Row(
+                children: [
+                  Text(
+                      '년차',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: ColorStyles.black500,
+                          decoration: null
+                      )
+                  ),
+                  Icon( // <-- Icon
+                    Icons.arrow_drop_down_rounded,
+                    size: 24.0,
+                    color: ColorStyles.black100,
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
 
 class _MentorListView extends StatelessWidget {
   const _MentorListView({Key? key}) : super(key: key);
@@ -54,6 +158,14 @@ class _MentorListView extends StatelessWidget {
               decoration: BoxDecoration(
                 color: ColorStyles.white,
                 borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: ColorStyles.white400.withOpacity(0.7),
+                    spreadRadius: 2,
+                    blurRadius: 8.0,
+                    offset: const Offset(4, 4),
+                  ),
+                ],
               ),
               child: _ProfileView(),
             ),
