@@ -13,8 +13,8 @@ class LineCheckButton extends StatelessWidget {
     this.selectedBorderColor = ColorStyles.blue100,
     this.selectedTextColor = ColorStyles.mainColor,
     this.unselectedBackgroundColor = ColorStyles.white,
-    this.unselectedBorderColor = ColorStyles.white800,
-    this.unselectedTextColor = ColorStyles.black700,
+    this.unselectedBorderColor = ColorStyles.white400,
+    this.unselectedTextColor = ColorStyles.black100,
     this.padding = EdgeInsets.zero,
 
     required this.isSelected,
