@@ -309,7 +309,7 @@ class _IntroductionView extends StatelessWidget {
             style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: ColorStyles.black1000
+                color: ColorStyles.black500
             ),
           ),
         ),
@@ -339,7 +339,7 @@ class _DescriptionView extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           decoration: BoxDecoration(
-              color: ColorStyles.white200,
+              color: ColorStyles.white100,
               borderRadius: BorderRadius.circular(8)
           ),
           child: Text('''
@@ -356,8 +356,8 @@ class _DescriptionView extends StatelessWidget {
             ''',
             style: TextStyle(
                 fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: ColorStyles.black800
+                fontWeight: FontWeight.w500,
+                color: ColorStyles.black500
             ),
           ),
         ),
