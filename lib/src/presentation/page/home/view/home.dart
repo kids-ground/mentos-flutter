@@ -25,35 +25,15 @@ class HomePage extends StatelessWidget {
         bottomLine: false,
         leading: Image.asset(
           "assets/images/mentos.png",
-          // color: ColorStyles.black700,
           width: 24,
         ),
-        actions: [
-          CupertinoButton(
-            minSize: 0,
-            padding: const EdgeInsets.fromLTRB(0, 10, 12, 10),
-            onPressed: () { },
-            child: Image.asset(
-              "assets/images/search.png",
-              color: ColorStyles.black700
-            ),
-          ),
-          CupertinoButton(
-            minSize: 0,
-            padding: const EdgeInsets.fromLTRB(0, 10, 20, 10),
-            onPressed: () { },
-            child: Image.asset(
-              "assets/images/pencil.png",
-              color: ColorStyles.black700
-            ),
-          )
-        ],
       ),
+      floatingActionButton: _ActionButton(),
       body: Container(
         color: ColorStyles.white,
         child: const Column(
           children: [
-            _CategoryListView(),
+            // _CategoryListView(),
             Divider(
               height: 0.2,
               thickness: 0.2,
@@ -66,6 +46,44 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+class _ActionButton extends StatelessWidget {
+  const _ActionButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoButton(
+      padding: const EdgeInsets.all(0),
+      minSize: 0,
+      onPressed: () { },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        decoration: BoxDecoration(
+            color: ColorStyles.blue200,
+            borderRadius: BorderRadius.circular(100),
+            boxShadow: [
+              BoxShadow(
+                spreadRadius: 4,
+                color: ColorStyles.white500,
+                blurRadius: 8,
+                offset: Offset(2, 2)
+              )
+            ]
+            // border: Border.all(
+            //   color: ColorStyles.mainColor,
+            // )
+        ),
+        child: Image.asset(
+          "assets/images/pencil.png",
+          color: ColorStyles.mainColor,
+          width: 24,
+          height: 24,
+        ),
+      ),
+    );
+  }
+}
+
 
 
 class _CategoryListView extends StatelessWidget {
@@ -98,10 +116,6 @@ class _CategoryListView extends StatelessWidget {
     );
   }
 }
-
-
-
-
 
 class _ContentListView extends StatelessWidget {
   const _ContentListView({Key? key}) : super(key: key);
