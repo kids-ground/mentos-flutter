@@ -66,7 +66,7 @@ class _MentorFilterView extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(12, 4, 4, 4),
               margin: const EdgeInsets.all(0),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius: BorderRadius.circular(8),
                   color: ColorStyles.white,
                   border: Border.all(
                       color: ColorStyles.white500
@@ -86,7 +86,7 @@ class _MentorFilterView extends StatelessWidget {
                   Icon( // <-- Icon
                     Icons.arrow_drop_down_rounded,
                     size: 24.0,
-                    color: ColorStyles.black100,
+                    color: ColorStyles.white1000,
                   ),
                 ],
               ),
@@ -103,7 +103,7 @@ class _MentorFilterView extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(12, 4, 4, 4),
               margin: const EdgeInsets.all(0),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius: BorderRadius.circular(8),
                   color: ColorStyles.white,
                   border: Border.all(
                       color: ColorStyles.white500
@@ -123,7 +123,7 @@ class _MentorFilterView extends StatelessWidget {
                   Icon( // <-- Icon
                     Icons.arrow_drop_down_rounded,
                     size: 24.0,
-                    color: ColorStyles.black100,
+                    color: ColorStyles.white1000,
                   ),
                 ],
               ),
@@ -146,30 +146,7 @@ class _MentorListView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
       itemBuilder: (context, idx) => Column(
         children: [
-          CupertinoButton(
-            padding: const EdgeInsets.all(0),
-            disabledColor: Colors.transparent,
-            onPressed: () {
-              Navigator.push(context, MentorDetailPage.route(1));
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: ColorStyles.white,
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  BoxShadow(
-                    color: ColorStyles.white400.withOpacity(0.7),
-                    spreadRadius: 2,
-                    blurRadius: 8.0,
-                    offset: const Offset(4, 4),
-                  ),
-                ],
-              ),
-              child: _ProfileView(),
-            ),
-          ),
+          const _MentorProfileItemView(),
           const SizedBox(height: 16,)
         ],
       )
@@ -177,103 +154,127 @@ class _MentorListView extends StatelessWidget {
   }
 }
 
-class _ProfileView extends StatelessWidget {
-  const _ProfileView({Key? key}) : super(key: key);
+
+class _MentorProfileItemView extends StatelessWidget {
+  const _MentorProfileItemView({Key? key}) : super(key: key);
 
   final double width = 54;
   final double height = 54;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CachedNetworkImage(
-              width: width,
-              height: height,
-              imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
-              imageBuilder: (context, imageProvider) => Container(
-                decoration: BoxDecoration(
-                  color: ColorStyles.blue300,
-                  borderRadius: BorderRadius.all(Radius.circular(width/2)),
-                  image: DecorationImage(
-                      image: imageProvider,
-                      fit: BoxFit.cover,
-                      scale: 0.5
-                  ),
-                ),
-              ),
-              placeholder: (context, url) => Container(width: width, height: height,),
+    return CupertinoButton(
+      padding: const EdgeInsets.all(0),
+      disabledColor: Colors.transparent,
+      onPressed: () {
+        Navigator.push(context, MentorDetailPage.route(1));
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: ColorStyles.white,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+              color: ColorStyles.white400.withOpacity(0.7),
+              spreadRadius: 6,
+              blurRadius: 6.0,
+              offset: const Offset(4, 4),
             ),
-            const SizedBox(width: 16,),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          ],
+        ),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
-                  "로건",
-                  style: const TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w700,
-                      color: ColorStyles.black1000
+                CachedNetworkImage(
+                  width: width,
+                  height: height,
+                  imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      color: ColorStyles.blue300,
+                      borderRadius: BorderRadius.all(Radius.circular(width/2)),
+                      image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                          scale: 0.5
+                      ),
+                    ),
                   ),
+                  placeholder: (context, url) => Container(width: width, height: height,),
                 ),
-                const SizedBox(height: 2,),
-                Text(
-                  "Google",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: ColorStyles.black800
-                  ),
-                ),
-                const SizedBox(height: 4,),
-                Row(
+                const SizedBox(width: 16,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "연구개발",
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: ColorStyles.black100
+                    const Text(
+                      "로건",
+                      style: const TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w700,
+                          color: ColorStyles.black1000
                       ),
                     ),
-                    Text(' ∙ '),
+                    const SizedBox(height: 2,),
                     Text(
-                      "AI",
+                      "Google",
                       style: TextStyle(
                           fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: ColorStyles.black100
+                          fontWeight: FontWeight.w600,
+                          color: ColorStyles.black800
                       ),
                     ),
-                    Text('  '),
-                    Text(
-                      "(3 ~ 4년차)",
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: ColorStyles.black100
-                      ),
+                    const SizedBox(height: 4,),
+                    Row(
+                      children: [
+                        Text(
+                          "연구개발",
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: ColorStyles.black100
+                          ),
+                        ),
+                        Text(' ∙ '),
+                        Text(
+                          "AI",
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: ColorStyles.black100
+                          ),
+                        ),
+                        Text('  '),
+                        Text(
+                          "(3 ~ 4년차)",
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: ColorStyles.black100
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ],
             ),
+            const SizedBox(height: 12,),
+            Text(
+              '" 안녕하세요. Google 5년차 소프트웨어 엔지니어입니다. Google에 대해 궁금하신게 있으시다면 주저말고 연락주세요! "',
+              style: TextStyle(
+                  fontSize: 16,
+                  height: 1.35,
+                  fontWeight: FontWeight.w500,
+                  color: ColorStyles.black500
+              ),
+            ),
           ],
         ),
-        const SizedBox(height: 12,),
-        Text(
-          '" 안녕하세요. Google 5년차 소프트웨어 엔지니어입니다. Google에 대해 궁금하신게 있으시다면 주저말고 연락주세요! "',
-          style: TextStyle(
-              fontSize: 16,
-              height: 1.35,
-              fontWeight: FontWeight.w500,
-              color: ColorStyles.black500
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
