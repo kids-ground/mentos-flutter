@@ -69,9 +69,6 @@ class _ActionButton extends StatelessWidget {
                 offset: Offset(2, 2)
               )
             ]
-            // border: Border.all(
-            //   color: ColorStyles.mainColor,
-            // )
         ),
         child: Image.asset(
           "assets/images/pencil.png",
@@ -146,11 +143,14 @@ class _ContentListView extends StatelessWidget {
                       return Future.delayed(const Duration(milliseconds: 1000));
                     },
                   ),
-                  const SliverPadding(padding: EdgeInsets.fromLTRB(0, 0, 0, 8),),
+                  const SliverPadding(padding: EdgeInsets.fromLTRB(0, 0, 0, 16),),
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       childCount: state.list.length,
-                      (context, index) => _ContentListItem(data: state.list[index],),
+                      (context, index) => Padding(
+                        padding: const EdgeInsets.fromLTRB(24,0,24,16),
+                        child: _ContentListItem(data: state.list[index],),
+                      ),
                     ),
                   ),
                 ],
@@ -171,127 +171,86 @@ class _ContentListItem extends StatelessWidget {
 
   final MockMentoringData data;
 
+  final double width = 40;
+  final double height = 40;
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0,0,0,12), // 최외각 패딩
+    return CupertinoButton(
+      padding: const EdgeInsets.all(0),
+      disabledColor: Colors.transparent,
+      onPressed: () {
+
+      },
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(8),
           color: ColorStyles.white,
+          boxShadow: [
+            BoxShadow(
+              color: ColorStyles.white400.withOpacity(0.7),
+              spreadRadius: 6,
+              blurRadius: 6.0,
+              offset: const Offset(4, 4),
+            ),
+          ],
         ),
-        padding: const EdgeInsets.fromLTRB(20, 24, 20, 20), // 카드 내 패딩
+
+        padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-              child: Row(
-                children: [
-                  Text(
-                    data.category,
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: data.category == "멘토링 요청" ? ColorStyles.red1000 : ColorStyles.blue1000
-                    ),
-                  ),
-                  const SizedBox(width: 4,),
-                  Text(
-                    '·',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: ColorStyles.black800
-                    ),
-                  ),
-                  const SizedBox(width: 4,),
-                  Text(
-                    data.jobDuty,
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: ColorStyles.black800
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
             Container(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-
-                      CachedNetworkImage(
-                        imageUrl: data.member.thumbnail,
-                        width: 30,
-                        height: 30,
-                        fadeInDuration: const Duration(milliseconds: 200),
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              image: DecorationImage(
-                                  image: imageProvider, fit: BoxFit.cover)),
-                        ),
-                        placeholder: (context, url) => Container(
-                          width: 30,
-                          height: 30,
+                  CachedNetworkImage(
+                    width: width,
+                    height: height,
+                    imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
+                    imageBuilder: (context, imageProvider) => Container(
+                      decoration: BoxDecoration(
+                        color: ColorStyles.blue300,
+                        borderRadius: BorderRadius.all(Radius.circular(width/2)),
+                        image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                            scale: 0.5
                         ),
                       ),
-
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(8,0,0,0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              data.member.nickname,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w500,
-                                  color: ColorStyles.black100
-                              ),
-                            ),
-
-                            Row(
-                              children: [
-                                if (data.member.isCertified)
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(0,0,2,0),
-                                    child: Image.asset(
-                                      'assets/images/certification_mark.png',
-                                      width: 13,
-                                      height: 13,
-                                      color: Colors.green[300],
-                                    ),
-                                  ),
-                                Text(
-                                  data.member.company,
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: ColorStyles.black100
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                    ),
+                    placeholder: (context, url) => Container(width: width, height: height,),
+                  ),
+                  const SizedBox(width: 12,),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        data.member.nickname,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: ColorStyles.black800
+                        ),
+                      ),
+                      const SizedBox(height: 2,),
+                      Text(
+                        '32분 전',
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: ColorStyles.white1000
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               )
             ),
-
+            const SizedBox(height: 4,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -308,8 +267,8 @@ class _ContentListItem extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w800,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
                             color: ColorStyles.black1000
                           ),
                         ),
@@ -335,8 +294,8 @@ class _ContentListItem extends StatelessWidget {
                 if (data.thumbnail != null)
                   CachedNetworkImage(
                     imageUrl: data.thumbnail!,
-                    width: 80,
-                    height: 80,
+                    width: 70,
+                    height: 70,
                     fadeInDuration: const Duration(milliseconds: 200),
                     imageBuilder: (context, imageProvider) => Container(
                       decoration: BoxDecoration(
@@ -351,48 +310,28 @@ class _ContentListItem extends StatelessWidget {
                   ),
               ],
             ),
-            const SizedBox(height: 8,),
-
+            const SizedBox(height: 12,),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Row(
-                  children: [
-                    Text(
-                      '조회 ${data.hit}',
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: ColorStyles.white1000
-                      ),
-                    ),
-                    const SizedBox(width: 16,),
-                    Text(
-                      '채팅 ${data.chatCount}',
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: ColorStyles.white1000
-                      ),
-                    ),
-                    const SizedBox(width: 16,),
-                    Text(
-                      '32분 전',
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: ColorStyles.white1000
-                      ),
-                    ),
-                  ],
-                ),
+                Image.asset('assets/images/eye.png', width: 18, color: ColorStyles.white800,),
+                const SizedBox(width: 6,),
                 Text(
-                  '${new NumberFormat('###,###,###,###').format(data.price)}원', // or '제안'
+                  '${data.hit}',
                   style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      color: ColorStyles.black700
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: ColorStyles.white1000
+                  ),
+                ),
+                const SizedBox(width: 24,),
+                Image.asset('assets/images/chat_dots.png', width: 18, color: ColorStyles.white800,),
+                const SizedBox(width: 6,),
+                Text(
+                  '${data.chatCount}',
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: ColorStyles.white1000
                   ),
                 ),
               ],
@@ -455,8 +394,8 @@ var mockData = [
       company: "토스",
       thumbnail: "https://avatars.githubusercontent.com/u/52196792?v=4"
     ),
-    title: "토스 오고 싶은 사람!",
-    description: "이번 토스 Next 공채에 들어오고 싶으신분 연락주세요!",
+    title: "신입 공채 준비 중인데..",
+    description: "신입 공채 준비 중인데 뭐부터 공부해야할지 잘 모르겠어요. 공채 합격자 분들 중 가이드라인을 제시해 주실 분을 찾습니다.",
     hit: 302,
     chatCount: 3,
   ),
