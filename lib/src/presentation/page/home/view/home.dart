@@ -8,6 +8,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:mentos_flutter/src/presentation/page/home/bloc/home_bloc.dart';
+import 'package:mentos_flutter/src/presentation/page/request_modify/view/request_modify_page.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/line_check_button.dart';
 import 'package:mentos_flutter/src/util/color/color_style.dart';
@@ -23,6 +24,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: CommonAppBar(
         bottomLine: false,
+        leadingWidth: 200,
         leading: Row(
           children: [
             Image.asset(
@@ -67,7 +69,9 @@ class _ActionButton extends StatelessWidget {
     return CupertinoButton(
       padding: const EdgeInsets.all(0),
       minSize: 0,
-      onPressed: () { },
+      onPressed: () {
+        Navigator.push(context, RequestModifyPage.route());
+      },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         decoration: BoxDecoration(
@@ -183,8 +187,8 @@ class _ContentListItem extends StatelessWidget {
 
   final MockMentoringData data;
 
-  final double width = 40;
-  final double height = 40;
+  final double width = 30;
+  final double height = 30;
 
   @override
   Widget build(BuildContext context) {
@@ -192,7 +196,6 @@ class _ContentListItem extends StatelessWidget {
       padding: const EdgeInsets.all(0),
       disabledColor: Colors.transparent,
       onPressed: () {
-
       },
       child: Container(
         decoration: BoxDecoration(
@@ -213,56 +216,52 @@ class _ContentListItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CachedNetworkImage(
-                    width: width,
-                    height: height,
-                    imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
-                    imageBuilder: (context, imageProvider) => Container(
-                      decoration: BoxDecoration(
-                        color: ColorStyles.blue300,
-                        borderRadius: BorderRadius.all(Radius.circular(width/2)),
-                        image: DecorationImage(
-                            image: imageProvider,
-                            fit: BoxFit.cover,
-                            scale: 0.5
-                        ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CachedNetworkImage(
+                  width: width,
+                  height: height,
+                  imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      color: ColorStyles.blue300,
+                      borderRadius: BorderRadius.all(Radius.circular(width/2)),
+                      image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                          scale: 0.5
                       ),
                     ),
-                    placeholder: (context, url) => Container(width: width, height: height,),
                   ),
-                  const SizedBox(width: 12,),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        data.member.nickname,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: ColorStyles.black800
-                        ),
+                  placeholder: (context, url) => Container(width: width, height: height,),
+                ),
+                const SizedBox(width: 8,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      data.member.nickname,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: ColorStyles.black1000
                       ),
-                      const SizedBox(height: 2,),
-                      Text(
-                        '32분 전',
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: ColorStyles.white1000
-                        ),
+                    ),
+                    Text(
+                      '32분 전',
+                      style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                          color: ColorStyles.white1000
                       ),
-                    ],
-                  ),
-                ],
-              )
+                    ),
+                  ],
+                ),
+              ],
             ),
-            const SizedBox(height: 4,),
+            const SizedBox(height: 16,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -279,7 +278,7 @@ class _ContentListItem extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                            fontSize: 17,
+                            fontSize: 18,
                             fontWeight: FontWeight.w700,
                             color: ColorStyles.black1000
                           ),
@@ -296,7 +295,31 @@ class _ContentListItem extends StatelessWidget {
                               height: 1.4
                           ),
                         ),
-                        const SizedBox(height: 8,),
+                        const SizedBox(height: 12,),
+                        Row(
+                          children: data.tagList.map((v) =>
+                              Row(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                    decoration: BoxDecoration(
+                                        color: ColorStyles.red100,
+                                        borderRadius: BorderRadius.circular(16)
+                                    ),
+                                    child: Text(
+                                      '#${v}',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: ColorStyles.red1000
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 6,)
+                                ],
+                              )
+                          ).toList(),
+                        ),
                       ],
                     ),
                   ),
@@ -306,8 +329,8 @@ class _ContentListItem extends StatelessWidget {
                 if (data.thumbnail != null)
                   CachedNetworkImage(
                     imageUrl: data.thumbnail!,
-                    width: 70,
-                    height: 70,
+                    width: 80,
+                    height: 80,
                     fadeInDuration: const Duration(milliseconds: 200),
                     imageBuilder: (context, imageProvider) => Container(
                       decoration: BoxDecoration(
@@ -322,7 +345,8 @@ class _ContentListItem extends StatelessWidget {
                   ),
               ],
             ),
-            const SizedBox(height: 12,),
+
+            const SizedBox(height: 16,),
             Row(
               children: [
                 Image.asset('assets/images/eye.png', width: 18, color: ColorStyles.white800,),
@@ -377,6 +401,7 @@ class MockMentoringData {
     required this.member,
     required this.title,
     required this.description,
+    required this.tagList,
     required this.hit,
     required this.chatCount,
     this.price = 20000,
@@ -388,6 +413,7 @@ class MockMentoringData {
   final MockMember member;
   final String title;
   final String description;
+  final List<String> tagList;
 
   final int hit;
   final int chatCount;
@@ -408,6 +434,7 @@ var mockData = [
     ),
     title: "신입 공채 준비 중인데..",
     description: "신입 공채 준비 중인데 뭐부터 공부해야할지 잘 모르겠어요. 공채 합격자 분들 중 가이드라인을 제시해 주실 분을 찾습니다.",
+    tagList:['신입', '네카라'],
     hit: 302,
     chatCount: 3,
   ),
@@ -423,6 +450,7 @@ var mockData = [
     ),
     title: "마케팅에 대해서 배워보고 싶어요",
     description: "개발을 하다보니 마케팅에 관해서도 호기심이 생겼습니다. 저에게 마케팅에 대해서 알려주실 분 없을까요??",
+    tagList: ['마케팅', '주니어'],
     hit: 27,
     chatCount: 0,
     thumbnail: "https://i0.wp.com/blog.codestates.com/wp-content/uploads/2023/02/%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0_%ED%8D%BC%ED%8F%AC%EB%A8%BC%EC%8A%A4%EB%A7%88%EC%BC%80%ED%8C%85%EC%9D%B4%EB%9E%80_%EB%8C%80%ED%91%9C%EC%9D%B4%EB%AF%B8%EC%A7%80.png?resize=750%2C485&ssl=1"

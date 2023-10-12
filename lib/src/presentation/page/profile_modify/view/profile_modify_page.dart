@@ -18,6 +18,7 @@ import 'package:mentos_flutter/src/util/enum/mentos_enum.dart';
 class ProfileModifyPage extends StatelessWidget {
   const ProfileModifyPage({Key? key}) : super(key: key);
 
+  // 수정이냐 작성이냐에 따라 파라미터 달라짐
   static Route<void> route() {
     return MaterialPageRoute(
       builder: (context) => BlocProvider(
