@@ -58,9 +58,10 @@ class _LoginView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
           decoration: BoxDecoration(
             image: DecorationImage(
-              fit: BoxFit.contain,
+              alignment: Alignment.topCenter,
+              fit: BoxFit.fitWidth,
               image: AssetImage("assets/images/background_logo.png"),
-              opacity: 0.3
+              opacity: 0.5
             )
           ),
           child: Column(
@@ -113,7 +114,7 @@ class _LoginView extends StatelessWidget {
                   color: ColorStyles.black300,
                 ),
               ),
-              const SizedBox(height: 100,),
+              const SizedBox(height: 160,),
 
               Column(
                 children: [

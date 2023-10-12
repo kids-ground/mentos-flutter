@@ -49,6 +49,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         margin: const EdgeInsets.fromLTRB(24, 8, 0, 8),
         child: leading,
       ) : null,
+      leadingWidth: 200,
       actions: actions,
       elevation: 0.1,
     );

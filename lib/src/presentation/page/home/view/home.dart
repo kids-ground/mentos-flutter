@@ -23,9 +23,21 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: CommonAppBar(
         bottomLine: false,
-        leading: Image.asset(
-          "assets/images/mentos.png",
-          width: 24,
+        leading: Row(
+          children: [
+            Image.asset(
+              "assets/images/mentos_question.png",
+              width: 24,
+            ),
+            const SizedBox(width: 8,),
+            Text(
+              '멘티 요청',
+              style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 24
+              ),
+            )
+          ],
         ),
       ),
       floatingActionButton: _ActionButton(),
@@ -148,7 +160,7 @@ class _ContentListView extends StatelessWidget {
                     delegate: SliverChildBuilderDelegate(
                       childCount: state.list.length,
                       (context, index) => Padding(
-                        padding: const EdgeInsets.fromLTRB(24,0,24,16),
+                        padding: const EdgeInsets.fromLTRB(0,0,0,16),
                         child: _ContentListItem(data: state.list[index],),
                       ),
                     ),
@@ -184,7 +196,7 @@ class _ContentListItem extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(0),
           color: ColorStyles.white,
           boxShadow: [
             BoxShadow(
@@ -196,7 +208,7 @@ class _ContentListItem extends StatelessWidget {
           ],
         ),
 
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
