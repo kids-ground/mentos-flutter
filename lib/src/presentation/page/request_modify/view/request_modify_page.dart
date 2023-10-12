@@ -25,7 +25,6 @@ class RequestModifyPage extends StatelessWidget {
   }
 }
 
-// 제목, 글작성, 사진첨부(최대 3개), 태그(최대 2개)
 class _RequestModifyView extends StatelessWidget {
   _RequestModifyView({Key? key}) : super(key: key);
   final formKey = GlobalKey<FormState>();
@@ -39,26 +38,30 @@ class _RequestModifyView extends StatelessWidget {
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           onVerticalDragStart: (_) => FocusScope.of(context).unfocus(),
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    _TitleFormView(),
-                    _TagFormView(),
-                    const SizedBox(height: 12,),
-                    _ContentFormView(),
-                    const SizedBox(height: 16,),
-                    _ImageListView()
-                  ],
-                ),
-              )
-            )
+          child: Form(
+            key: formKey,
+            child: CustomScrollView(
+              physics: const RangeMaintainingScrollPhysics(),
+              slivers: [
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: const Column(
+                    children: [
+                      _TitleFormView(),
+                      _TagFormView(),
+                      SizedBox(height: 12,),
+                      _ContentFormView(),
+                      SizedBox(height: 16,),
+                      // _ImageListView(),
+                      SizedBox(height: 32,),
+                      Spacer(),
+                      _SaveButtonView(),
+                      SizedBox(height: 24,),
+                    ],
+                  ),
+                )
+              ],
+            ),
           )
         ),
       ),
@@ -92,16 +95,16 @@ class _TitleFormView extends StatelessWidget {
         contentPadding: const EdgeInsets.fromLTRB(24, 20, 24, 20),
         // 기본 색상
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white200, width: 1),
+          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white200, width: 1),
+          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
         ),
         errorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white200, width: 1),
+          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
         ),
         focusedErrorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white200, width: 1),
+          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
         ),
       ),
       validator: (v) { return null; },
@@ -117,7 +120,7 @@ class _TagFormView extends StatelessWidget {
     return TextFormField(
       onChanged: (v){ },
       keyboardType: TextInputType.text,
-      enableInteractiveSelection: true,
+      enableInteractiveSelection: false,
       maxLength: 30,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
@@ -135,16 +138,16 @@ class _TagFormView extends StatelessWidget {
         contentPadding: const EdgeInsets.fromLTRB(24, 20, 24, 20),
         // 기본 색상
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white200, width: 1),
+          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white200, width: 1),
+          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
         ),
         errorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white200, width: 1),
+          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
         ),
         focusedErrorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white200, width: 1),
+          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
         ),
       ),
       validator: (v) { return null; },
@@ -159,7 +162,7 @@ class _ContentFormView extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       onChanged: (v){ },
-      keyboardType: TextInputType.text,
+      keyboardType: TextInputType.multiline,
       enableInteractiveSelection: true,
       maxLength: 200,
       maxLines: 15,
@@ -189,16 +192,16 @@ Java와 Spring로 하나의 프로젝트를 만들어 봤습니다.
         contentPadding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
         // 기본 색상
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white200, width: 1),
+          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white200, width: 1),
+          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
         ),
         errorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white200, width: 1),
+          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
         ),
         focusedErrorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white200, width: 1),
+          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
         ),
       ),
       validator: (v) { return null; },
@@ -267,6 +270,28 @@ class _SaveButtonView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: CupertinoButton(
+        color: ColorStyles.mainColor,
+        padding: EdgeInsets.zero,
+        onPressed: () { },
+        child: Container(
+          alignment: Alignment.center,
+          height: 52,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: const Text(
+              '작성 완료',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: ColorStyles.white,
+              )
+          ),
+        ),
+      ),
+    );
   }
 }
