@@ -269,7 +269,7 @@ class _CommentItem extends StatelessWidget {
           const SizedBox(height: 10,),
           _buildCommentContentView(),
           const SizedBox(height: 12,),
-          _buildMoreView()
+          _buildMoreView(context)
         ],
       ),
     );
@@ -341,13 +341,14 @@ class _CommentItem extends StatelessWidget {
     );
   }
 
-  Widget _buildMoreView() {
+  Widget _buildMoreView(BuildContext context) {
     return Row(
       children: [
         SizedBox(width: imageWidth + imageInterval,),
         CupertinoButton(
-          // color: ColorStyles.blue500,
-          onPressed: () { },
+          onPressed: () {
+            context.read<RequestPostDetailBloc>().add(RequestPostDetailCommentReply(commentId: 1));
+          },
           padding: EdgeInsets.fromLTRB(0, 2, 0, 0),
           minSize: 0,
           child: Row(
@@ -386,62 +387,134 @@ class _CommentItem extends StatelessWidget {
 class _CommentFormView extends StatelessWidget {
   const _CommentFormView({Key? key}) : super(key: key);
 
+  final double replyImageWidth = 20;
+  final double replyImageHeight = 20;
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        Expanded(
-          child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: ColorStyles.white200
-            ),
-            margin: const EdgeInsets.fromLTRB(24, 6, 0, 8),
-            alignment: Alignment.centerLeft,
-            child: TextFormField(
-              onChanged: (text) {
-              },
-              maxLength: 100,
-              minLines: 1,
-              maxLines: 3,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                errorBorder: InputBorder.none,
-                disabledBorder: InputBorder.none,
-                counterText: '',
-                contentPadding: EdgeInsets.only(
-                    left: 16, bottom: 10, top: 10, right: 16),
-                hintText: '댓글로 조언해주세요',
-                hintStyle: TextStyle(color: ColorStyles.white1000)
-              ),
-            ),
-          ),
-        ),
-        CupertinoButton(
-          onPressed: () {
+    return BlocBuilder<RequestPostDetailBloc, RequestPostDetailState>(
+      builder: (context, state) {
+        return Column(
+          children: [
+            Divider(thickness: 0.5, color: ColorStyles.white500, height: 0.5,),
 
-          },
-          disabledColor: ColorStyles.disableBackgroundColor,
-          padding: EdgeInsets.zero,
-          child: Container(
-            margin: const EdgeInsets.fromLTRB(0,6,0,8),
-            alignment: Alignment.center,
-            padding: const EdgeInsets.fromLTRB(12, 12, 24, 12),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: SizedBox(
-              child: Icon(
-                Icons.send_rounded,
-                color: ColorStyles.mainColor,
+
+            if (state.replyCommentId != 0)
+              Container(
+                margin: EdgeInsets.fromLTRB(24, 8, 0, 0),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4)
+                ),
+                child: CupertinoButton(
+                  onPressed: () {
+                    context.read<RequestPostDetailBloc>().add(const RequestPostDetailCommentReplyCancel());
+                  },
+                  padding: EdgeInsets.symmetric(vertical: 4),
+                  minSize: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CachedNetworkImage(
+                        width: replyImageWidth,
+                        height: replyImageHeight,
+                        imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            color: ColorStyles.blue300,
+                            borderRadius: BorderRadius.all(Radius.circular(replyImageWidth/2)),
+                            image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                                scale: 0.5
+                            ),
+                          ),
+                        ),
+                        placeholder: (context, url) => Container(width: replyImageWidth, height: replyImageHeight,),
+                      ),
+                      const SizedBox(width: 6,),
+                      Text(
+                        'rokwon',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: ColorStyles.black700,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16
+                        ),
+                      ),
+                      const SizedBox(width: 6,),
+                      Text(
+                        '님에게 답장 중',
+                        style: TextStyle(
+                            color: ColorStyles.black700,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16
+                        ),
+                      ),
+
+                      const SizedBox(width: 6,),
+                      Icon(Icons.cancel, size: 16, color: ColorStyles.white900,)
+                    ],
+                  ),
+                ),
               ),
+
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: ColorStyles.white200
+                    ),
+                    margin: const EdgeInsets.fromLTRB(24, 6, 0, 8),
+                    alignment: Alignment.centerLeft,
+                    child: TextFormField(
+                      onChanged: (text) {
+                        context.read<RequestPostDetailBloc>().add(RequestPostDetailCommentWrite(comment: text));
+                      },
+                      maxLength: 100,
+                      minLines: 1,
+                      maxLines: 3,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        counterText: '',
+                        contentPadding: EdgeInsets.only(
+                            left: 16, bottom: 10, top: 10, right: 16),
+                        hintText: '댓글을 작성해주세요',
+                        hintStyle: TextStyle(color: ColorStyles.white1000)
+                      ),
+                    ),
+                  ),
+                ),
+                CupertinoButton(
+                  onPressed: state.canSend ? () {
+
+                  } : null,
+                  padding: EdgeInsets.zero,
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(0,6,0,8),
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.fromLTRB(12, 12, 24, 12),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Icon(
+                      Icons.send_rounded,
+                      color: state.canSend ? ColorStyles.mainColor : ColorStyles.disableBackgroundColor,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ),
-      ],
+          ],
+        );
+      },
     );
   }
 }
