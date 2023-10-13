@@ -56,4 +56,7 @@ class ColorStyles {
   static const Color yellow = Color(0xFFFFDB0F);
 
   static const Color blueGrey100 = Color(0xFFECEFF1);
+
+  // feature
+  static const Color disableBackgroundColor = white600;
 }

@@ -75,7 +75,9 @@ class _TitleFormView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged: (v){ },
+      onChanged: (v){
+        context.read<RequestModifyBloc>().add(RequestModifyTitle(title: v));
+      },
       keyboardType: TextInputType.text,
       enableInteractiveSelection: true,
       maxLength: 30,
@@ -118,13 +120,16 @@ class _TagFormView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged: (v){ },
+      onChanged: (v) {
+        // 띄어쓰기당 태그하나 - UI로 그리기
+        context.read<RequestModifyBloc>().add(RequestModifyTagList(tagList: v.split(' ')));
+      },
       keyboardType: TextInputType.text,
       enableInteractiveSelection: false,
-      maxLength: 30,
+      maxLength: 20,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
-        hintText: '태그 작성 (최대 2개)',
+        hintText: '태그 작성 최대 2개 ex) #주니어',
         counterText: '',
         hintStyle: const TextStyle(
             color: ColorStyles.white900,
@@ -161,7 +166,9 @@ class _ContentFormView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged: (v){ },
+      onChanged: (v){
+        context.read<RequestModifyBloc>().add(RequestModifyContent(content: v));
+      },
       keyboardType: TextInputType.multiline,
       enableInteractiveSelection: true,
       maxLength: 200,
@@ -252,16 +259,12 @@ class _ImageListView extends StatelessWidget {
   }
 
   void _selectImages(int maxCount) async {
-
     final imagePicker = ImagePicker();
     final List<XFile> selectedImages = await imagePicker.pickMultiImage(imageQuality: 50);
 
     if (selectedImages.isEmpty) return;
-    if (selectedImages.length > maxCount) {
-
-    } else {
-
-    }
+    if (selectedImages.length > maxCount) {}
+    else { }
   }
 }
 
@@ -270,28 +273,33 @@ class _SaveButtonView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: CupertinoButton(
-        color: ColorStyles.mainColor,
-        padding: EdgeInsets.zero,
-        onPressed: () { },
-        child: Container(
-          alignment: Alignment.center,
-          height: 52,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
+    return BlocBuilder<RequestModifyBloc, RequestModifyState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: CupertinoButton(
+            color: ColorStyles.mainColor,
+            padding: EdgeInsets.zero,
+            disabledColor: ColorStyles.disableBackgroundColor,
+            onPressed: state.canComplete ? () { } : null,
+            child: Container(
+              alignment: Alignment.center,
+              height: 52,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Text(
+                  '작성 완료',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    color: ColorStyles.white,
+                  )
+              ),
+            ),
           ),
-          child: const Text(
-              '작성 완료',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                color: ColorStyles.white,
-              )
-          ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

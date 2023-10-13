@@ -25,6 +25,8 @@ class RequestModifyState extends Equatable {
     selectedImageFileList: selectedImageFileList ?? this.selectedImageFileList
   );
 
+  bool get canComplete => title.isNotEmpty && content.isNotEmpty;
+
   @override
   List<Object> get props => [title, tagList, content, selectedImageFileList];
 }
