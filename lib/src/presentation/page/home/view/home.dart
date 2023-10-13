@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:mentos_flutter/src/presentation/page/home/bloc/home_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/request_modify/view/request_modify_page.dart';
+import 'package:mentos_flutter/src/presentation/page/request_post_detail/view/request_post_detail_page.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/line_check_button.dart';
 import 'package:mentos_flutter/src/util/color/color_style.dart';
@@ -196,6 +197,7 @@ class _ContentListItem extends StatelessWidget {
       padding: const EdgeInsets.all(0),
       disabledColor: Colors.transparent,
       onPressed: () {
+        Navigator.push(context, RequestPostDetailPage.route(1));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -345,7 +347,6 @@ class _ContentListItem extends StatelessWidget {
                   ),
               ],
             ),
-
             const SizedBox(height: 16,),
             Row(
               children: [
