@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mentos_flutter/src/domain/dto/response/mentor_profile/mentor_profile_response.dart';
+import 'package:mentos_flutter/src/data/dto/response/mentor_profile/mentor_profile_response.dart';
 
 part 'mentor_detail_event.dart';
 part 'mentor_detail_state.dart';

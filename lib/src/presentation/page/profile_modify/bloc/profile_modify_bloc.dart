@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mentos_flutter/src/domain/dto/response/member/member_response.dart';
+import 'package:mentos_flutter/src/data/dto/response/member/member_response.dart';
 import 'package:mentos_flutter/src/util/enum/mentos_enum.dart';
 
 part 'profile_modify_event.dart';
