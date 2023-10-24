@@ -18,6 +18,9 @@ dependencies:
   bloc: ^8.1.2
   equatable: ^2.0.5
 
+  # DI
+  get_it: ^7.6.4
+
   # Social Login
   kakao_flutter_sdk: ^1.4.3
   sign_in_with_apple: ^4.3.0
@@ -59,7 +62,6 @@ dev_dependencies:
 
   # App Icon
   flutter_launcher_icons: ^0.13.1
-
 
 # The following section is specific to Flutter packages.
 flutter:

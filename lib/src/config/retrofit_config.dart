@@ -1,8 +1,5 @@
 
-
 import 'package:dio/dio.dart';
-import 'package:mentos_flutter/src/data/repository/auth_repository.dart';
-import 'package:mentos_flutter/src/util/constant/strings.dart';
 import 'package:mentos_flutter/src/util/resource/logger.dart';
 
 late final Dio baseApiDio;
@@ -20,8 +17,6 @@ void _setupBaseApiDio() {
 
   // interceptors 추가
   baseApiDio.interceptors.add(_CustomLogInterceptor());
-
-  AuthRepository(baseApiDio, baseUrl: baseUrl);
 }
 
 class _CustomLogInterceptor extends Interceptor {
