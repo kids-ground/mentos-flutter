@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:mentos_flutter/src/config/bloc_config.dart';
 import 'package:mentos_flutter/src/config/di_config.dart';
 import 'package:mentos_flutter/src/config/firebase_config.dart';
