@@ -9,6 +9,7 @@ import 'package:mentos_flutter/src/config/firebase_config.dart';
 import 'package:mentos_flutter/src/config/kakao_config.dart';
 import 'package:mentos_flutter/src/config/retrofit_config.dart';
 import 'package:mentos_flutter/src/presentation/page/app/view/app.dart';
+import 'package:mentos_flutter/src/util/resource/logger.dart';
 
 void main() async {
   runZonedGuarded<Future<void>>(
@@ -30,7 +31,7 @@ void main() async {
       // Splash 종료
       FlutterNativeSplash.remove();
     },
-    (error, stack) => {} // FirebaseCrashlytics.instance.recordError(error, stack, fatal: true)
+    (error, stack) => logger.e(error.runtimeType.toString()) // FirebaseCrashlytics.instance.recordError(error, stack, fatal: true)
   );
 
 
