@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mentos_flutter/src/presentation/page/request_modify/bloc/request_modify_bloc.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/routing_app_bar.dart';
-import 'package:mentos_flutter/src/util/color/color_style.dart';
+import 'package:mentos_flutter/src/presentation/style/color_style.dart';
 
 class RequestModifyPage extends StatelessWidget {
   const RequestModifyPage({Key? key}) : super(key: key);

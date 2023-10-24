@@ -6,7 +6,7 @@ import 'package:mentos_flutter/src/presentation/page/mentor_profile_modify/view/
 import 'package:mentos_flutter/src/presentation/page/profile_modify/view/profile_modify_page.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/border_line_button.dart';
-import 'package:mentos_flutter/src/util/color/color_style.dart';
+import 'package:mentos_flutter/src/presentation/style/color_style.dart';
 
 class MyPagePage extends StatelessWidget {
   const MyPagePage({Key? key}) : super(key: key);

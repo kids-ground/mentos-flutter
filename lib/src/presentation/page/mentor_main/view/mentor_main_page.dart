@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentos_flutter/src/presentation/page/mentor_detail/view/mentor_detail_page.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
-import 'package:mentos_flutter/src/util/color/color_style.dart';
+import 'package:mentos_flutter/src/presentation/style/color_style.dart';
 
 class MentorMainPage extends StatelessWidget {
   const MentorMainPage({Key? key}) : super(key: key);

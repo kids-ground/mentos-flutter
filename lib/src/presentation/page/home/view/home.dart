@@ -12,7 +12,7 @@ import 'package:mentos_flutter/src/presentation/page/request_modify/view/request
 import 'package:mentos_flutter/src/presentation/page/request_post_detail/view/request_post_detail_page.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/line_check_button.dart';
-import 'package:mentos_flutter/src/util/color/color_style.dart';
+import 'package:mentos_flutter/src/presentation/style/color_style.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class HomePage extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mentos_flutter/src/util/color/color_style.dart';
+import 'package:mentos_flutter/src/presentation/style/color_style.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CommonAppBar({

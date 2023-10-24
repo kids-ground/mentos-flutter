@@ -6,7 +6,7 @@ import 'package:mentos_flutter/src/presentation/widget/app_bar/routing_app_bar.d
 import 'package:mentos_flutter/src/presentation/widget/button/border_line_button.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/full_filled_button.dart';
 import 'package:mentos_flutter/src/presentation/widget/text_field/default_text_from_field.dart';
-import 'package:mentos_flutter/src/util/color/color_style.dart';
+import 'package:mentos_flutter/src/presentation/style/color_style.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:mentos_flutter/src/util/constant/strings.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/border_line_button.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/full_filled_button.dart';
-import 'package:mentos_flutter/src/util/color/color_style.dart';
+import 'package:mentos_flutter/src/presentation/style/color_style.dart';
 
 
 void showBottomDialog({

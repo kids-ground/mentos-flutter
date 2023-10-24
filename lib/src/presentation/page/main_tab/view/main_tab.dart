@@ -6,7 +6,7 @@ import 'package:mentos_flutter/src/presentation/page/home/view/home.dart';
 import 'package:mentos_flutter/src/presentation/page/main_tab/bloc/main_tab_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/mentor_main/view/mentor_main_page.dart';
 import 'package:mentos_flutter/src/presentation/page/mypage/view/mypage.dart';
-import 'package:mentos_flutter/src/util/color/color_style.dart';
+import 'package:mentos_flutter/src/presentation/style/color_style.dart';
 
 class MainTabPage extends StatelessWidget {
   const MainTabPage({Key? key}) : super(key: key);

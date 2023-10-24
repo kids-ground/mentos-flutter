@@ -16,3 +16,9 @@
 ![flutter_clean_architecture](https://github.com/kids-ground/mentos_flutter/assets/52196792/36d03c8a-1f6e-4e29-b23e-06485ca870bd)  
 
 
+<br />  
+
+### TodoList
+- [ ] Data Layer 라이브러리 셋팅
+- [ ] Data Later 유틸 클래스 구현
+- [ ] Domain 설계

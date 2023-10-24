@@ -6,7 +6,7 @@ import 'package:mentos_flutter/src/presentation/page/login/view/login.dart';
 import 'package:mentos_flutter/src/presentation/page/main_tab/bloc/main_tab_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/main_tab/view/main_tab.dart';
 import 'package:mentos_flutter/src/presentation/page/terms_of_service/bloc/terms_of_service_bloc.dart';
-import 'package:mentos_flutter/src/util/color/color_style.dart';
+import 'package:mentos_flutter/src/presentation/style/color_style.dart';
 import 'package:mentos_flutter/src/util/constant/strings.dart';
 
 class App extends StatelessWidget {

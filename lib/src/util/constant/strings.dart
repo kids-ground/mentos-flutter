@@ -1,9 +1,9 @@
 
 // kakao Native App Key
-const String kakaoNativeAppKey = 'bfe7b97ac3e5b3b6d9d1cd55da609ae8';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-// API
-const String baseApi = 'https://rokwonk.com';
+final String kakaoNativeAppKey = dotenv.env['KAKAO_NATIVE_APP_KEY'] ?? '';
+final String baseUrl = dotenv.env['API_BASE_URL'] ?? '';
 
 // Pattern
 const emailPattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
