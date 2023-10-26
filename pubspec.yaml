@@ -47,7 +47,13 @@ dependencies:
   # ETC
   intl: ^0.18.1 # 시간 포맷
   flutter_dotenv: ^5.1.0 # env
+  permission_handler: ^11.0.1 # 권한 요청 관리
+  app_settings: ^5.1.1 # 앱 셋팅으로 바로가기
 
+  # Firebase
+  firebase_core: ^2.20.0
+  firebase_messaging: ^14.7.2
+  flutter_local_notifications: ^16.1.0
 
 dev_dependencies:
   flutter_test:
