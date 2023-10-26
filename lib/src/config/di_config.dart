@@ -4,15 +4,17 @@ import 'package:mentos_flutter/src/config/config.dart';
 
 import 'package:mentos_flutter/src/data/data_source/data_source.dart';
 import 'package:mentos_flutter/src/data/repository/repository.dart';
+import 'package:mentos_flutter/src/domain/service/DeepLinkingService.dart';
+import 'package:mentos_flutter/src/domain/service/NotificationService.dart';
 
 import 'package:mentos_flutter/src/util/constant/strings.dart';
 
 final getIt = GetIt.instance;
 
 void setupDIConfig() {
-  // 의존성 호출 시 => getIt.get<AuthRepository>();
   _setupData();
   _setupRepository();
+  _setupService();
   _setupUseCase();
 }
 
@@ -26,6 +28,11 @@ void _setupRepository() {
   getIt.registerLazySingleton(() => AuthRepository(baseApiDio, baseUrl: baseUrl));
 
   // local
+}
+
+void _setupService() {
+  getIt.registerSingleton(DeepLinkingService(dataSource: getIt.get<LocalKeyValueDataSource>()));
+  getIt.registerSingleton(NotificationService(deepLinkingService: getIt.get<DeepLinkingService>()));
 }
 
 void _setupUseCase() {

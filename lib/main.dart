@@ -3,11 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:mentos_flutter/src/config/bloc_config.dart';
-import 'package:mentos_flutter/src/config/di_config.dart';
-import 'package:mentos_flutter/src/config/firebase_config.dart';
-import 'package:mentos_flutter/src/config/kakao_config.dart';
-import 'package:mentos_flutter/src/config/retrofit_config.dart';
+import 'package:mentos_flutter/src/config/config.dart';
+import 'package:mentos_flutter/src/domain/service/DeepLinkingService.dart';
+import 'package:mentos_flutter/src/domain/service/NotificationService.dart';
 import 'package:mentos_flutter/src/presentation/page/app/view/app.dart';
 import 'package:mentos_flutter/src/util/resource/logger.dart';
 
@@ -20,19 +18,21 @@ void main() async {
       FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
       await dotenv.load(fileName: 'assets/config/.env');
-      setupKakaoSDK();
-      setupFirebaseConfig();
-      setupRetrofitConfig();
       setupDIConfig();
       setupBlocConfig();
+      await setupFirebaseConfig();
+      await setupNotificationConfig(
+        getIt.get<NotificationService>(),
+        getIt.get<DeepLinkingService>()
+      );
+      setupRetrofitConfig();
+      setupKakaoSDK();
 
       // 앱 실행
       runApp(const App());
       // Splash 종료
       FlutterNativeSplash.remove();
     },
-    (error, stack) => logger.e(error.runtimeType.toString()) // FirebaseCrashlytics.instance.recordError(error, stack, fatal: true)
+    (error, stack) => logger.e('${error.toString()} ${stack.toString()}') // FirebaseCrashlytics.instance.recordError(error, stack, fatal: true)
   );
-
-
 }
