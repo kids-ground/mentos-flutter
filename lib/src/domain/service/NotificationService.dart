@@ -16,11 +16,12 @@ class NotificationService {
   static const String androidChannelTitle = 'Receive Push Notification In Foreground';
 
   late final AndroidNotificationChannel _androidChannel;
-  late final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
+  late final FlutterLocalNotificationsPlugin _localNotifications;
 
   late final InitializationSettings _initializationSettings;
   late final void Function(NotificationResponse) _foregroundLocalNotificationHandler;
   late final void Function(NotificationResponse) _backgroundLocalNotificationHandler;
+
 
   // 푸시알림 권한 확인
   Future<bool> checkPermission() async {
@@ -55,13 +56,25 @@ class NotificationService {
     AppSettings.openAppSettings(type: AppSettingsType.notification);
   }
 
-  // Local Notification 즉시 전송
-  void immediatelySendLocalNotification() {
-
+  // Local Notification 즉시 전송 (파라미터 수정 필요 - 어떤 노티 보내줄지)
+  Future<void> immediatelySendLocalNotification() async {
+    NotificationDetails _details = const NotificationDetails(
+      android: AndroidNotificationDetails(androidChannelId, '1번 푸시'),
+      iOS: DarwinNotificationDetails(
+        badgeNumber: 1
+      ),
+    );
+    logger.i('이거 왜 안나와');
+    await _localNotifications.show(
+        1,
+        '로컬 푸시 알림',
+        '로컬 푸시 알림 테스트',
+        _details,
+        payload: 'deepLink');
   }
 
   // Local Notification 스케줄 추가 - 즉시 알림, 시간 전송 가능
-  void addLocalNotificationSchedule() {
+  Future<void> addLocalNotificationSchedule() async {
 
   }
 
@@ -97,8 +110,8 @@ class NotificationService {
     );
 
     // 설정 완료
-    _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    await _flutterLocalNotificationsPlugin
+    _localNotifications = FlutterLocalNotificationsPlugin();
+    await _localNotifications
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(_androidChannel);
     InitializationSettings initializationSettings = InitializationSettings(
@@ -112,7 +125,7 @@ class NotificationService {
 
   // Local Push Handler 지정 - permission 요청이 자동으로 뜨기 때문에 Permission 요청 후에 호출
   Future<void> _setLocalNotificationHandler() async {
-    await _flutterLocalNotificationsPlugin.initialize(
+    await _localNotifications.initialize(
       _initializationSettings,
       onDidReceiveNotificationResponse: _foregroundLocalNotificationHandler,
       onDidReceiveBackgroundNotificationResponse: _backgroundLocalNotificationHandler,
