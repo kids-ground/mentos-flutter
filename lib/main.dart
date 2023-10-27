@@ -7,7 +7,7 @@ import 'package:mentos_flutter/src/config/config.dart';
 import 'package:mentos_flutter/src/domain/service/deep_linking_service.dart';
 import 'package:mentos_flutter/src/domain/service/notification_service.dart';
 import 'package:mentos_flutter/src/presentation/page/app/view/app.dart';
-import 'package:mentos_flutter/src/util/resource/logger.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 void main() async {
   runZonedGuarded<Future<void>>(
@@ -33,6 +33,6 @@ void main() async {
       // Splash 종료
       FlutterNativeSplash.remove();
     },
-    (error, stack) => logger.e('${error.toString()} ${stack.toString()}') // FirebaseCrashlytics.instance.recordError(error, stack, fatal: true)
+    (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack, fatal: true)
   );
 }
