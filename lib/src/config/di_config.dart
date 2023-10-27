@@ -4,8 +4,8 @@ import 'package:mentos_flutter/src/config/config.dart';
 
 import 'package:mentos_flutter/src/data/data_source/data_source.dart';
 import 'package:mentos_flutter/src/data/repository/repository.dart';
-import 'package:mentos_flutter/src/domain/service/DeepLinkingService.dart';
-import 'package:mentos_flutter/src/domain/service/NotificationService.dart';
+import 'package:mentos_flutter/src/domain/service/deep_linking_service.dart';
+import 'package:mentos_flutter/src/domain/service/notification_service.dart';
 
 import 'package:mentos_flutter/src/util/constant/strings.dart';
 

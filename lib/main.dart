@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:mentos_flutter/src/config/config.dart';
-import 'package:mentos_flutter/src/domain/service/DeepLinkingService.dart';
-import 'package:mentos_flutter/src/domain/service/NotificationService.dart';
+import 'package:mentos_flutter/src/domain/service/deep_linking_service.dart';
+import 'package:mentos_flutter/src/domain/service/notification_service.dart';
 import 'package:mentos_flutter/src/presentation/page/app/view/app.dart';
 import 'package:mentos_flutter/src/util/resource/logger.dart';
 

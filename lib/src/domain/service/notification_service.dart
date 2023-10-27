@@ -3,7 +3,7 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:mentos_flutter/src/domain/service/DeepLinkingService.dart';
+import 'package:mentos_flutter/src/domain/service/deep_linking_service.dart';
 import 'package:mentos_flutter/src/util/resource/logger.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -13,31 +13,32 @@ class NotificationService {
   final DeepLinkingService deepLinkingService;
 
   static const String androidChannelId = 'high_importance_channel';
-  static const String androidChannelTitle = 'Receive Push Notification In Foreground';
+  static const String androidChannelName = 'Receive Push Notification In Foreground';
 
-  late final AndroidNotificationChannel _androidChannel;
   late final FlutterLocalNotificationsPlugin _localNotifications;
-
+  late final AndroidNotificationChannel _androidChannel;
   late final InitializationSettings _initializationSettings;
+
   late final void Function(NotificationResponse) _foregroundLocalNotificationHandler;
   late final void Function(NotificationResponse) _backgroundLocalNotificationHandler;
 
+  // 권한 요청
+  Future<void> requestPermissionIfNotDetermined() async {
+    if (await Permission.notification.isDenied) {
+      await Permission.notification.request();
+    }
 
-  // 푸시알림 권한 확인
-  Future<bool> checkPermission() async {
-    if (await Permission.notification.isDenied) await Permission.notification.request();
-
-    bool isPermanentlyDenied = await Permission.notification.isPermanentlyDenied;
-    if (!isPermanentlyDenied) await _setLocalNotificationHandler();
-
-    return isPermanentlyDenied;
+    _setLocalNotificationHandler();
   }
+
+  // 푸사알림이 꺼져 있는지 확인
+  Future<void> get isPermanentlyDenied async => await Permission.notification.isPermanentlyDenied;
 
   // FCMToken 업데이트 하기
   Future<void> updateFCMToken() async {
-    String? _fcmToken = await FirebaseMessaging.instance.getToken();
-    logger.i('$_fcmToken');
-    // 저장
+    String? fcmToken = await FirebaseMessaging.instance.getToken();
+    logger.i('$fcmToken');
+    // 네트워크 통신
   }
 
   // 푸시알림 변경
@@ -56,26 +57,33 @@ class NotificationService {
     AppSettings.openAppSettings(type: AppSettingsType.notification);
   }
 
-  // Local Notification 즉시 전송 (파라미터 수정 필요 - 어떤 노티 보내줄지)
-  Future<void> immediatelySendLocalNotification() async {
-    NotificationDetails _details = const NotificationDetails(
-      android: AndroidNotificationDetails(androidChannelId, '1번 푸시'),
+  // Local Notification 즉시 전송
+  Future<void> immediatelySendLocalNotification({
+    required LocalNotificationType type,
+    required Map<String, dynamic> data
+  }) async {
+    // 푸시알림 Deny 상태일경우 처리
+    NotificationDetails details = const NotificationDetails(
+      android: AndroidNotificationDetails(androidChannelId, androidChannelName),
       iOS: DarwinNotificationDetails(
-        badgeNumber: 1
+        presentAlert: true,
+        presentBadge: false,
+        presentSound: true,
       ),
     );
-    logger.i('이거 왜 안나와');
+
     await _localNotifications.show(
-        1,
-        '로컬 푸시 알림',
-        '로컬 푸시 알림 테스트',
-        _details,
-        payload: 'deepLink');
+        type.id,
+        type.title,
+        type.description,
+        details,
+        payload: data.toString()
+    );
   }
 
   // Local Notification 스케줄 추가 - 즉시 알림, 시간 전송 가능
   Future<void> addLocalNotificationSchedule() async {
-
+    // 푸시알림 Deny 상태일경우 처리
   }
 
   // 등록된 Local Notification 삭제 - 스케줄 추가 시 설정한 id로 취소
@@ -96,7 +104,7 @@ class NotificationService {
     // Android 채널 설정
     _androidChannel = const AndroidNotificationChannel(
       androidChannelId,
-      androidChannelTitle,
+      androidChannelName,
       importance: Importance.max,
     );
 
@@ -131,4 +139,15 @@ class NotificationService {
       onDidReceiveBackgroundNotificationResponse: _backgroundLocalNotificationHandler,
     );
   }
+}
+
+enum LocalNotificationType {
+  post(0, '새로운 게시글', '새로운 게시글을 확인해 볼까요?'),
+  repost(1, '새로운 답글', '새로운 답글이 달렸습니다.');
+
+  const LocalNotificationType(this.id, this.title, this.description);
+
+  final int id;
+  final String title;
+  final String description;
 }

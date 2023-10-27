@@ -2,8 +2,8 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mentos_flutter/src/config/config.dart';
-import 'package:mentos_flutter/src/domain/service/DeepLinkingService.dart';
-import 'package:mentos_flutter/src/domain/service/NotificationService.dart';
+import 'package:mentos_flutter/src/domain/service/deep_linking_service.dart';
+import 'package:mentos_flutter/src/domain/service/notification_service.dart';
 import 'package:mentos_flutter/src/util/resource/logger.dart';
 
 // Firebase 우선설정 필수
