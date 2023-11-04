@@ -31,7 +31,7 @@ class _RequestPostDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: RoutingAppBar(title: '로건님의 요청글',),
-      backgroundColor: ColorStyles.white,
+      backgroundColor: white,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -103,7 +103,7 @@ class _PostItem extends StatelessWidget {
           imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
           imageBuilder: (context, imageProvider) => Container(
             decoration: BoxDecoration(
-              color: ColorStyles.blue300,
+              color: blue300,
               borderRadius: BorderRadius.all(Radius.circular(width/2)),
               image: DecorationImage(
                   image: imageProvider,
@@ -124,7 +124,7 @@ class _PostItem extends StatelessWidget {
               style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: ColorStyles.black1000
+                  color: black1000
               ),
             ),
             Text(
@@ -132,7 +132,7 @@ class _PostItem extends StatelessWidget {
               style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
-                  color: ColorStyles.white1000
+                  color: white1000
               ),
             ),
           ],
@@ -149,7 +149,7 @@ class _PostItem extends StatelessWidget {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                    color: ColorStyles.red100,
+                    color: red100,
                     borderRadius: BorderRadius.circular(16)
                 ),
                 child: Text(
@@ -157,7 +157,7 @@ class _PostItem extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: ColorStyles.red1000
+                      color: red1000
                   ),
                 ),
               ),
@@ -186,7 +186,7 @@ class _PostItem extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
-                      color: ColorStyles.black1000
+                      color: black1000
                   ),
                 ),
                 const SizedBox(height: 24,),
@@ -196,7 +196,7 @@ class _PostItem extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
-                      color: ColorStyles.black500,
+                      color: black500,
                       height: 1.5
                   ),
                 ),
@@ -216,7 +216,7 @@ class _PostItem extends StatelessWidget {
         style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,
-            color: ColorStyles.white1000
+            color: white1000
         ),
       ),
     );
@@ -225,25 +225,25 @@ class _PostItem extends StatelessWidget {
   Widget _buildMoreView() {
     return Row(
       children: [
-        Image.asset('assets/images/eye.png', width: 20, color: ColorStyles.white800,),
+        Image.asset('assets/images/eye.png', width: 20, color: white800,),
         const SizedBox(width: 6,),
         Text(
           '17',
           style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w400,
-              color: ColorStyles.white1000
+              color: white1000
           ),
         ),
         const SizedBox(width: 32,),
-        Image.asset('assets/images/chat_dots.png', width: 20, color: ColorStyles.white800,),
+        Image.asset('assets/images/chat_dots.png', width: 20, color: white800,),
         const SizedBox(width: 6,),
         Text(
           '2',
           style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w400,
-              color: ColorStyles.white1000
+              color: white1000
           ),
         ),
       ],
@@ -284,7 +284,7 @@ class _CommentItem extends StatelessWidget {
           imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
           imageBuilder: (context, imageProvider) => Container(
             decoration: BoxDecoration(
-              color: ColorStyles.blue300,
+              color: blue300,
               borderRadius: BorderRadius.all(Radius.circular(imageWidth/2)),
               image: DecorationImage(
                   image: imageProvider,
@@ -305,7 +305,7 @@ class _CommentItem extends StatelessWidget {
               style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w500,
-                  color: ColorStyles.black1000
+                  color: black1000
               ),
             ),
             const SizedBox(height: 0,),
@@ -314,7 +314,7 @@ class _CommentItem extends StatelessWidget {
               style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
-                  color: ColorStyles.black300
+                  color: black300
               ),
             ),
           ],
@@ -331,7 +331,7 @@ class _CommentItem extends StatelessWidget {
           child: Text(
             '훌륭한 마인드를 가지고 계시군요. 제가 아직 조언을 해드릴 짬은 아니라 응원 메시지만 남기고 갑니다. 화이팅!!',
             style: TextStyle(
-                color: ColorStyles.black500,
+                color: black500,
                 fontWeight: FontWeight.w500,
                 fontSize: 17
             ),
@@ -356,7 +356,7 @@ class _CommentItem extends StatelessWidget {
               Text(
                   '답글쓰기',
                   style: TextStyle(
-                      color: ColorStyles.white1000,
+                      color: white1000,
                       fontSize: 14
                   )
               )
@@ -365,7 +365,7 @@ class _CommentItem extends StatelessWidget {
         ),
         const SizedBox(width: 6,),
         Text('•', style: TextStyle(
-            color: ColorStyles.white300,
+            color: white300,
             fontSize: 14
         )),
         const SizedBox(width: 6,),
@@ -374,7 +374,7 @@ class _CommentItem extends StatelessWidget {
           child: Text(
               '21분 전',
               style: TextStyle(
-                  color: ColorStyles.white1000,
+                  color: white1000,
                   fontSize: 14
               )
           ),
@@ -396,7 +396,7 @@ class _CommentFormView extends StatelessWidget {
       builder: (context, state) {
         return Column(
           children: [
-            Divider(thickness: 0.5, color: ColorStyles.white500, height: 0.5,),
+            Divider(thickness: 0.5, color: white500, height: 0.5,),
 
 
             if (state.replyCommentId != 0)
@@ -421,7 +421,7 @@ class _CommentFormView extends StatelessWidget {
                         imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
                         imageBuilder: (context, imageProvider) => Container(
                           decoration: BoxDecoration(
-                            color: ColorStyles.blue300,
+                            color: blue300,
                             borderRadius: BorderRadius.all(Radius.circular(replyImageWidth/2)),
                             image: DecorationImage(
                                 image: imageProvider,
@@ -437,7 +437,7 @@ class _CommentFormView extends StatelessWidget {
                         'rokwon',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: ColorStyles.black700,
+                            color: black700,
                             fontWeight: FontWeight.w600,
                             fontSize: 16
                         ),
@@ -446,14 +446,14 @@ class _CommentFormView extends StatelessWidget {
                       Text(
                         '님에게 답장 중',
                         style: TextStyle(
-                            color: ColorStyles.black700,
+                            color: black700,
                             fontWeight: FontWeight.w500,
                             fontSize: 16
                         ),
                       ),
 
                       const SizedBox(width: 6,),
-                      Icon(Icons.cancel, size: 16, color: ColorStyles.white900,)
+                      Icon(Icons.cancel, size: 16, color: white900,)
                     ],
                   ),
                 ),
@@ -466,7 +466,7 @@ class _CommentFormView extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        color: ColorStyles.white200
+                        color: white200
                     ),
                     margin: const EdgeInsets.fromLTRB(24, 6, 0, 8),
                     alignment: Alignment.centerLeft,
@@ -487,7 +487,7 @@ class _CommentFormView extends StatelessWidget {
                         contentPadding: EdgeInsets.only(
                             left: 16, bottom: 10, top: 10, right: 16),
                         hintText: '댓글을 작성해주세요',
-                        hintStyle: TextStyle(color: ColorStyles.white1000)
+                        hintStyle: TextStyle(color: white1000)
                       ),
                     ),
                   ),
@@ -506,7 +506,7 @@ class _CommentFormView extends StatelessWidget {
                     ),
                     child: Icon(
                       Icons.send_rounded,
-                      color: state.canSend ? ColorStyles.mainColor : ColorStyles.disableBackgroundColor,
+                      color: state.canSend ? mainColor : disableBackgroundColor,
                     ),
                   ),
                 ),

@@ -85,7 +85,7 @@ class BottomDialogView extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w700,
-                      color: ColorStyles.black1000,
+                      color: black1000,
                       decoration: null
                     )
                   ),
@@ -97,7 +97,7 @@ class BottomDialogView extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
-                      color: ColorStyles.black300,
+                      color: black300,
                       decoration: null
                     )
                   ),

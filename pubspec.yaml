@@ -88,6 +88,9 @@ flutter:
     - assets/config/.env
 
   fonts:
+    - family: PretendardVariable
+      fonts:
+        - asset: assets/fonts/PretendardVariable.ttf
     - family: Pretendard
       fonts:
         - asset: assets/fonts/Pretendard-Black.otf

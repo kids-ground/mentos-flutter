@@ -5,8 +5,8 @@ class FilledTagView extends StatelessWidget {
   const FilledTagView({
     Key? key,
     required this.title,
-    this.backgroundColor = ColorStyles.blue100,
-    this.fontColor = ColorStyles.blue1000,
+    this.backgroundColor = blue100,
+    this.fontColor = blue1000,
     this.fontSize = 14,
     this.fontWeight = FontWeight.w400
   }) : super(key: key);

@@ -58,7 +58,7 @@ class _ProfileModifyView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const RoutingAppBar(title: '프로필 수정',),
-      backgroundColor: ColorStyles.white,
+      backgroundColor: white,
       body: SafeArea(
         child: CustomScrollView(
           physics: const RangeMaintainingScrollPhysics(),
@@ -107,10 +107,10 @@ class _ImageSelectView extends StatelessWidget {
               width: width,
               height: height,
               decoration: BoxDecoration(
-                color: ColorStyles.white300,
+                color: white300,
                 borderRadius: BorderRadius.circular(width/2),
                 border: Border.all(
-                  color: ColorStyles.white800,
+                  color: white800,
                 )
               ),
               child: _showImageConditional(context, state)
@@ -120,11 +120,11 @@ class _ImageSelectView extends StatelessWidget {
             bottom: 0,
             right: 0,
             child: CircleAvatar(
-              backgroundColor: ColorStyles.white500,
+              backgroundColor: white500,
               child: IconButton(
                 onPressed: () { _selectImage(context); },
                 padding: EdgeInsets.zero,
-                icon: const Icon(Icons.add_a_photo, size: 22, color: ColorStyles.black200,),
+                icon: const Icon(Icons.add_a_photo, size: 22, color: black200,),
               ),
             ))
         ],
@@ -171,7 +171,7 @@ class _ImageSelectView extends StatelessWidget {
       imageUrl: imageUrl,
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
-          color: ColorStyles.blue300,
+          color: blue300,
           borderRadius: BorderRadius.all(Radius.circular(width/2)),
           image: DecorationImage(
               image: imageProvider,
@@ -189,7 +189,7 @@ class _ImageSelectView extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: ColorStyles.white200,
+        color: white200,
         borderRadius: BorderRadius.all(Radius.circular(width/2)),
       ),
     );

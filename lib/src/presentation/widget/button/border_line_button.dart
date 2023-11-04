@@ -26,7 +26,7 @@ class BorderLineButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
-      color: ColorStyles.white,
+      color: white,
       padding: const EdgeInsets.all(0),
       disabledColor: Colors.transparent,
       onPressed: onPressed,
@@ -38,7 +38,7 @@ class BorderLineButton extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: onPressed == null ? ColorStyles.white900 : color
+              color: onPressed == null ? white900 : color
             )
         ),
         child: Text(
@@ -46,7 +46,7 @@ class BorderLineButton extends StatelessWidget {
           style: TextStyle(
               fontSize: fontSize,
               fontWeight: fontWeight,
-              color: onPressed == null ? ColorStyles.white900 : color,
+              color: onPressed == null ? white900 : color,
               decoration: null
           )
         ),

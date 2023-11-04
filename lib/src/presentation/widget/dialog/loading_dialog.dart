@@ -12,7 +12,7 @@ void showLoadingDialog(BuildContext context) {
           surfaceTintColor: Colors.transparent,
           child: CupertinoActivityIndicator(
             radius: 20,
-            color: ColorStyles.white,
+            color: white,
           )
       );
     },

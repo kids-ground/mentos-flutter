@@ -46,7 +46,7 @@ class DefaultTextFormField extends StatelessWidget {
               style: const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w700,
-                  color: ColorStyles.black500
+                  color: black500
               ),
             ),
             Text(
@@ -54,7 +54,7 @@ class DefaultTextFormField extends StatelessWidget {
               style: const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w700,
-                  color: ColorStyles.red1000
+                  color: red1000
               ),
             ),
           ],
@@ -72,18 +72,18 @@ class DefaultTextFormField extends StatelessWidget {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           controller: controller,
           decoration: InputDecoration(
-            fillColor: ColorStyles.white200,
+            fillColor: white200,
             filled: isFilled,
             counterText: "",
             hintText: hintText,
             helperText: helperText,
             helperStyle: const TextStyle(
-              color: ColorStyles.mainColor,
+              color: mainColor,
               fontWeight: FontWeight.w600,
               fontSize: 14
             ),
             hintStyle: const TextStyle(
-              color: ColorStyles.white900, // 플레이스홀더 텍스트 색상
+              color: white900, // 플레이스홀더 텍스트 색상
             ),
             errorStyle: const TextStyle(
                 fontSize: 12
@@ -92,16 +92,16 @@ class DefaultTextFormField extends StatelessWidget {
             contentPadding: const EdgeInsets.fromLTRB(8, 12, 4, 12),
             // 기본 색상
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: isFilled ? ColorStyles.white200 : ColorStyles.white500, width: 1.5),
+              borderSide: BorderSide(color: isFilled ? white200 : white500, width: 1.5),
             ),
             focusedBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: ColorStyles.mainColor, width: 1.5),
+              borderSide: BorderSide(color: mainColor, width: 1.5),
             ),
             errorBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: ColorStyles.red1000, width: 1.5),
+              borderSide: BorderSide(color: red1000, width: 1.5),
             ),
             focusedErrorBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: ColorStyles.red1000, width: 1.5),
+              borderSide: BorderSide(color: red1000, width: 1.5),
             ),
           ),
           validator: validator,

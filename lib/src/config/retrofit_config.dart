@@ -36,7 +36,7 @@ class _CustomLogInterceptor extends Interceptor {
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
-    logger.d(
+    logger.e(
       'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}',
     );
     super.onError(err, handler);

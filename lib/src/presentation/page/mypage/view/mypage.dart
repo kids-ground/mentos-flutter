@@ -24,7 +24,7 @@ class _MyPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CommonAppBar(title: '마이페이지'),
-      backgroundColor: ColorStyles.white,
+      backgroundColor: white,
       body: SafeArea(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -66,7 +66,7 @@ class _ProfileInfo extends StatelessWidget {
               imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
               imageBuilder: (context, imageProvider) => Container(
                 decoration: BoxDecoration(
-                  color: ColorStyles.blue300,
+                  color: blue300,
                   borderRadius: BorderRadius.all(Radius.circular(width/2)),
                   image: DecorationImage(
                     image: imageProvider,
@@ -83,14 +83,14 @@ class _ProfileInfo extends StatelessWidget {
               style: const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w700,
-                  color: ColorStyles.black1000
+                  color: black1000
               ),
             )
           ],
         ),
 
         CupertinoButton(
-          color: ColorStyles.white,
+          color: white,
           padding: const EdgeInsets.all(0),
           disabledColor: Colors.transparent,
           onPressed: () {
@@ -102,7 +102,7 @@ class _ProfileInfo extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: ColorStyles.white500,
+                  color: white500,
                 )
             ),
             child: const Text(
@@ -110,7 +110,7 @@ class _ProfileInfo extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
-                    color: ColorStyles.black100,
+                    color: black100,
                     decoration: null
                 )
             ),
@@ -130,7 +130,7 @@ class _MentorProfileInfo extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: ColorStyles.white200,
+        color: white200,
       ),
       child: ListTileTheme(
         contentPadding: EdgeInsets.zero,
@@ -141,8 +141,8 @@ class _MentorProfileInfo extends StatelessWidget {
           expandedCrossAxisAlignment: CrossAxisAlignment.start,
           expandedAlignment: Alignment.topLeft,
           initiallyExpanded: true,
-          iconColor: ColorStyles.black100,
-          collapsedIconColor: ColorStyles.black100,
+          iconColor: black100,
+          collapsedIconColor: black100,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.zero
           ),
@@ -151,7 +151,7 @@ class _MentorProfileInfo extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 18,
-              color: ColorStyles.black800
+              color: black800
             ),
           ),
           children: [
@@ -188,7 +188,7 @@ class _MentorProfileInfo extends StatelessWidget {
               style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
-                  color: ColorStyles.black800
+                  color: black800
               ),
             ),
           ],
@@ -199,7 +199,7 @@ class _MentorProfileInfo extends StatelessWidget {
           style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
-              color: ColorStyles.black800
+              color: black800
           ),
         ),
       ],
@@ -215,9 +215,9 @@ class _MentorProfileInfo extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               decoration: BoxDecoration(
-                color: ColorStyles.white,
+                color: white,
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: ColorStyles.white500)
+                border: Border.all(color: white500)
               ),
               child: Column(
                 children: [
@@ -226,7 +226,7 @@ class _MentorProfileInfo extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
-                        color: ColorStyles.black800
+                        color: black800
                     ),
                   ),
                   Text(
@@ -234,7 +234,7 @@ class _MentorProfileInfo extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
-                        color: ColorStyles.black800
+                        color: black800
                     ),
                   ),
                 ],
@@ -246,9 +246,9 @@ class _MentorProfileInfo extends StatelessWidget {
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 decoration: BoxDecoration(
-                    color: ColorStyles.white,
+                    color: white,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: ColorStyles.white500)
+                    border: Border.all(color: white500)
                 ),
                 child: Column(
                   children: [
@@ -257,7 +257,7 @@ class _MentorProfileInfo extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
-                          color: ColorStyles.black800
+                          color: black800
                       ),
                     ),
                     Text(
@@ -265,7 +265,7 @@ class _MentorProfileInfo extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
-                          color: ColorStyles.black800
+                          color: black800
                       ),
                     ),
                   ],
@@ -277,9 +277,9 @@ class _MentorProfileInfo extends StatelessWidget {
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 decoration: BoxDecoration(
-                    color: ColorStyles.white,
+                    color: white,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: ColorStyles.white500)
+                    border: Border.all(color: white500)
                 ),
                 child: Column(
                   children: [
@@ -288,7 +288,7 @@ class _MentorProfileInfo extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
-                          color: ColorStyles.black800
+                          color: black800
                       ),
                     ),
                     Text(
@@ -296,7 +296,7 @@ class _MentorProfileInfo extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
-                          color: ColorStyles.black800
+                          color: black800
                       ),
                     ),
                   ],
@@ -317,7 +317,7 @@ class _MentorProfileInfo extends StatelessWidget {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w700,
-            color: ColorStyles.black800
+            color: black800
           ),
         ),
         const SizedBox(height: 4),
@@ -326,7 +326,7 @@ class _MentorProfileInfo extends StatelessWidget {
           style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w500,
-              color: ColorStyles.black500
+              color: black500
           ),
         ),
       ],
@@ -348,10 +348,10 @@ class _MentorProfileInfo extends StatelessWidget {
               alignment: Alignment.center,
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
               decoration: BoxDecoration(
-                color: ColorStyles.white,
+                color: white,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: ColorStyles.blue500,
+                    color: blue500,
                   )
               ),
               child: const Text(
@@ -359,7 +359,7 @@ class _MentorProfileInfo extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: ColorStyles.mainColor,
+                      color: mainColor,
                       decoration: null
                   )
               ),
@@ -378,10 +378,10 @@ class _MentorProfileInfo extends StatelessWidget {
               alignment: Alignment.center,
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
               decoration: BoxDecoration(
-                  color: ColorStyles.white,
+                  color: white,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: ColorStyles.blue500,
+                    color: blue500,
                   )
               ),
               child: const Text(
@@ -389,7 +389,7 @@ class _MentorProfileInfo extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: ColorStyles.mainColor,
+                      color: mainColor,
                       decoration: null
                   )
               ),
@@ -414,7 +414,7 @@ class _ManagementSection extends StatelessWidget {
           style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.w700,
-              color: ColorStyles.black1000
+              color: black1000
           ),
         ),
         const SizedBox(height: 8,),
@@ -430,13 +430,13 @@ class _ManagementSection extends StatelessWidget {
                 'assets/images/star_line.png',
                 width: 24,
               ),
-              trailing: Icon(CupertinoIcons.chevron_forward, size: 16, color: ColorStyles.white1000,),
+              trailing: Icon(CupertinoIcons.chevron_forward, size: 16, color: white1000,),
               title: Text(
                 "멘토 즐겨찾기",
                 style: const TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.w500,
-                  color: ColorStyles.black1000
+                  color: black1000
                 ),
               ),
             ),
@@ -451,10 +451,10 @@ class _ManagementSection extends StatelessWidget {
                 style: const TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.w500,
-                    color: ColorStyles.black1000
+                    color: black1000
                 ),
               ),
-              trailing: Icon(CupertinoIcons.chevron_forward, size: 16, color: ColorStyles.white1000,),
+              trailing: Icon(CupertinoIcons.chevron_forward, size: 16, color: white1000,),
             ),
             CupertinoListTile(
                 padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
@@ -467,7 +467,7 @@ class _ManagementSection extends StatelessWidget {
                   style: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
-                      color: ColorStyles.black1000
+                      color: black1000
                   ),
                 ),
                 trailing: CupertinoSwitch(value: true, onChanged: (bool value) {  },)
@@ -492,7 +492,7 @@ class _PersonalSection extends StatelessWidget {
           style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.w700,
-              color: ColorStyles.black1000
+              color: black1000
           ),
         ),
         const SizedBox(height: 8,),
@@ -513,7 +513,7 @@ class _PersonalSection extends StatelessWidget {
                   style: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
-                      color: ColorStyles.black1000
+                      color: black1000
                   ),
                 ),
               ),
@@ -528,7 +528,7 @@ class _PersonalSection extends StatelessWidget {
                   style: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
-                      color: ColorStyles.black1000
+                      color: black1000
                   ),
                 ),
               ),
@@ -543,7 +543,7 @@ class _PersonalSection extends StatelessWidget {
                   style: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
-                      color: ColorStyles.black1000
+                      color: black1000
                   ),
                 ),
               ),
@@ -558,7 +558,7 @@ class _PersonalSection extends StatelessWidget {
                   style: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
-                      color: ColorStyles.black1000
+                      color: black1000
                   ),
                 ),
               ),

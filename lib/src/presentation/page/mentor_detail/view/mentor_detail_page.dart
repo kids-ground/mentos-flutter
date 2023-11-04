@@ -32,7 +32,7 @@ class _MentorDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorStyles.white,
+      backgroundColor: white,
       appBar: const RoutingAppBar(title: '멘토 상세',),
       body: SafeArea(
         child: Column(
@@ -80,7 +80,7 @@ class _ProfileView extends StatelessWidget {
           imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
           imageBuilder: (context, imageProvider) => Container(
             decoration: BoxDecoration(
-              color: ColorStyles.blue300,
+              color: blue300,
               borderRadius: BorderRadius.all(Radius.circular(width/2)),
               image: DecorationImage(
                   image: imageProvider,
@@ -100,7 +100,7 @@ class _ProfileView extends StatelessWidget {
               style: const TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.w700,
-                  color: ColorStyles.black1000
+                  color: black1000
               ),
             ),
             Row(
@@ -110,7 +110,7 @@ class _ProfileView extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: ColorStyles.black800
+                      color: black800
                   ),
                 ),
                 Padding(
@@ -133,7 +133,7 @@ class _ProfileView extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: ColorStyles.black100
+                      color: black100
                   ),
                 ),
                 Text(' ∙ '),
@@ -142,7 +142,7 @@ class _ProfileView extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
-                      color: ColorStyles.black100
+                      color: black100
                   ),
                 ),
                 Text('  '),
@@ -151,7 +151,7 @@ class _ProfileView extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: ColorStyles.black100
+                      color: black100
                   ),
                 ),
               ],
@@ -178,20 +178,20 @@ class _StatisticsView extends StatelessWidget {
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 decoration: BoxDecoration(
-                    color: ColorStyles.white,
+                    color: white,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: ColorStyles.blue500)
+                    border: Border.all(color: blue500)
                 ),
                 child: Column(
                   children: [
-                    Image.asset('assets/images/palette.png', width: 26, color: ColorStyles.blue300,),
+                    Image.asset('assets/images/palette.png', width: 26, color: blue300,),
                     const SizedBox(height: 4,),
                     Text(
                       "멘토링",
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
-                          color: ColorStyles.black800
+                          color: black800
                       ),
                     ),
                     const SizedBox(height: 4,),
@@ -200,7 +200,7 @@ class _StatisticsView extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
-                          color: ColorStyles.black800
+                          color: black800
                       ),
                     ),
                   ],
@@ -212,20 +212,20 @@ class _StatisticsView extends StatelessWidget {
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 decoration: BoxDecoration(
-                    color: ColorStyles.white,
+                    color: white,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: ColorStyles.blue500)
+                    border: Border.all(color: blue500)
                 ),
                 child: Column(
                   children: [
-                    Image.asset('assets/images/letter.png', width: 26, color: ColorStyles.blue300,),
+                    Image.asset('assets/images/letter.png', width: 26, color: blue300,),
                     const SizedBox(height: 4,),
                     Text(
                       "리뷰",
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
-                          color: ColorStyles.black800
+                          color: black800
                       ),
                     ),
                     const SizedBox(height: 4,),
@@ -234,7 +234,7 @@ class _StatisticsView extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
-                          color: ColorStyles.black800
+                          color: black800
                       ),
                     ),
                   ],
@@ -246,20 +246,20 @@ class _StatisticsView extends StatelessWidget {
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 decoration: BoxDecoration(
-                    color: ColorStyles.white,
+                    color: white,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: ColorStyles.blue500)
+                    border: Border.all(color: blue500)
                 ),
                 child: Column(
                   children: [
-                    Image.asset('assets/images/star.png', width: 26, color: ColorStyles.blue300,),
+                    Image.asset('assets/images/star.png', width: 26, color: blue300,),
                     const SizedBox(height: 4,),
                     Text(
                       "평점",
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
-                          color: ColorStyles.black800
+                          color: black800
                       ),
                     ),
                     const SizedBox(height: 4,),
@@ -268,7 +268,7 @@ class _StatisticsView extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
-                          color: ColorStyles.black800
+                          color: black800
                       ),
                     ),
                   ],
@@ -294,14 +294,14 @@ class _IntroductionView extends StatelessWidget {
           style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w700,
-              color: ColorStyles.black800
+              color: black800
           ),
         ),
         const SizedBox(height: 12),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           decoration: BoxDecoration(
-            color: ColorStyles.blue100,
+            color: blue100,
             borderRadius: BorderRadius.circular(8)
           ),
           child: Text(
@@ -309,7 +309,7 @@ class _IntroductionView extends StatelessWidget {
             style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: ColorStyles.black500
+                color: black500
             ),
           ),
         ),
@@ -331,7 +331,7 @@ class _DescriptionView extends StatelessWidget {
           style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w700,
-              color: ColorStyles.black800
+              color: black800
           ),
         ),
         const SizedBox(height: 12),
@@ -339,7 +339,7 @@ class _DescriptionView extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           decoration: BoxDecoration(
-              color: ColorStyles.white100,
+              color: white100,
               borderRadius: BorderRadius.circular(8)
           ),
           child: Text('''
@@ -357,7 +357,7 @@ class _DescriptionView extends StatelessWidget {
             style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: ColorStyles.black500
+                color: black500
             ),
           ),
         ),
@@ -376,14 +376,14 @@ class _ContactView extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
         decoration: const BoxDecoration(
           border: Border(
-            top: BorderSide(width: 1, color: ColorStyles.white200),
+            top: BorderSide(width: 1, color: white200),
           ),
         ),
         child: Row(
           children: [
             Expanded(
               child: CupertinoButton(
-                color: ColorStyles.mainColor,
+                color: mainColor,
                 padding: EdgeInsets.zero,
                 onPressed: () { },
                 child: Container(
@@ -397,7 +397,7 @@ class _ContactView extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
-                      color: ColorStyles.white,
+                      color: white,
                     )
                   ),
                 ),
@@ -405,7 +405,7 @@ class _ContactView extends StatelessWidget {
             ),
             const SizedBox(width: 12),
             CupertinoButton(
-              color: state.isBookmarked ? ColorStyles.yellow.withAlpha(70) : ColorStyles.white,
+              color: state.isBookmarked ? yellow.withAlpha(70) : white,
               padding: EdgeInsets.zero,
               onPressed: () {
                 context.read<MentorDetailBloc>().add(MentorDetailEventBookmarked(isBookmarked: !state.isBookmarked));
@@ -417,13 +417,13 @@ class _ContactView extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: state.isBookmarked ? ColorStyles.yellow : ColorStyles.white500,
+                    color: state.isBookmarked ? yellow : white500,
                   )
                 ),
                 child: Image.asset(
                   'assets/images/star.png',
                   width: 24,
-                  color: state.isBookmarked ? ColorStyles.yellow : ColorStyles.white600)
+                  color: state.isBookmarked ? yellow : white600)
               ),
             ),
           ],

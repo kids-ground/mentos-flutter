@@ -6,6 +6,7 @@ import 'package:mentos_flutter/src/data/data_source/data_source.dart';
 import 'package:mentos_flutter/src/data/repository/repository.dart';
 import 'package:mentos_flutter/src/domain/service/deep_linking_service.dart';
 import 'package:mentos_flutter/src/domain/service/notification_service.dart';
+import 'package:mentos_flutter/src/domain/service/tracking_event_service.dart';
 
 import 'package:mentos_flutter/src/util/constant/strings.dart';
 
@@ -25,6 +26,7 @@ void _setupData() {
 
 void _setupRepository() {
   // network
+  getIt.registerLazySingleton(() => TestRepository(baseApiDio, baseUrl: baseUrl));
   getIt.registerLazySingleton(() => AuthRepository(baseApiDio, baseUrl: baseUrl));
 
   // local
@@ -33,6 +35,7 @@ void _setupRepository() {
 void _setupService() {
   getIt.registerSingleton(DeepLinkingService(dataSource: getIt.get<LocalKeyValueDataSource>()));
   getIt.registerSingleton(NotificationService(deepLinkingService: getIt.get<DeepLinkingService>()));
+  getIt.registerSingleton(TrackingEventService());
 }
 
 void _setupUseCase() {

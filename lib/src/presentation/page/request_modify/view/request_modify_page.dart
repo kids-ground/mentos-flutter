@@ -86,7 +86,7 @@ class _TitleFormView extends StatelessWidget {
         hintText: '제목을 입력해주세요(30자 제한)',
         counterText: '',
         hintStyle: const TextStyle(
-          color: ColorStyles.white900,
+          color: white900,
           fontWeight: FontWeight.w500,
           fontSize: 16
         ),
@@ -97,16 +97,16 @@ class _TitleFormView extends StatelessWidget {
         contentPadding: const EdgeInsets.fromLTRB(24, 20, 24, 20),
         // 기본 색상
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
+          borderSide: BorderSide(color: white400, width: 1),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
+          borderSide: BorderSide(color: white400, width: 1),
         ),
         errorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
+          borderSide: BorderSide(color: white400, width: 1),
         ),
         focusedErrorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
+          borderSide: BorderSide(color: white400, width: 1),
         ),
       ),
       validator: (v) { return null; },
@@ -132,7 +132,7 @@ class _TagFormView extends StatelessWidget {
         hintText: '태그 작성 최대 2개 ex) #주니어',
         counterText: '',
         hintStyle: const TextStyle(
-            color: ColorStyles.white900,
+            color: white900,
             fontWeight: FontWeight.w500,
             fontSize: 16
         ),
@@ -143,16 +143,16 @@ class _TagFormView extends StatelessWidget {
         contentPadding: const EdgeInsets.fromLTRB(24, 20, 24, 20),
         // 기본 색상
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
+          borderSide: BorderSide(color: white400, width: 1),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
+          borderSide: BorderSide(color: white400, width: 1),
         ),
         errorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
+          borderSide: BorderSide(color: white400, width: 1),
         ),
         focusedErrorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
+          borderSide: BorderSide(color: white400, width: 1),
         ),
       ),
       validator: (v) { return null; },
@@ -183,12 +183,12 @@ Java와 Spring로 하나의 프로젝트를 만들어 봤습니다.
 
 (200자 제한)''',
         hintStyle: const TextStyle(
-            color: ColorStyles.white900,
+            color: white900,
             fontWeight: FontWeight.w500,
             fontSize: 16
         ),
         helperStyle: const TextStyle(
-            color: ColorStyles.white900,
+            color: white900,
             fontWeight: FontWeight.w500,
             fontSize: 14
         ),
@@ -199,16 +199,16 @@ Java와 Spring로 하나의 프로젝트를 만들어 봤습니다.
         contentPadding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
         // 기본 색상
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
+          borderSide: BorderSide(color: white400, width: 1),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
+          borderSide: BorderSide(color: white400, width: 1),
         ),
         errorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
+          borderSide: BorderSide(color: white400, width: 1),
         ),
         focusedErrorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorStyles.white400, width: 1),
+          borderSide: BorderSide(color: white400, width: 1),
         ),
       ),
       validator: (v) { return null; },
@@ -235,17 +235,17 @@ class _ImageListView extends StatelessWidget {
               width: 70,
               height: 70,
               decoration: BoxDecoration(
-                color: ColorStyles.white300,
+                color: white300,
                 borderRadius: BorderRadius.circular(8)
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.photo_camera, color: ColorStyles.black100, size: 30,),
+                  Icon(Icons.photo_camera, color: black100, size: 30,),
                   Text(
                     '0/3',
                     style: TextStyle(
-                      color: ColorStyles.black100,
+                      color: black100,
                       fontSize: 14
                     ),
                   )
@@ -278,9 +278,9 @@ class _SaveButtonView extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: CupertinoButton(
-            color: ColorStyles.mainColor,
+            color: mainColor,
             padding: EdgeInsets.zero,
-            disabledColor: ColorStyles.disableBackgroundColor,
+            disabledColor: disableBackgroundColor,
             onPressed: state.canComplete ? () { } : null,
             child: Container(
               alignment: Alignment.center,
@@ -293,7 +293,7 @@ class _SaveButtonView extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
-                    color: ColorStyles.white,
+                    color: white,
                   )
               ),
             ),

@@ -12,13 +12,13 @@ class ChatListPage extends StatelessWidget {
       body: SafeArea(
         child: Container(
           alignment: Alignment.center,
-          color: ColorStyles.white200,
+          color: white200,
           child: Text(
             '채팅 내역이 없습니다.',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
-              color: ColorStyles.black100
+              color: black100
             ),
           ),
         ),

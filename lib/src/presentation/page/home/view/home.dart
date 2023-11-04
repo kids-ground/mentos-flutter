@@ -45,14 +45,14 @@ class HomePage extends StatelessWidget {
       ),
       floatingActionButton: _ActionButton(),
       body: Container(
-        color: ColorStyles.white,
+        color: white,
         child: const Column(
           children: [
             // _CategoryListView(),
             Divider(
               height: 0.2,
               thickness: 0.2,
-              color: ColorStyles.white800,
+              color: white800,
             ),
             _ContentListView()
           ],
@@ -76,12 +76,12 @@ class _ActionButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         decoration: BoxDecoration(
-            color: ColorStyles.blue200,
+            color: blue200,
             borderRadius: BorderRadius.circular(100),
             boxShadow: [
               BoxShadow(
                 spreadRadius: 4,
-                color: ColorStyles.white500,
+                color: white500,
                 blurRadius: 8,
                 offset: Offset(2, 2)
               )
@@ -89,7 +89,7 @@ class _ActionButton extends StatelessWidget {
         ),
         child: Image.asset(
           "assets/images/pencil.png",
-          color: ColorStyles.mainColor,
+          color: mainColor,
           width: 24,
           height: 24,
         ),
@@ -151,7 +151,7 @@ class _ContentListView extends StatelessWidget {
         } else {
           return Expanded(
             child: Container(
-              color: ColorStyles.white100,
+              color: white100,
               child: CustomScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 slivers: [
@@ -202,10 +202,10 @@ class _ContentListItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(0),
-          color: ColorStyles.white,
+          color: white,
           boxShadow: [
             BoxShadow(
-              color: ColorStyles.white400.withOpacity(0.7),
+              color: white400.withOpacity(0.7),
               spreadRadius: 6,
               blurRadius: 6.0,
               offset: const Offset(4, 4),
@@ -227,7 +227,7 @@ class _ContentListItem extends StatelessWidget {
                   imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
-                      color: ColorStyles.blue300,
+                      color: blue300,
                       borderRadius: BorderRadius.all(Radius.circular(width/2)),
                       image: DecorationImage(
                           image: imageProvider,
@@ -248,7 +248,7 @@ class _ContentListItem extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
-                          color: ColorStyles.black1000
+                          color: black1000
                       ),
                     ),
                     Text(
@@ -256,7 +256,7 @@ class _ContentListItem extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
-                          color: ColorStyles.white1000
+                          color: white1000
                       ),
                     ),
                   ],
@@ -282,7 +282,7 @@ class _ContentListItem extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
-                            color: ColorStyles.black1000
+                            color: black1000
                           ),
                         ),
                         const SizedBox(height: 4,),
@@ -293,7 +293,7 @@ class _ContentListItem extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
-                              color: ColorStyles.black1000,
+                              color: black1000,
                               height: 1.4
                           ),
                         ),
@@ -305,7 +305,7 @@ class _ContentListItem extends StatelessWidget {
                                   Container(
                                     padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                     decoration: BoxDecoration(
-                                        color: ColorStyles.red100,
+                                        color: red100,
                                         borderRadius: BorderRadius.circular(16)
                                     ),
                                     child: Text(
@@ -313,7 +313,7 @@ class _ContentListItem extends StatelessWidget {
                                       style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,
-                                          color: ColorStyles.red1000
+                                          color: red1000
                                       ),
                                     ),
                                   ),
@@ -350,25 +350,25 @@ class _ContentListItem extends StatelessWidget {
             const SizedBox(height: 16,),
             Row(
               children: [
-                Image.asset('assets/images/eye.png', width: 18, color: ColorStyles.white800,),
+                Image.asset('assets/images/eye.png', width: 18, color: white800,),
                 const SizedBox(width: 6,),
                 Text(
                   '${data.hit}',
                   style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: ColorStyles.white1000
+                      color: white1000
                   ),
                 ),
                 const SizedBox(width: 24,),
-                Image.asset('assets/images/chat_dots.png', width: 18, color: ColorStyles.white800,),
+                Image.asset('assets/images/chat_dots.png', width: 18, color: white800,),
                 const SizedBox(width: 6,),
                 Text(
                   '${data.chatCount}',
                   style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: ColorStyles.white1000
+                      color: white1000
                   ),
                 ),
               ],

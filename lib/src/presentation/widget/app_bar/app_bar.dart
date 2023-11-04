@@ -29,11 +29,11 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: ColorStyles.white,
+      backgroundColor: white,
       surfaceTintColor: Colors.transparent,
       shape: bottomLine ? const Border(
         bottom: BorderSide(
-          color: ColorStyles.black100,
+          color: black100,
           width: 0.1,
         ),
       ) : null,

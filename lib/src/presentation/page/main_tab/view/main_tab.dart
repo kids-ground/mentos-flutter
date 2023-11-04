@@ -53,8 +53,8 @@ class _MainTabView extends StatelessWidget {
               showSelectedLabels: true,
               showUnselectedLabels: true,
               elevation: 0.1,
-              selectedItemColor: ColorStyles.black700,
-              unselectedItemColor: ColorStyles.white800,
+              selectedItemColor: black700,
+              unselectedItemColor: white800,
               selectedLabelStyle: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600
@@ -65,8 +65,8 @@ class _MainTabView extends StatelessWidget {
               ),
               items: pageInfoList.map<BottomNavigationBarItem>((v) =>
                   BottomNavigationBarItem(
-                    icon: Image.asset(v.pageIconPath, height: 26, color: ColorStyles.white800),
-                    activeIcon: Image.asset(v.pageIconPath, height: 26, color: ColorStyles.black700),
+                    icon: Image.asset(v.pageIconPath, height: 26, color: white800),
+                    activeIcon: Image.asset(v.pageIconPath, height: 26, color: black700),
                     label: v.pageName
                   )
               ).toList(),

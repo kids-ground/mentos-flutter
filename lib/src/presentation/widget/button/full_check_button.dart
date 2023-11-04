@@ -27,11 +27,11 @@ class FullCheckButton extends StatelessWidget {
       width: width,
       child: TextButton(
           style: TextButton.styleFrom(
-              backgroundColor: isSelected ? ColorStyles.white : ColorStyles.white300,
+              backgroundColor: isSelected ? white : white300,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                   side: BorderSide(
-                      color: isSelected ? ColorStyles.mainColor : ColorStyles.white300,
+                      color: isSelected ? mainColor : white300,
                       width: 1
                   )
               )
@@ -44,7 +44,7 @@ class FullCheckButton extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.check,
-                    color: isSelected ? ColorStyles.mainColor : ColorStyles.white1000,
+                    color: isSelected ? mainColor : white1000,
                     size: 24,
                   ),
                   const SizedBox(width: 12),
@@ -53,7 +53,7 @@ class FullCheckButton extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: isSelected ? ColorStyles.mainColor : ColorStyles.black100,
+                        color: isSelected ? mainColor : black100,
                       )
                   ),
                 ],

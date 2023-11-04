@@ -23,7 +23,7 @@ class _MentorMainView extends StatelessWidget {
       appBar: const CommonAppBar(title: '멘토', bottomLine: false,),
       body: SafeArea(
         child: Container(
-          color: ColorStyles.white100,
+          color: white100,
           child: Column(
             children: [
               _MentorFilterView(),
@@ -45,11 +45,11 @@ class _MentorFilterView extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
       decoration: BoxDecoration(
-        color: ColorStyles.white,
+        color: white,
         border: Border(
           bottom: BorderSide(
             width: 0.1,
-            color: ColorStyles.black100
+            color: black100
           ),
         )
 
@@ -67,9 +67,9 @@ class _MentorFilterView extends StatelessWidget {
               margin: const EdgeInsets.all(0),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: ColorStyles.white,
+                  color: white,
                   border: Border.all(
-                      color: ColorStyles.white500
+                      color: white500
                   )
               ),
               child: Row(
@@ -79,14 +79,14 @@ class _MentorFilterView extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
-                        color: ColorStyles.black500,
+                        color: black500,
                         decoration: null
                     )
                   ),
                   Icon( // <-- Icon
                     Icons.arrow_drop_down_rounded,
                     size: 24.0,
-                    color: ColorStyles.white1000,
+                    color: white1000,
                   ),
                 ],
               ),
@@ -104,9 +104,9 @@ class _MentorFilterView extends StatelessWidget {
               margin: const EdgeInsets.all(0),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: ColorStyles.white,
+                  color: white,
                   border: Border.all(
-                      color: ColorStyles.white500
+                      color: white500
                   )
               ),
               child: Row(
@@ -116,14 +116,14 @@ class _MentorFilterView extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
-                          color: ColorStyles.black500,
+                          color: black500,
                           decoration: null
                       )
                   ),
                   Icon( // <-- Icon
                     Icons.arrow_drop_down_rounded,
                     size: 24.0,
-                    color: ColorStyles.white1000,
+                    color: white1000,
                   ),
                 ],
               ),
@@ -173,11 +173,11 @@ class _MentorProfileItemView extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         width: double.infinity,
         decoration: BoxDecoration(
-          color: ColorStyles.white,
+          color: white,
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
-              color: ColorStyles.white400.withOpacity(0.7),
+              color: white400.withOpacity(0.7),
               spreadRadius: 6,
               blurRadius: 6.0,
               offset: const Offset(4, 4),
@@ -195,7 +195,7 @@ class _MentorProfileItemView extends StatelessWidget {
                   imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
-                      color: ColorStyles.blue300,
+                      color: blue300,
                       borderRadius: BorderRadius.all(Radius.circular(width/2)),
                       image: DecorationImage(
                           image: imageProvider,
@@ -215,7 +215,7 @@ class _MentorProfileItemView extends StatelessWidget {
                       style: const TextStyle(
                           fontSize: 18.0,
                           fontWeight: FontWeight.w700,
-                          color: ColorStyles.black1000
+                          color: black1000
                       ),
                     ),
                     const SizedBox(height: 2,),
@@ -224,7 +224,7 @@ class _MentorProfileItemView extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
-                          color: ColorStyles.black800
+                          color: black800
                       ),
                     ),
                     const SizedBox(height: 4,),
@@ -235,7 +235,7 @@ class _MentorProfileItemView extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
-                              color: ColorStyles.black100
+                              color: black100
                           ),
                         ),
                         Text(' ∙ '),
@@ -244,7 +244,7 @@ class _MentorProfileItemView extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
-                              color: ColorStyles.black100
+                              color: black100
                           ),
                         ),
                         Text('  '),
@@ -253,7 +253,7 @@ class _MentorProfileItemView extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
-                              color: ColorStyles.black100
+                              color: black100
                           ),
                         ),
                       ],
@@ -269,7 +269,7 @@ class _MentorProfileItemView extends StatelessWidget {
                   fontSize: 16,
                   height: 1.35,
                   fontWeight: FontWeight.w500,
-                  color: ColorStyles.black500
+                  color: black500
               ),
             ),
           ],

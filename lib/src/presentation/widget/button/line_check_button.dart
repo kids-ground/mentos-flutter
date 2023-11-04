@@ -9,12 +9,12 @@ class LineCheckButton extends StatelessWidget {
     this.fontSize = 16,
     this.fontWeight = FontWeight.w500,
 
-    this.selectedBackgroundColor = ColorStyles.blue100,
-    this.selectedBorderColor = ColorStyles.blue100,
-    this.selectedTextColor = ColorStyles.mainColor,
-    this.unselectedBackgroundColor = ColorStyles.white,
-    this.unselectedBorderColor = ColorStyles.white400,
-    this.unselectedTextColor = ColorStyles.black100,
+    this.selectedBackgroundColor = blue100,
+    this.selectedBorderColor = blue100,
+    this.selectedTextColor = mainColor,
+    this.unselectedBackgroundColor = white,
+    this.unselectedBorderColor = white400,
+    this.unselectedTextColor = black100,
     this.padding = EdgeInsets.zero,
 
     required this.isSelected,
@@ -43,7 +43,7 @@ class LineCheckButton extends StatelessWidget {
     return Padding(
       padding: padding,
       child: CupertinoButton(
-        color: ColorStyles.white,
+        color: white,
         minSize: 0,
         padding: const EdgeInsets.all(0),
         onPressed: onPressed,

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentos_flutter/src/config/config.dart';
+import 'package:mentos_flutter/src/data/repository/network/network.dart';
 import 'package:mentos_flutter/src/presentation/page/app/bloc/app_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/login/bloc/login_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/login/view/login.dart';
@@ -16,7 +19,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => AppBloc()),
+          BlocProvider(create: (context) => AppBloc(testRepository: getIt.get<TestRepository>())),
           BlocProvider(create: (context) => LoginBloc()),
           BlocProvider(create: (context) => TermsOfServiceBloc()),
           BlocProvider(create: (context) => MainTabBloc())
@@ -34,9 +37,22 @@ class AppView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: appTitle,
+      themeMode: ThemeMode.dark,
+      debugShowCheckedModeBanner: false,
+      darkTheme: ThemeData(
+        fontFamily: fontFamilyName,
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: backgroundColor,
+        appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.light),
+        useMaterial3: true,
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        splashFactory: NoSplash.splashFactory,
+      ),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: ColorStyles.black700,
+          seedColor: black700,
+          background: white
         ),
         fontFamily: fontFamilyName,
         useMaterial3: true,

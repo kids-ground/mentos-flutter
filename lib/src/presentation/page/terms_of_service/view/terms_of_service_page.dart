@@ -81,7 +81,7 @@ class _TermsHeader extends StatelessWidget {
           style: const TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.w700,
-              color: ColorStyles.black1000),
+              color: black1000),
         ),
         const SizedBox(height: 16),
         Text(
@@ -89,7 +89,7 @@ class _TermsHeader extends StatelessWidget {
           style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
-              color: ColorStyles.black200),
+              color: black200),
         ),
       ],
     );
@@ -140,11 +140,11 @@ class _TermsButtonGroup extends StatelessWidget {
               '확인',
               style: TextStyle(
                   decoration: TextDecoration.underline,
-                  decorationColor: ColorStyles.black100,
+                  decorationColor: black100,
                   decorationThickness: 1,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
-                  color: ColorStyles.black100
+                  color: black100
               )
           )
       ),
@@ -162,9 +162,9 @@ class _TermsSaveButton extends StatelessWidget {
         width: double.infinity,
         height: 56,
         child: CupertinoButton(
-            disabledColor: ColorStyles.white700,
+            disabledColor: white700,
             borderRadius: BorderRadius.circular(16),
-            color: ColorStyles.mainColor,
+            color: mainColor,
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
             onPressed: state.requiredAllAgree ? () => onPressedSaveButton(context) : null,
             child: const Text(

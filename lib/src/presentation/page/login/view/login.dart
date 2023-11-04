@@ -1,14 +1,15 @@
 
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mentos_flutter/src/presentation/page/app/bloc/app_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/login/bloc/login_bloc.dart';
-import 'package:mentos_flutter/src/presentation/page/main_tab/view/main_tab.dart';
 import 'package:mentos_flutter/src/presentation/page/terms_of_service/view/terms_of_service_page.dart';
-import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
+import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
-import 'package:mentos_flutter/src/util/enum/social_type.dart';
+import 'package:mentos_flutter/src/util/constant/strings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatelessWidget {
@@ -50,86 +51,36 @@ class _LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     final loginBloC = BlocProvider.of<LoginBloc>(context);
     return Scaffold(
-      backgroundColor: ColorStyles.white,
       body: SafeArea(
         child: Container(
           width: double.infinity,
           height: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              alignment: Alignment.topCenter,
-              fit: BoxFit.fitWidth,
-              image: AssetImage("assets/images/background_logo.png"),
-              opacity: 0.5
-            )
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+          // decoration: const BoxDecoration(
+          //   image: DecorationImage(
+          //     alignment: Alignment.topCenter,
+          //     fit: BoxFit.fitWidth,
+          //     image: AssetImage("assets/images/background_logo.png"),
+          //     opacity: 0.5
+          //   )
+          // ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "ME",
-                    style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.w900,
-                      color: ColorStyles.black1000,
-                    ),
-                  ),
-                  Text(
-                    "n",
-                    style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.w400,
-                      color: ColorStyles.black1000,
-                    ),
-                  ),
-                  Text(
-                    "T",
-                    style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.w900,
-                      color: ColorStyles.black1000,
-                    ),
-                  ),
-                  Text(
-                    "os",
-                    style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.w400,
-                      color: ColorStyles.black1000,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 12,),
-              Text(
-                "' 멘토와 멘티의 만남 '",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: ColorStyles.black300,
-                ),
-              ),
-              const SizedBox(height: 160,),
-
+              Spacer(),
+              _TitleView(),
+              const SizedBox(height: 100,),
               Column(
                 children: [
-                  _SocialLoginButton(
-                      type: SocialLoginType.kakao,
-                      onPressed: () => loginBloC.add(const LoginPressedKakaoLoginEvent())
-                  ),
-                  const SizedBox(height: 12),
-                  _SocialLoginButton(
-                      type: SocialLoginType.apple,
-                      onPressed: () => loginBloC.add(const LoginPressedAppleLoginEvent())
-                  ),
+                  const _KakaoLoginButton(),
+                  const SizedBox(height: 16),
+                  const _AppleLoginButton()
                 ],
               ),
-              SizedBox(height: 24,)
+              Spacer(),
+              TermsServiceView(),
+              SizedBox(height: 16,),
             ],
           ),
         ),
@@ -138,45 +89,160 @@ class _LoginView extends StatelessWidget {
   }
 }
 
-class _SocialLoginButton extends StatelessWidget {
-  const _SocialLoginButton({
-    Key? key,
-    required this.type,
-    required this.onPressed
-  }) : super(key: key);
-
-  final SocialLoginType type;
-  final Function() onPressed;
+class _TitleView extends StatelessWidget {
+  const _TitleView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
-
-    return Container(
-      height: 52,
-      child: CupertinoButton(
-        borderRadius: BorderRadius.circular(8),
-        color: ColorStyles.blueGrey100,
-        onPressed: onPressed,
-        child: Row(
+    return Column(
+      children: [
+        Text(
+          "' 커리어 멘토가 필요할 때 '",
+          style: primaryT2,
+        ),
+        // SizedBox(height: 12,),
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              type.logo,
-              width: 18,
-              height: 18,
-            ),
+            Image.asset('assets/images/mentos.png', width: 70, height: 70,),
             const SizedBox(width: 8,),
-            Text(
-              type.loginTitle,
-              style: TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.w600,
-                color: ColorStyles.black800,
-              ),
-            ),
+            Text("멘토스", style: logoH0,),
           ],
+        ),
+      ],
+    );
+  }
+}
+
+class _KakaoLoginButton extends StatelessWidget {
+  const _KakaoLoginButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoButton(
+        borderRadius: BorderRadius.circular(8),
+        padding: const EdgeInsets.all(0),
+        color: Colors.transparent,
+        minSize: 0,
+        onPressed: () => context.read<LoginBloc>().add(const LoginPressedKakaoLoginEvent()),
+        child: Container(
+          height: 56,
+          width: double.infinity,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                width: 1,
+                color: Colors.yellow,
+              )
+          ),
+          child: Stack(
+            alignment: Alignment.centerLeft,
+            children: [
+              const Center(
+                child: Text(
+                  '카카오톡 로그인',
+                  style: primaryB1,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    color: white,
+                    borderRadius: BorderRadius.circular(16)
+                  ),
+                  child: Image.asset("assets/images/kakaoLogo.png",),
+                ),
+              ),
+            ],
+          ),
         )
+    );
+  }
+}
+
+class _AppleLoginButton extends StatelessWidget {
+  const _AppleLoginButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoButton(
+        borderRadius: BorderRadius.circular(8),
+        padding: const EdgeInsets.all(0),
+        color: Colors.transparent,
+        minSize: 0,
+        onPressed: () => context.read<LoginBloc>().add(const LoginPressedAppleLoginEvent()),
+        child: Container(
+          height: 56,
+          width: double.infinity,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                  width: 1,
+                  color: white1000
+              )
+          ),
+          child: Stack(
+            alignment: Alignment.centerLeft,
+            children: [
+              const Center(
+                child: Text(
+                  '애플 로그인',
+                  style: primaryB1,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                      color: white,
+                      borderRadius: BorderRadius.circular(16)
+                  ),
+                  child: Image.asset("assets/images/appleLogo.png"),
+                ),
+              ),
+            ],
+          ),
+        )
+    );
+  }
+}
+
+class TermsServiceView extends StatelessWidget {
+  const TermsServiceView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('이용약관', style: TextStyle(
+            fontFamily: variableFontFamilyName,
+            color: white,
+            fontSize: 15,
+            fontVariations: [
+              FontVariation('wght', 400),
+            ],
+            decoration: TextDecoration.underline,
+          ),),
+          SizedBox(width: 12,),
+          Text('개인정보처리방침', style: TextStyle(
+            fontFamily: variableFontFamilyName,
+            color: white,
+            fontSize: 15,
+            fontVariations: [
+              FontVariation('wght', 400),
+            ],
+            decoration: TextDecoration.underline,
+          ),),
+        ],
       ),
     );
   }

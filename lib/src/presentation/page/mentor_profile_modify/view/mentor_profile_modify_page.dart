@@ -37,13 +37,13 @@ class _MentorProfileModifyView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const RoutingAppBar(title: '멘토 프로필 수정',),
-      backgroundColor: ColorStyles.white,
+      backgroundColor: white,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           onVerticalDragStart: (_) => FocusScope.of(context).unfocus(),
           child: Container(
-            color: ColorStyles.white,
+            color: white,
             width: double.infinity,
             height: double.infinity,
             child: SingleChildScrollView(
@@ -219,7 +219,7 @@ class _JobGroupForm extends StatelessWidget {
                 style: const TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.w700,
-                    color: ColorStyles.black500
+                    color: black500
                 ),
               ),
               Text(
@@ -227,7 +227,7 @@ class _JobGroupForm extends StatelessWidget {
                 style: const TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.w700,
-                    color: ColorStyles.red1000
+                    color: red1000
                 ),
               ),
 
@@ -237,12 +237,12 @@ class _JobGroupForm extends StatelessWidget {
           DropdownButtonFormField2<String>(
             isExpanded: true,
             decoration: const InputDecoration(
-              fillColor: ColorStyles.white200,
+              fillColor: white200,
               filled: true,
               counterText: "",
               hintText: '직무를 선택하세요',
               hintStyle: TextStyle(
-                color: ColorStyles.white900, // 플레이스홀더 텍스트 색상
+                color: white900, // 플레이스홀더 텍스트 색상
               ),
               errorStyle: TextStyle(
                   fontSize: 12
@@ -250,16 +250,16 @@ class _JobGroupForm extends StatelessWidget {
               isDense: true,
               contentPadding: EdgeInsets.fromLTRB(8, 10, 4, 10),
               enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: ColorStyles.white200, width: 1.5),
+                borderSide: BorderSide(color: white200, width: 1.5),
               ),
               focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: ColorStyles.mainColor, width: 1.5),
+                borderSide: BorderSide(color: mainColor, width: 1.5),
               ),
               errorBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: ColorStyles.red1000, width: 1.5),
+                borderSide: BorderSide(color: red1000, width: 1.5),
               ),
               focusedErrorBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: ColorStyles.red1000, width: 1.5),
+                borderSide: BorderSide(color: red1000, width: 1.5),
               ),
             ),
             items: jobGroupList.map((item) => DropdownMenuItem<String>(
@@ -284,7 +284,7 @@ class _JobGroupForm extends StatelessWidget {
             iconStyleData: const IconStyleData(
               icon: Icon(
                 Icons.arrow_drop_down,
-                color: ColorStyles.black100,
+                color: black100,
               ),
               iconSize: 24,
             ),
