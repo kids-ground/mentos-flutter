@@ -11,6 +11,13 @@ import 'package:mentos_flutter/src/presentation/style/color_style.dart';
 class MainTabPage extends StatelessWidget {
   const MainTabPage({Key? key}) : super(key: key);
 
+  static BlocProvider<MainTabBloc> show() {
+    return BlocProvider(
+      create: (context) => MainTabBloc(),
+      child: const MainTabPage(),
+    );
+  }
+
   // static Route<void> routeWithoutAnimation() {
   //   return PageRouteBuilder(
   //     pageBuilder: (context, animation1, animation2) => const MainTabPage(),

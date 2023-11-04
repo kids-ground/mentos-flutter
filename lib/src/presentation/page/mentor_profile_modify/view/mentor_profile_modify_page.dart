@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/mentor_profile_modify/bloc/mentor_profile_modify_bloc.dart';
+import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/routing_app_bar.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/border_line_button.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/full_filled_button.dart';
@@ -37,13 +38,11 @@ class _MentorProfileModifyView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const RoutingAppBar(title: '멘토 프로필 수정',),
-      backgroundColor: white,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           onVerticalDragStart: (_) => FocusScope.of(context).unfocus(),
           child: Container(
-            color: white,
             width: double.infinity,
             height: double.infinity,
             child: SingleChildScrollView(
@@ -103,8 +102,7 @@ class _EmailForm extends StatelessWidget {
               const SizedBox(height: 32,),
               BorderLineButton(
                 title: '인증',
-                fontSize: 15,
-                fontWeight: FontWeight.w700,
+                textStyle: state.isActiveEmailVerify ? primaryB4 : customColorTextStyle(primaryB4, black200),
                 onPressed: state.isActiveEmailVerify ? () =>
                   context.read<MentorProfileModifyBloc>().add(const MentorProfileModifyEmailVerifyPressed())
                 : null,
@@ -137,7 +135,6 @@ class _EmailVerifyForm extends StatelessWidget {
                   child: DefaultTextFormField(
                       label: '이메일 - 인증확인',
                       hintText: '인증번호를 입력해주세요',
-                      helperText: '3:00',
                       isFilled: false,
                       keyboardType: TextInputType.number,
                       maxLength: 6,
@@ -156,8 +153,7 @@ class _EmailVerifyForm extends StatelessWidget {
                     const SizedBox(height: 32,),
                     BorderLineButton(
                       title: '확인',
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
+                      textStyle: state.isActiveEmailVerifyConfirm ? primaryB4  : customColorTextStyle(primaryB4, black200),
                       onPressed: state.isActiveEmailVerifyConfirm ? () =>
                           context.read<MentorProfileModifyBloc>().add(const MentorProfileModifyEmailVerifyConfirmPressed())
                       : null,
@@ -212,37 +208,24 @@ class _JobGroupForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const SizedBox(height: 32,),
-          const Row(
+          Row(
             children: [
-              Text(
-                '직군',
-                style: const TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w700,
-                    color: black500
-                ),
-              ),
-              Text(
-                ' *',
-                style: const TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w700,
-                    color: red1000
-                ),
-              ),
-
+              const Text('직군', style: primaryT3,),
+              Text(' *', style: customColorTextStyle(primaryT3, red1000)),
             ],
           ),
           const SizedBox(height: 8),
           DropdownButtonFormField2<String>(
             isExpanded: true,
+            style: primaryB1,
             decoration: const InputDecoration(
-              fillColor: white200,
+              fillColor: black600,
               filled: true,
               counterText: "",
               hintText: '직무를 선택하세요',
-              hintStyle: TextStyle(
-                color: white900, // 플레이스홀더 텍스트 색상
+              hintStyle: const TextStyle(
+                fontSize: 17,
+                color: black200, // 플레이스홀더 텍스트 색상
               ),
               errorStyle: TextStyle(
                   fontSize: 12
@@ -250,10 +233,10 @@ class _JobGroupForm extends StatelessWidget {
               isDense: true,
               contentPadding: EdgeInsets.fromLTRB(8, 10, 4, 10),
               enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: white200, width: 1.5),
+                borderSide: BorderSide(color: white1000, width: 1.5),
               ),
               focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: mainColor, width: 1.5),
+                borderSide: BorderSide(color: blue800, width: 1.5),
               ),
               errorBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: red1000, width: 1.5),
@@ -290,10 +273,11 @@ class _JobGroupForm extends StatelessWidget {
             ),
             dropdownStyleData: DropdownStyleData(
               decoration: BoxDecoration(
+                color: black800,
                 borderRadius: BorderRadius.circular(8),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
+                    color: black800.withOpacity(0.5),
                     spreadRadius: 0,
                     blurRadius: 5,
                     offset: Offset(0, 2), // changes position of shadow

@@ -8,6 +8,7 @@ import 'package:mentos_flutter/src/presentation/page/web_view/view/web_view.dart
 import 'package:mentos_flutter/src/presentation/widget/button/full_check_button.dart';
 import 'package:mentos_flutter/src/presentation/widget/view/bottom_dialog_view.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
+import 'package:mentos_flutter/src/util/enum/mentos_enum.dart';
 
 
 class TermsOfServicePage extends StatelessWidget {

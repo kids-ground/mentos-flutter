@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/border_line_button.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/full_filled_button.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
@@ -11,12 +14,13 @@ void showBottomDialog({
   String? subButtonTitle,
   required String mainButtonTitle,
   Function()? subButtonOnPressed,
-  required Function() mainButtonOnPressed
+  required Function() mainButtonOnPressed,
+  bool? barrierDismissible
 }) {
   showGeneralDialog(
     barrierLabel: "Label",
-    barrierDismissible: true,
-    barrierColor: Colors.black.withOpacity(0.5),
+    barrierDismissible: barrierDismissible ?? true,
+    barrierColor: Colors.black.withOpacity(0.8),
     transitionDuration: const Duration(milliseconds: 300),
     context: context,
     pageBuilder: (context, anim1, anim2) {
@@ -71,39 +75,19 @@ class BottomDialogView extends StatelessWidget {
             width: double.infinity,
             margin: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: black600,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+              padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                      color: black1000,
-                      decoration: null
-                    )
-                  ),
-
+                  Text(title, style: primaryT2),
                   const SizedBox(height: 20),
-
-                  Text(
-                    body,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                      color: black300,
-                      decoration: null
-                    )
-                  ),
-
+                  Text(body, style: primaryB1),
                   const SizedBox(height: 24),
-
                   Row(
                     children: [
                       if (subButtonOnPressed != null)
@@ -111,7 +95,7 @@ class BottomDialogView extends StatelessWidget {
                           Expanded(
                             child: BorderLineButton(
                                 title: subButtonTitle ?? "",
-                                height: 48,
+                                height: 56,
                                 onPressed: () {
                                   Navigator.pop(context);
                                   subButtonOnPressed!();
@@ -124,7 +108,7 @@ class BottomDialogView extends StatelessWidget {
                       Expanded(
                           child: FullFilledButton(
                               title: mainButtonTitle,
-                              height: 48,
+                              height: 56,
                               onPressed: () {
                                 Navigator.pop(context);
                                 mainButtonOnPressed();

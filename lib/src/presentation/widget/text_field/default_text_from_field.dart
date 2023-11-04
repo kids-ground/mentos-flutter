@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
+import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 
 class DefaultTextFormField extends StatelessWidget {
   const DefaultTextFormField({
@@ -41,26 +42,13 @@ class DefaultTextFormField extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text(
-              label,
-              style: const TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.w700,
-                  color: black500
-              ),
-            ),
-            Text(
-              isRequired ? ' *' : '',
-              style: const TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.w700,
-                  color: red1000
-              ),
-            ),
+            Text( label, style: primaryT3 ),
+            Text( isRequired ? ' *' : '', style:customColorTextStyle(primaryT3, red1000), ),
           ],
         ),
         SizedBox(height: isFilled ? 8 : 0,),
         TextFormField(
+          style: primaryB1,
           onSaved: onSaved,
           onChanged: onChanged,
           initialValue: initialValue,
@@ -72,7 +60,7 @@ class DefaultTextFormField extends StatelessWidget {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           controller: controller,
           decoration: InputDecoration(
-            fillColor: white200,
+            fillColor: black600,
             filled: isFilled,
             counterText: "",
             hintText: hintText,
@@ -83,7 +71,8 @@ class DefaultTextFormField extends StatelessWidget {
               fontSize: 14
             ),
             hintStyle: const TextStyle(
-              color: white900, // 플레이스홀더 텍스트 색상
+              fontSize: 17,
+              color: black200, // 플레이스홀더 텍스트 색상
             ),
             errorStyle: const TextStyle(
                 fontSize: 12
@@ -92,10 +81,10 @@ class DefaultTextFormField extends StatelessWidget {
             contentPadding: const EdgeInsets.fromLTRB(8, 12, 4, 12),
             // 기본 색상
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: isFilled ? white200 : white500, width: 1.5),
+              borderSide: BorderSide(color: isFilled ? white1000 : white1000, width: 1.5),
             ),
             focusedBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: mainColor, width: 1.5),
+              borderSide: BorderSide(color: blue800, width: 1.5),
             ),
             errorBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: red1000, width: 1.5),

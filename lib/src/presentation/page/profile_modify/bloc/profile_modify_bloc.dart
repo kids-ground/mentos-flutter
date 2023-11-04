@@ -28,7 +28,7 @@ class ProfileModifyBloc extends Bloc<ProfileModifyEvent, ProfileModifyState> {
       nickname: '로건'
     );
 
-    emit(state.copyWith(memberResponse: memberResponse, loadingStatus: LoadingStatus.ready));
+    emit(state.copyWith(memberResponse: memberResponse, loadingStatus: LoadingStatus.success));
   }
 
   Future<void> _selectedImage(

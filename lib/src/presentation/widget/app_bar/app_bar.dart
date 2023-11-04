@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
+import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CommonAppBar({
@@ -29,23 +30,15 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: white,
       surfaceTintColor: Colors.transparent,
       shape: bottomLine ? const Border(
         bottom: BorderSide(
-          color: black100,
+          color: white1000,
           width: 0.1,
         ),
       ) : null,
       centerTitle: centerTitle,
-      title: title != null ?
-        Text(
-          title!,
-          style: TextStyle(
-            fontWeight: fontWeight,
-            fontSize: fontSize
-          ),
-        ) : null,
+      title: title != null ? Text(title!, style: primaryT3,) : null,
       titleSpacing: 24,
       leading: leading != null ? Container(
         margin: const EdgeInsets.fromLTRB(24, 8, 0, 8),

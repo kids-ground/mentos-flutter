@@ -15,6 +15,9 @@ void _setupBaseApiDio() {
   baseApiDio.options.connectTimeout = const Duration(seconds: 5);
   baseApiDio.options.receiveTimeout = const Duration(seconds: 3);
 
+  // content-type 설정
+  baseApiDio.options.contentType = 'application/json';
+
   // interceptors 추가
   baseApiDio.interceptors.add(_CustomLogInterceptor());
 }
@@ -22,7 +25,7 @@ void _setupBaseApiDio() {
 class _CustomLogInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    logger.d('REQUEST[${options.method}] => PATH: ${options.path}');
+    logger.d('REQUEST[${options.method}] => PATH: ${options.path}, ${options.data}');
     super.onRequest(options, handler);
   }
 

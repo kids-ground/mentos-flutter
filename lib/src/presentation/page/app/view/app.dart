@@ -4,34 +4,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentos_flutter/src/config/config.dart';
 import 'package:mentos_flutter/src/data/repository/network/network.dart';
 import 'package:mentos_flutter/src/presentation/page/app/bloc/app_bloc.dart';
-import 'package:mentos_flutter/src/presentation/page/login/bloc/login_bloc.dart';
+import 'package:mentos_flutter/src/presentation/page/launch/view/launch_page.dart';
 import 'package:mentos_flutter/src/presentation/page/login/view/login.dart';
-import 'package:mentos_flutter/src/presentation/page/main_tab/bloc/main_tab_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/main_tab/view/main_tab.dart';
-import 'package:mentos_flutter/src/presentation/page/terms_of_service/bloc/terms_of_service_bloc.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
 import 'package:mentos_flutter/src/util/constant/strings.dart';
+import 'package:mentos_flutter/src/util/enum/mentos_enum.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => AppBloc(testRepository: getIt.get<TestRepository>())),
-          BlocProvider(create: (context) => LoginBloc()),
-          BlocProvider(create: (context) => TermsOfServiceBloc()),
-          BlocProvider(create: (context) => MainTabBloc())
-        ],
-        child: const AppView()
+    return BlocProvider(
+      create: (context) => AppBloc(testRepository: getIt.get<TestRepository>()),
+      child: const _AppView(),
     );
   }
 }
 
-
-class AppView extends StatelessWidget {
-  const AppView({Key? key}) : super(key: key);
+class _AppView extends StatelessWidget {
+  const _AppView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +36,12 @@ class AppView extends StatelessWidget {
         fontFamily: fontFamilyName,
         brightness: Brightness.light,
         scaffoldBackgroundColor: backgroundColor,
-        appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.light),
+        textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.white),
+        appBarTheme: const AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.light,
+          backgroundColor: backgroundColor,
+          foregroundColor: white
+        ),
         useMaterial3: true,
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
@@ -66,12 +64,12 @@ class AppView extends StatelessWidget {
         },
         builder: (context, state) {
           switch (state.status) {
-            case AppStatus.loading: // Splash
+            case AppStatus.init: // Splash
+              return LaunchPage.show();
             case AppStatus.unAuth:
-            case AppStatus.registering:
-              return const LoginPage();
+              return LoginPage.show();
             case AppStatus.joined:
-              return const MainTabPage();
+              return MainTabPage.show();
           }
         }
       ),

@@ -4,6 +4,10 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+import 'package:mentos_flutter/src/data/data_source/data_source.dart';
+import 'package:mentos_flutter/src/data/dto/request/login/login_request.dart';
+import 'package:mentos_flutter/src/data/repository/network/auth_repository.dart';
+import 'package:mentos_flutter/src/util/enum/mentos_enum.dart';
 import 'package:mentos_flutter/src/util/resource/logger.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
@@ -11,10 +15,18 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc(): super(const LoginState()) {
+  LoginBloc({
+    required AuthRepository authRepository,
+    required LocalKeyValueDataSource localKeyValueDataSource
+  }): _authRepository = authRepository,
+        _localKeyValueDataSource = localKeyValueDataSource,
+        super(const LoginState()) {
     on<LoginPressedKakaoLoginEvent>(_onPressedKakaoLogin);
     on<LoginPressedAppleLoginEvent>(_onPressedAppleLogin);
   }
+
+  final AuthRepository _authRepository;
+  final LocalKeyValueDataSource _localKeyValueDataSource;
 
   Future<void> _onPressedKakaoLogin(
     LoginPressedKakaoLoginEvent event,
@@ -33,9 +45,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
 
     // Server 통신
-    logger.d('카카오 AccessToken : ${kakakoOAuthToken.accessToken}');
-    await Future.delayed(const Duration(milliseconds: 700));
+    var request = LoginRequest(loginType: LoginType.kakao.name.toUpperCase(), token: kakakoOAuthToken.accessToken);
+    var response = await _authRepository.signIn(request);
 
+    // 저장
+
+    // signUp에따라 달라짐
     emit(state.copyWith(status: LoginStatus.signUp));
   }
 

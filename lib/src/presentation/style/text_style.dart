@@ -72,10 +72,11 @@ const primaryT1 = TextStyle(
     ]
 );
 
+
 const primaryT2 = TextStyle(
     color: white,
     fontFamily: variableFontFamilyName,
-    fontSize: 20,
+    fontSize: 22,
     fontVariations: [
       FontVariation('wght', 600)
     ]
@@ -165,6 +166,6 @@ TextStyle customColorTextStyle(TextStyle style, Color color) {
       color: color,
       fontFamily: style.fontFamily,
       fontSize: style.fontSize,
-      fontWeight: style.fontWeight
+      fontVariations: style.fontVariations
   );
 }

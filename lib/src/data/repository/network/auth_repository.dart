@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:mentos_flutter/src/data/dto/request/login/login_request.dart';
+import 'package:mentos_flutter/src/data/dto/response/login/login_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'auth_repository.g.dart';
@@ -7,8 +9,6 @@ part 'auth_repository.g.dart';
 abstract class AuthRepository {
   factory AuthRepository(Dio dio, {String baseUrl}) = _AuthRepository;
 
-  @GET("/{id}")
-  Future<void> getRestaurantDetail({
-    @Path() required String id,
-  });
+  @POST("/auth/login")
+  Future<LoginResponse> signIn(@Body() LoginRequest request);
 }

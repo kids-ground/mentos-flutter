@@ -4,23 +4,30 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:mentos_flutter/src/config/config.dart';
+import 'package:mentos_flutter/src/data/data_source/data_source.dart';
+import 'package:mentos_flutter/src/data/repository/network/auth_repository.dart';
 import 'package:mentos_flutter/src/presentation/page/app/bloc/app_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/login/bloc/login_bloc.dart';
+import 'package:mentos_flutter/src/presentation/page/mentor_profile_modify/view/mentor_profile_modify_page.dart';
 import 'package:mentos_flutter/src/presentation/page/terms_of_service/view/terms_of_service_page.dart';
 import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
+import 'package:mentos_flutter/src/presentation/widget/view/bottom_dialog_view.dart';
 import 'package:mentos_flutter/src/util/constant/strings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentos_flutter/src/util/enum/mentos_enum.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
-  static Route<void> route() {
-    return MaterialPageRoute(
-      builder: (context) => BlocProvider(
-        create: (context) => LoginBloc(),
-        child: const LoginPage(),
+  static BlocProvider<LoginBloc> show() {
+    return BlocProvider(
+      create: (context) => LoginBloc(
+        authRepository: getIt.get<AuthRepository>(),
+        localKeyValueDataSource: getIt.get<LocalKeyValueDataSource>()
       ),
+      child: const LoginPage(),
     );
   }
 
@@ -33,13 +40,33 @@ class LoginPage extends StatelessWidget {
           case LoginStatus.signIn:
             context.read<AppBloc>().add(const AppChangeStatus(appStaus: AppStatus.joined));
           case LoginStatus.signUp:
-            Navigator.push(context, TermsOfServicePage.route());
+            showRequestMentorProfile(context);
           case LoginStatus.failure: // 실패 Toast 띄우기
           default:
             return;
         }
       },
       child: const _LoginView(),
+    );
+  }
+
+  void showRequestMentorProfile(BuildContext context) {
+    showBottomDialog(
+        context: context,
+        title: '💡 커리어 프로필을 작성하시겠어요?',
+        body: '커리어 프로필 작성을 통해\n멘티분들께 신뢰받는 멘토가 되어보세요!',
+        subButtonTitle: '시작하기',
+        barrierDismissible: false,
+        subButtonOnPressed: () async {
+          await Future.delayed(const Duration(milliseconds: 300));
+          context.read<AppBloc>().add(const AppChangeStatus(appStaus: AppStatus.joined));
+        },
+        mainButtonTitle: '작성하기',
+        mainButtonOnPressed: () async {
+          Navigator.push(context, MentorProfileModifyPage.route());
+          await Future.delayed(const Duration(milliseconds: 200));
+          context.read<AppBloc>().add(const AppChangeStatus(appStaus: AppStatus.joined));
+        }
     );
   }
 }
@@ -64,22 +91,22 @@ class _LoginView extends StatelessWidget {
           //     opacity: 0.5
           //   )
           // ),
-          child: Column(
+          child: const Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Spacer(),
               _TitleView(),
-              const SizedBox(height: 100,),
+              SizedBox(height: 100,),
               Column(
                 children: [
-                  const _KakaoLoginButton(),
-                  const SizedBox(height: 16),
-                  const _AppleLoginButton()
+                  _KakaoLoginButton(),
+                  SizedBox(height: 16),
+                  _AppleLoginButton()
                 ],
               ),
               Spacer(),
-              TermsServiceView(),
+              _TermsServiceView(),
               SizedBox(height: 16,),
             ],
           ),
@@ -214,12 +241,12 @@ class _AppleLoginButton extends StatelessWidget {
   }
 }
 
-class TermsServiceView extends StatelessWidget {
-  const TermsServiceView({Key? key}) : super(key: key);
+class _TermsServiceView extends StatelessWidget {
+  const _TermsServiceView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

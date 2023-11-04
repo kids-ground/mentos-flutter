@@ -1,4 +1,22 @@
 
+enum LoadingStatus {
+  init,
+  loading,
+  success,
+  failure,
+  none
+}
+
+enum AppStatus {
+  init,
+  unAuth,
+  joined,
+}
+
+enum LoginType {
+  kakao, apple
+}
+
 enum MentorVerifyType {
   notVerify, // 인증전
   mailVerified, // 메일 인증완료
@@ -15,13 +33,4 @@ enum JobYear {
 
 enum JobGroup {
   develop, design, marketing, hr
-}
-
-enum LoadingStatus {
-  init,
-  loading,
-  ready,
-  failure,
-  success,
-  cancel,
 }
