@@ -44,14 +44,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       return;
     }
 
-    // Server 통신
-    var request = LoginRequest(loginType: LoginType.kakao.name.toUpperCase(), token: kakakoOAuthToken.accessToken);
-    var response = await _authRepository.signIn(request);
+    var isSignup = await _isSignupWithFetch(LoginType.kakao.name.toUpperCase(), kakakoOAuthToken.accessToken);
 
-    // 저장
-
-    // signUp에따라 달라짐
-    emit(state.copyWith(status: LoginStatus.signUp));
+    emit(state.copyWith(status: isSignup ? LoginStatus.signUp : LoginStatus.signIn));
   }
 
   Future<void> _onPressedAppleLogin(
@@ -71,10 +66,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       return;
     }
 
-    // Server 통신
-    logger.d('애플 AccessToken : ${token.identityToken}');
-    await Future.delayed(const Duration(milliseconds: 700));
+    var isSignup = await _isSignupWithFetch(LoginType.apple.name.toUpperCase(), token.identityToken ?? "");
 
-    emit(state.copyWith(status: LoginStatus.signIn));
+    emit(state.copyWith(status: isSignup ? LoginStatus.signUp : LoginStatus.signIn));
+  }
+
+  Future<bool> _isSignupWithFetch(String loginType, String token) async {
+    // Server 통신
+    var request = LoginRequest(loginType: loginType, token: token);
+    var response = await _authRepository.signIn(request);
+
+    // 저장
+    _localKeyValueDataSource.setAccessToken(response.accessToken);
+    _localKeyValueDataSource.setRefreshToken(response.refreshToken);
+
+    return response.isSignup == true;
   }
 }

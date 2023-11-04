@@ -95,6 +95,7 @@ class BottomDialogView extends StatelessWidget {
                           Expanded(
                             child: BorderLineButton(
                                 title: subButtonTitle ?? "",
+                                textStyle: primaryB1,
                                 height: 56,
                                 onPressed: () {
                                   Navigator.pop(context);
