@@ -37,7 +37,8 @@ class ProfileModifyPage extends StatelessWidget {
           case LoadingStatus.loading:
             showLoadingDialog(context);
           case LoadingStatus.success:
-            showSimpleSnackBar(context, '수정이 완료되었습니다');
+            // showSimpleSnackBar(context, '수정이 완료되었습니다');
+            Navigator.pop(context);
             Navigator.pop(context);
           case LoadingStatus.failure:
             Navigator.pop(context);

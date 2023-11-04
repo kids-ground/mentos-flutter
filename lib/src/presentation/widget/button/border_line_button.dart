@@ -41,7 +41,8 @@ class BorderLineButton extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: onPressed == null ? black700 : white
+              color: onPressed == null ? black700 : white1000,
+              width: 0.5
             )
         ),
         child: Text(title,

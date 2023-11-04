@@ -26,19 +26,19 @@ class MainTabPage extends StatelessWidget {
         BlocProvider(create: (context) => HomeBloc()..add(const HomeSelectCategory(selectedHomeCategroyId: 0)))
         // MainTab에 포함되는 Page
       ],
-      child: const _MainTabView()
+      child: _MainTabView()
     );
   }
 }
 
 class _MainTabView extends StatelessWidget {
-  const _MainTabView({Key? key}) : super(key: key);
+  _MainTabView({Key? key}) : super(key: key);
 
-  final List<_MainTabPageInfo> pageInfoList = const [
+  List<_MainTabPageInfo> pageInfoList = [
     _MainTabPageInfo(page: HomePage(), pageIconPath: "assets/images/home.png", pageName: '홈'),
     _MainTabPageInfo(page: MentorMainPage(), pageIconPath: "assets/images/users.png", pageName: '멘토'),
     // _MainTabPageInfo(page: ChatListPage(), pageIconPath: "assets/images/chat.png", pageName: '채팅'),
-    _MainTabPageInfo(page: MyPagePage(), pageIconPath: "assets/images/mypage.png", pageName: '마이페이지'),
+    _MainTabPageInfo(page: MyPagePage.show(), pageIconPath: "assets/images/mypage.png", pageName: '마이페이지'),
   ];
 
   @override

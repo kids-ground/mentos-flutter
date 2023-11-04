@@ -18,8 +18,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeBloC = context.read<HomeBloc>();
-
     return Scaffold(
       appBar: CommonAppBar(
         bottomLine: false,

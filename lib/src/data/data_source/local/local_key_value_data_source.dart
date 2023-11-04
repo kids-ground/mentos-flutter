@@ -11,9 +11,11 @@ class LocalKeyValueDataSource {
   }
 
   Future<String?> get accessToken async => (await database).getString(LocalKey.accessToken.name);
+  Future<void> deleteAccessToken() async => (await database).remove(LocalKey.accessToken.name);
   Future<void> setAccessToken(String value) async => (await database).setString(LocalKey.accessToken.name, value);
 
   Future<String?> get refreshToken async => (await database).getString(LocalKey.refreshToken.name);
+  Future<void> deleteRefreshToken() async => (await database).remove(LocalKey.refreshToken.name);
   Future<void> setRefreshToken(String value) async => (await database).setString(LocalKey.refreshToken.name, value);
 }
 

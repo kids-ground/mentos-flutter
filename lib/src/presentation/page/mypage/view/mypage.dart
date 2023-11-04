@@ -1,15 +1,31 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentos_flutter/src/config/config.dart';
+import 'package:mentos_flutter/src/data/data_source/data_source.dart';
+import 'package:mentos_flutter/src/presentation/page/app/bloc/app_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/mentor_detail/view/mentor_detail_page.dart';
 import 'package:mentos_flutter/src/presentation/page/mentor_profile_modify/view/mentor_profile_modify_page.dart';
+import 'package:mentos_flutter/src/presentation/page/mypage/bloc/mypage_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/profile_modify/view/profile_modify_page.dart';
 import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
+import 'package:mentos_flutter/src/presentation/widget/view/bottom_dialog_view.dart';
+import 'package:mentos_flutter/src/util/enum/mentos_enum.dart';
 
 class MyPagePage extends StatelessWidget {
   const MyPagePage({Key? key}) : super(key: key);
+
+  static BlocProvider<MypageBloc> show() {
+    return BlocProvider(
+      create: (context) => MypageBloc(
+          dataSource: getIt.get<LocalKeyValueDataSource>()
+      ),
+      child: const MyPagePage(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -193,9 +209,9 @@ class _MentorProfileInfo extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               decoration: BoxDecoration(
-                color: black500,
+                color: black700,
                 borderRadius: BorderRadius.circular(8),
-                // border: Border.all(color: black100)
+                border: Border.all(color: blue500)
               ),
               child: Column(
                 children: [
@@ -216,9 +232,9 @@ class _MentorProfileInfo extends StatelessWidget {
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 decoration: BoxDecoration(
-                    color: black500,
+                    color: black700,
                     borderRadius: BorderRadius.circular(8),
-                    // border: Border.all(color: white500)
+                    border: Border.all(color: blue500)
                 ),
                 child: Column(
                   children: [
@@ -239,9 +255,9 @@ class _MentorProfileInfo extends StatelessWidget {
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 decoration: BoxDecoration(
-                    color: black500,
+                    color: black700,
                     borderRadius: BorderRadius.circular(8),
-                    // border: Border.all(color: white500)
+                    border: Border.all(color: blue500)
                 ),
                 child: Column(
                   children: [
@@ -380,20 +396,20 @@ class _ManagementSection extends StatelessWidget {
                 style: primaryB2,
               ),
             ),
-            CupertinoListTile(
-              backgroundColor: black700,
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
-              leading: Image.asset(
-                'assets/images/note_pencil_line.png',
-                width: 24,
-                color: white,
-              ),
-              title: Text(
-                "내가 쓴 후기",
-                style: primaryB2,
-              ),
-              trailing: Icon(CupertinoIcons.chevron_forward, size: 16, color: white1000,),
-            ),
+            // CupertinoListTile(
+            //   backgroundColor: black700,
+            //   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+            //   leading: Image.asset(
+            //     'assets/images/note_pencil_line.png',
+            //     width: 24,
+            //     color: white,
+            //   ),
+            //   title: Text(
+            //     "내가 쓴 후기",
+            //     style: primaryB2,
+            //   ),
+            //   trailing: Icon(CupertinoIcons.chevron_forward, size: 16, color: white1000,),
+            // ),
             CupertinoListTile(
                 backgroundColor: black700,
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
@@ -463,6 +479,24 @@ class _PersonalSection extends StatelessWidget {
               CupertinoListTile(
                 backgroundColor: black700,
                 padding: EdgeInsets.symmetric(horizontal: 12),
+                onTap: () {
+                  showBottomDialog(
+                      context: context,
+                      title: '❌ 로그아웃하시겠어요?',
+                      body: '로그아웃시 서비스를 이용하실 수 없습니다.\n그래도 로그아웃 하시겠습니까?',
+                      subButtonTitle: '로그아웃',
+                      barrierDismissible: true,
+                      subButtonOnPressed: () async {
+                        context.read<MypageBloc>().add(const MyPageLogoutEvent());
+                        await Future.delayed(const Duration(milliseconds: 300));
+                        context.read<AppBloc>().add(AppChangeStatus(appStaus: AppStatus.unAuth));
+                      },
+                      mainButtonTitle: '취소',
+                      mainButtonOnPressed: () async {
+
+                      }
+                  );
+                },
                 leading: Image.asset(
                   'assets/images/power_off_line.png',
                   width: 24,
@@ -485,6 +519,22 @@ class _PersonalSection extends StatelessWidget {
                   "회원탈퇴",
                   style: primaryB2,
                 ),
+                onTap: () {
+                  showBottomDialog(
+                      context: context,
+                      title: '❌ 회원탈퇴',
+                      body: '회원탈퇴시 회원님의 정보가 모두 사라집니다.\n그래도 탈퇴 하시겠습니까?',
+                      subButtonTitle: '회원탈퇴',
+                      barrierDismissible: true,
+                      subButtonOnPressed: () async {
+
+                      },
+                      mainButtonTitle: '취소',
+                      mainButtonOnPressed: () async {
+
+                      }
+                  );
+                },
               ),
             ]
         ),

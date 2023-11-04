@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
+import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 
 class FullFilledButton extends StatelessWidget {
   const FullFilledButton({
@@ -37,7 +38,7 @@ class FullFilledButton extends StatelessWidget {
         ),
         child: Text(
           title,
-          style: TextStyle(
+          style: fontSize == 18 ? primaryB1 : TextStyle(
             fontSize: fontSize,
             fontWeight: FontWeight.w500,
             color: fontColor,
