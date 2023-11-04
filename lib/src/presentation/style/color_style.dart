@@ -52,6 +52,9 @@ const Color red800 = Color(0xFFF43B5C);
 const Color red900 = Color(0xFFF32348);
 const Color red1000 = Color(0xFFF10A34);
 
+const Color tagBackground = Color(0xFFF48BA6);
+const Color tagText = Color(0xFF5B1624);
+
 const Color yellow = Color(0xFFFFDB0F);
 
 const Color blueGrey100 = Color(0xFFECEFF1);

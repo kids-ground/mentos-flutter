@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/mentor_detail/bloc/mentor_detail_bloc.dart';
+import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/routing_app_bar.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
 
@@ -32,7 +33,6 @@ class _MentorDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
       appBar: const RoutingAppBar(title: '멘토 상세',),
       body: SafeArea(
         child: Column(
@@ -97,21 +97,13 @@ class _ProfileView extends StatelessWidget {
           children: [
             const Text(
               "로건",
-              style: const TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w700,
-                  color: black1000
-              ),
+              style: primaryT2,
             ),
             Row(
               children: [
                 Text(
                   "Google",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: black800
-                  ),
+                  style: primaryB2,
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(4,0,0,0),
@@ -120,7 +112,7 @@ class _ProfileView extends StatelessWidget {
                     'assets/images/certification_mark.png',
                     width: 16,
                     height: 16,
-                    color: Colors.green[300],
+                    color: Colors.green[400],
                   ),
                 ),
               ],
@@ -130,34 +122,23 @@ class _ProfileView extends StatelessWidget {
               children: [
                 Text(
                   "연구개발",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: black100
-                  ),
+                  style: customColorTextStyle(primaryB2, white1000),
                 ),
-                Text(' ∙ '),
+                Text(
+                  ' ∙ ',
+                  style: customColorTextStyle(primaryB2, white1000),
+                ),
                 Text(
                   "AI",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: black100
-                  ),
+                  style: customColorTextStyle(primaryB2, white1000),
                 ),
                 Text('  '),
                 Text(
-                  "(3 ~ 4년차)",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: black100
-                  ),
+                  "4년차",
+                  style: customColorTextStyle(primaryB2, white1000),
                 ),
               ],
             ),
-
-
           ],
         ),
       ],
@@ -178,7 +159,7 @@ class _StatisticsView extends StatelessWidget {
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 decoration: BoxDecoration(
-                    color: white,
+                    color: black700,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: blue500)
                 ),
@@ -188,20 +169,12 @@ class _StatisticsView extends StatelessWidget {
                     const SizedBox(height: 4,),
                     Text(
                       "멘토링",
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: black800
-                      ),
+                      style: primaryB1,
                     ),
                     const SizedBox(height: 4,),
                     Text(
                       "5번",
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          color: black800
-                      ),
+                      style: primaryB1,
                     ),
                   ],
                 )
@@ -212,7 +185,7 @@ class _StatisticsView extends StatelessWidget {
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 decoration: BoxDecoration(
-                    color: white,
+                    color: black700,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: blue500)
                 ),
@@ -222,20 +195,12 @@ class _StatisticsView extends StatelessWidget {
                     const SizedBox(height: 4,),
                     Text(
                       "리뷰",
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: black800
-                      ),
+                      style: primaryB1,
                     ),
                     const SizedBox(height: 4,),
                     Text(
                       "12개",
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          color: black800
-                      ),
+                      style: primaryB1,
                     ),
                   ],
                 )
@@ -246,7 +211,7 @@ class _StatisticsView extends StatelessWidget {
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 decoration: BoxDecoration(
-                    color: white,
+                    color: black700,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: blue500)
                 ),
@@ -256,20 +221,12 @@ class _StatisticsView extends StatelessWidget {
                     const SizedBox(height: 4,),
                     Text(
                       "평점",
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: black800
-                      ),
+                      style: primaryB1,
                     ),
                     const SizedBox(height: 4,),
                     Text(
                       "4.5",
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          color: black800
-                      ),
+                      style: primaryB1,
                     ),
                   ],
                 )
@@ -291,26 +248,18 @@ class _IntroductionView extends StatelessWidget {
       children: [
         Text(
           '한 줄 인사',
-          style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-              color: black800
-          ),
+          style: primaryT2,
         ),
         const SizedBox(height: 12),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           decoration: BoxDecoration(
-            color: blue100,
+            color: blue700,
             borderRadius: BorderRadius.circular(8)
           ),
           child: Text(
             '안녕하세요. Google 5년차 소프트웨어 엔지니어입니다. Google에 대해 궁금하신게 있으시다면 주저말고 연락주세요!',
-            style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: black500
-            ),
+            style: primaryB1,
           ),
         ),
       ],
@@ -328,18 +277,14 @@ class _DescriptionView extends StatelessWidget {
       children: [
         Text(
           '소개',
-          style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-              color: black800
-          ),
+          style: primaryT2,
         ),
         const SizedBox(height: 12),
 
         Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           decoration: BoxDecoration(
-              color: white100,
+              color: black500,
               borderRadius: BorderRadius.circular(8)
           ),
           child: Text('''
@@ -354,11 +299,7 @@ class _DescriptionView extends StatelessWidget {
 
 제 프로필을 보시고 궁금하신 점이 있으시다면 언제든 연락주세요  
             ''',
-            style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: black500
-            ),
+            style: primaryB2,
           ),
         ),
       ],
@@ -376,7 +317,7 @@ class _ContactView extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
         decoration: const BoxDecoration(
           border: Border(
-            top: BorderSide(width: 1, color: white200),
+            top: BorderSide(width: 0.5, color: black500),
           ),
         ),
         child: Row(
@@ -405,7 +346,7 @@ class _ContactView extends StatelessWidget {
             ),
             const SizedBox(width: 12),
             CupertinoButton(
-              color: state.isBookmarked ? yellow.withAlpha(70) : white,
+              color: state.isBookmarked ? yellow.withAlpha(70) : Colors.transparent,
               padding: EdgeInsets.zero,
               onPressed: () {
                 context.read<MentorDetailBloc>().add(MentorDetailEventBookmarked(isBookmarked: !state.isBookmarked));
@@ -417,13 +358,13 @@ class _ContactView extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: state.isBookmarked ? yellow : white500,
+                    color: state.isBookmarked ? yellow : black100,
                   )
                 ),
                 child: Image.asset(
                   'assets/images/star.png',
                   width: 24,
-                  color: state.isBookmarked ? yellow : white600)
+                  color: state.isBookmarked ? yellow : black100)
               ),
             ),
           ],

@@ -161,11 +161,12 @@ const primaryC3 = TextStyle(
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   Custom Color Text Style
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
-TextStyle customColorTextStyle(TextStyle style, Color color) {
+TextStyle customColorTextStyle(TextStyle style, Color? color, { double? height }) {
   return TextStyle(
-      color: color,
+      color: color ?? white,
       fontFamily: style.fontFamily,
       fontSize: style.fontSize,
-      fontVariations: style.fontVariations
+      fontVariations: style.fontVariations,
+      height: height
   );
 }

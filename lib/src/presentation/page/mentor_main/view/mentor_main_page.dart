@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mentos_flutter/src/presentation/page/mentor_detail/view/mentor_detail_page.dart';
+import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
 
@@ -23,7 +24,6 @@ class _MentorMainView extends StatelessWidget {
       appBar: const CommonAppBar(title: '멘토', bottomLine: false,),
       body: SafeArea(
         child: Container(
-          color: white100,
           child: Column(
             children: [
               _MentorFilterView(),
@@ -43,13 +43,12 @@ class _MentorFilterView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+      padding: EdgeInsets.fromLTRB(24, 8, 24, 12),
       decoration: BoxDecoration(
-        color: white,
         border: Border(
           bottom: BorderSide(
             width: 0.1,
-            color: black100
+            color: white1000
           ),
         )
 
@@ -67,21 +66,16 @@ class _MentorFilterView extends StatelessWidget {
               margin: const EdgeInsets.all(0),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: white,
+                  color: black800,
                   border: Border.all(
-                      color: white500
+                      color: black500
                   )
               ),
               child: Row(
                 children: [
                   Text(
                     '직군',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: black500,
-                        decoration: null
-                    )
+                    style: primaryB2
                   ),
                   Icon( // <-- Icon
                     Icons.arrow_drop_down_rounded,
@@ -103,22 +97,17 @@ class _MentorFilterView extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(12, 4, 4, 4),
               margin: const EdgeInsets.all(0),
               decoration: BoxDecoration(
+                  color: black800,
                   borderRadius: BorderRadius.circular(8),
-                  color: white,
                   border: Border.all(
-                      color: white500
+                      color: black500
                   )
               ),
               child: Row(
                 children: [
                   Text(
                       '년차',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: black500,
-                          decoration: null
-                      )
+                      style: primaryB2
                   ),
                   Icon( // <-- Icon
                     Icons.arrow_drop_down_rounded,
@@ -134,7 +123,6 @@ class _MentorFilterView extends StatelessWidget {
     );
   }
 }
-
 
 class _MentorListView extends StatelessWidget {
   const _MentorListView({Key? key}) : super(key: key);
@@ -173,15 +161,18 @@ class _MentorProfileItemView extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         width: double.infinity,
         decoration: BoxDecoration(
-          color: white,
+          color: black800,
           borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: black500
+          ),
           boxShadow: [
-            BoxShadow(
-              color: white400.withOpacity(0.7),
-              spreadRadius: 6,
-              blurRadius: 6.0,
-              offset: const Offset(4, 4),
-            ),
+            // BoxShadow(
+            //   color: white400.withOpacity(0.7),
+            //   spreadRadius: 6,
+            //   blurRadius: 6.0,
+            //   offset: const Offset(4, 4),
+            // ),
           ],
         ),
         child: Column(
@@ -212,49 +203,29 @@ class _MentorProfileItemView extends StatelessWidget {
                   children: [
                     const Text(
                       "로건",
-                      style: const TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w700,
-                          color: black1000
-                      ),
+                      style: primaryB1,
                     ),
                     const SizedBox(height: 2,),
                     Text(
                       "Google",
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: black800
-                      ),
+                      style: primaryB3,
                     ),
                     const SizedBox(height: 4,),
                     Row(
                       children: [
                         Text(
                           "연구개발",
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: black100
-                          ),
+                          style: customColorTextStyle(primaryB4, white1000),
                         ),
                         Text(' ∙ '),
                         Text(
                           "AI",
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: black100
-                          ),
+                          style: customColorTextStyle(primaryB4, white1000),
                         ),
                         Text('  '),
                         Text(
-                          "(3 ~ 4년차)",
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: black100
-                          ),
+                          "4년차",
+                          style: customColorTextStyle(primaryB4, white1000),
                         ),
                       ],
                     ),
@@ -265,12 +236,7 @@ class _MentorProfileItemView extends StatelessWidget {
             const SizedBox(height: 12,),
             Text(
               '" 안녕하세요. Google 5년차 소프트웨어 엔지니어입니다. Google에 대해 궁금하신게 있으시다면 주저말고 연락주세요! "',
-              style: TextStyle(
-                  fontSize: 16,
-                  height: 1.35,
-                  fontWeight: FontWeight.w500,
-                  color: black500
-              ),
+              style: customColorTextStyle(primaryB1, white500, height: 1.4),
             ),
           ],
         ),

@@ -7,6 +7,7 @@ import 'package:mentos_flutter/src/presentation/page/main_tab/bloc/main_tab_bloc
 import 'package:mentos_flutter/src/presentation/page/mentor_main/view/mentor_main_page.dart';
 import 'package:mentos_flutter/src/presentation/page/mypage/view/mypage.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
+import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 
 class MainTabPage extends StatelessWidget {
   const MainTabPage({Key? key}) : super(key: key);
@@ -17,14 +18,6 @@ class MainTabPage extends StatelessWidget {
       child: const MainTabPage(),
     );
   }
-
-  // static Route<void> routeWithoutAnimation() {
-  //   return PageRouteBuilder(
-  //     pageBuilder: (context, animation1, animation2) => const MainTabPage(),
-  //     transitionDuration: Duration.zero,
-  //     reverseTransitionDuration: Duration.zero,
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -56,24 +49,19 @@ class _MainTabView extends StatelessWidget {
           child: Scaffold(
             body: pageInfoList.elementAt(state.selectedIndex).page,
             bottomNavigationBar: BottomNavigationBar(
+              backgroundColor: backgroundColor.withOpacity(0.1),
               type: BottomNavigationBarType.fixed,
+              elevation: 0.1,
               showSelectedLabels: true,
               showUnselectedLabels: true,
-              elevation: 0.1,
-              selectedItemColor: black700,
-              unselectedItemColor: white800,
-              selectedLabelStyle: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600
-              ),
-              unselectedLabelStyle: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600
-              ),
+              selectedItemColor: white,
+              unselectedItemColor: black500,
+              selectedLabelStyle: primaryB4,
+              unselectedLabelStyle: primaryB4,
               items: pageInfoList.map<BottomNavigationBarItem>((v) =>
                   BottomNavigationBarItem(
-                    icon: Image.asset(v.pageIconPath, height: 26, color: white800),
-                    activeIcon: Image.asset(v.pageIconPath, height: 26, color: black700),
+                    icon: Image.asset(v.pageIconPath, height: 26, color: black400),
+                    activeIcon: Image.asset(v.pageIconPath, height: 26, color: white),
                     label: v.pageName
                   )
               ).toList(),

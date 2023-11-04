@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:mentos_flutter/src/presentation/page/mentor_detail/view/mentor_detail_page.dart';
 import 'package:mentos_flutter/src/presentation/page/mentor_profile_modify/view/mentor_profile_modify_page.dart';
 import 'package:mentos_flutter/src/presentation/page/profile_modify/view/profile_modify_page.dart';
+import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
-import 'package:mentos_flutter/src/presentation/widget/button/border_line_button.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
 
 class MyPagePage extends StatelessWidget {
@@ -24,7 +24,6 @@ class _MyPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CommonAppBar(title: '마이페이지'),
-      backgroundColor: white,
       body: SafeArea(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -80,19 +79,15 @@ class _ProfileInfo extends StatelessWidget {
             const SizedBox(width: 16,),
             const Text(
               "로건",
-              style: const TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.w700,
-                  color: black1000
-              ),
+              style: primaryT3,
             )
           ],
         ),
 
         CupertinoButton(
-          color: white,
           padding: const EdgeInsets.all(0),
           disabledColor: Colors.transparent,
+          minSize: 0,
           onPressed: () {
             Navigator.push(context, ProfileModifyPage.route());
           },
@@ -102,17 +97,12 @@ class _ProfileInfo extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: white500,
+                  color: white1000,
                 )
             ),
             child: const Text(
                 '프로필 수정',
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                    color: black100,
-                    decoration: null
-                )
+                style: primaryB4
             ),
           ),
         )
@@ -130,7 +120,7 @@ class _MentorProfileInfo extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: white200,
+        color: black700,
       ),
       child: ListTileTheme(
         contentPadding: EdgeInsets.zero,
@@ -148,11 +138,7 @@ class _MentorProfileInfo extends StatelessWidget {
           ),
           title: const Text(
             '멘토 프로필',
-            style: TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 18,
-              color: black800
-            ),
+            style: primaryT3,
           ),
           children: [
             buildJob(),
@@ -185,22 +171,14 @@ class _MentorProfileInfo extends StatelessWidget {
             ),
             Text(
               "Google",
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  color: black800
-              ),
+              style: primaryB2,
             ),
           ],
         ),
         Text(' ∙ '),
         Text(
           "AI",
-          style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-              color: black800
-          ),
+          style: primaryB2,
         ),
       ],
     );
@@ -215,27 +193,19 @@ class _MentorProfileInfo extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               decoration: BoxDecoration(
-                color: white,
+                color: black500,
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: white500)
+                // border: Border.all(color: black100)
               ),
               child: Column(
                 children: [
                   Text(
                     "멘토링",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: black800
-                    ),
+                    style: primaryB2,
                   ),
                   Text(
                     "5번",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: black800
-                    ),
+                    style: primaryB2,
                   ),
                 ],
               )
@@ -246,27 +216,19 @@ class _MentorProfileInfo extends StatelessWidget {
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 decoration: BoxDecoration(
-                    color: white,
+                    color: black500,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: white500)
+                    // border: Border.all(color: white500)
                 ),
                 child: Column(
                   children: [
                     Text(
                       "리뷰",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: black800
-                      ),
+                      style: primaryB2,
                     ),
                     Text(
                       "12개",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: black800
-                      ),
+                      style: primaryB2,
                     ),
                   ],
                 )
@@ -277,27 +239,19 @@ class _MentorProfileInfo extends StatelessWidget {
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 decoration: BoxDecoration(
-                    color: white,
+                    color: black500,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: white500)
+                    // border: Border.all(color: white500)
                 ),
                 child: Column(
                   children: [
                     Text(
                       "평점",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: black800
-                      ),
+                      style: primaryB2,
                     ),
                     Text(
                       "4.5",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: black800
-                      ),
+                      style: primaryB2,
                     ),
                   ],
                 )
@@ -314,20 +268,12 @@ class _MentorProfileInfo extends StatelessWidget {
       children: [
         Text(
           '한 줄 소개',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: black800
-          ),
+          style: primaryB2,
         ),
         const SizedBox(height: 4),
         Text(
           '안녕하세요 Google 5년차 소프트웨어 엔지니어입니다. Google에 대해 궁금하신게 있으시다면 주저말고 연락주세요!',
-          style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-              color: black500
-          ),
+          style: primaryB3,
         ),
       ],
     );
@@ -350,9 +296,9 @@ class _MentorProfileInfo extends StatelessWidget {
               decoration: BoxDecoration(
                 color: white,
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: blue500,
-                  )
+                  // border: Border.all(
+                  //   color: blue500,
+                  // )
               ),
               child: const Text(
                   '상세보기',
@@ -380,9 +326,9 @@ class _MentorProfileInfo extends StatelessWidget {
               decoration: BoxDecoration(
                   color: white,
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: blue500,
-                  )
+                  // border: Border.all(
+                  //   color: blue500,
+                  // )
               ),
               child: const Text(
                   '수정하기',
@@ -411,64 +357,54 @@ class _ManagementSection extends StatelessWidget {
       children: [
         const Text(
           "관리",
-          style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.w700,
-              color: black1000
-          ),
+          style: primaryT2,
         ),
         const SizedBox(height: 8,),
         CupertinoListSection.insetGrouped(
           backgroundColor: Colors.transparent,
           margin: EdgeInsets.zero,
           topMargin: 0,
-          separatorColor: Colors.transparent,
+          separatorColor: white,
           children: [
             CupertinoListTile(
-              padding: EdgeInsets.symmetric(horizontal: 0),
+              backgroundColor: black700,
+              padding: EdgeInsets.symmetric(horizontal: 12),
               leading: Image.asset(
                 'assets/images/star_line.png',
-                width: 24,
+                width: 20,
+                color: white,
               ),
               trailing: Icon(CupertinoIcons.chevron_forward, size: 16, color: white1000,),
               title: Text(
                 "멘토 즐겨찾기",
-                style: const TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w500,
-                  color: black1000
-                ),
+                style: primaryB2,
               ),
             ),
             CupertinoListTile(
-              padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+              backgroundColor: black700,
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
               leading: Image.asset(
                 'assets/images/note_pencil_line.png',
                 width: 24,
+                color: white,
               ),
               title: Text(
                 "내가 쓴 후기",
-                style: const TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w500,
-                    color: black1000
-                ),
+                style: primaryB2,
               ),
               trailing: Icon(CupertinoIcons.chevron_forward, size: 16, color: white1000,),
             ),
             CupertinoListTile(
-                padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                backgroundColor: black700,
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
                 leading: Image.asset(
                   'assets/images/bell_line.png',
                   width: 24,
+                  color: white,
                 ),
                 title: Text(
                   "알림",
-                  style: const TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w500,
-                      color: black1000
-                  ),
+                  style: primaryB2,
                 ),
                 trailing: CupertinoSwitch(value: true, onChanged: (bool value) {  },)
             ),
@@ -489,11 +425,7 @@ class _PersonalSection extends StatelessWidget {
       children: [
         const Text(
           "정보",
-          style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.w700,
-              color: black1000
-          ),
+          style: primaryT2,
         ),
         const SizedBox(height: 8,),
         CupertinoListSection.insetGrouped(
@@ -503,63 +435,55 @@ class _PersonalSection extends StatelessWidget {
             separatorColor: Colors.transparent,
             children: [
               CupertinoListTile(
-                padding: EdgeInsets.symmetric(horizontal: 0),
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                backgroundColor: black700,
                 leading: Image.asset(
                   'assets/images/shield_check_line.png',
                   width: 24,
+                  color: white,
                 ),
                 title: Text(
                   "개인정보 처리방침",
-                  style: const TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w500,
-                      color: black1000
-                  ),
+                  style: primaryB2,
                 ),
               ),
               CupertinoListTile(
-                padding: EdgeInsets.symmetric(horizontal: 0),
+                backgroundColor: black700,
+                padding: EdgeInsets.symmetric(horizontal: 12),
                 leading: Image.asset(
                   'assets/images/shield_check_line.png',
                   width: 24,
+                  color: white,
                 ),
                 title: Text(
                   "서비스 이용약관",
-                  style: const TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w500,
-                      color: black1000
-                  ),
+                  style: primaryB2,
                 ),
               ),
               CupertinoListTile(
-                padding: EdgeInsets.symmetric(horizontal: 0),
+                backgroundColor: black700,
+                padding: EdgeInsets.symmetric(horizontal: 12),
                 leading: Image.asset(
                   'assets/images/power_off_line.png',
                   width: 24,
+                  color: white,
                 ),
                 title: Text(
                   "로그아웃",
-                  style: const TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w500,
-                      color: black1000
-                  ),
+                  style: primaryB2,
                 ),
               ),
               CupertinoListTile(
-                padding: EdgeInsets.symmetric(horizontal: 0),
+                backgroundColor: black700,
+                padding: EdgeInsets.symmetric(horizontal: 12),
                 leading: Image.asset(
                   'assets/images/trash_line.png',
                   width: 24,
+                  color: white,
                 ),
                 title: Text(
                   "회원탈퇴",
-                  style: const TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w500,
-                      color: black1000
-                  ),
+                  style: primaryB2,
                 ),
               ),
             ]

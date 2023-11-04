@@ -39,7 +39,6 @@ class ProfileModifyPage extends StatelessWidget {
           case LoadingStatus.success:
             showSimpleSnackBar(context, '수정이 완료되었습니다');
             Navigator.pop(context);
-            Navigator.pop(context);
           case LoadingStatus.failure:
             Navigator.pop(context);
           default:
@@ -58,7 +57,6 @@ class _ProfileModifyView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const RoutingAppBar(title: '프로필 수정',),
-      backgroundColor: white,
       body: SafeArea(
         child: CustomScrollView(
           physics: const RangeMaintainingScrollPhysics(),

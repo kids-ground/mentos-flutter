@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mentos_flutter/src/presentation/page/request_modify/bloc/request_modify_bloc.dart';
+import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/routing_app_bar.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
 
@@ -32,7 +33,6 @@ class _RequestModifyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: RoutingAppBar(title: '멘토링 요청 작성',),
       body: SafeArea(
         child: GestureDetector(
@@ -82,6 +82,7 @@ class _TitleFormView extends StatelessWidget {
       enableInteractiveSelection: true,
       maxLength: 30,
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      style: primaryB1,
       decoration: InputDecoration(
         hintText: '제목을 입력해주세요(30자 제한)',
         counterText: '',
@@ -97,16 +98,16 @@ class _TitleFormView extends StatelessWidget {
         contentPadding: const EdgeInsets.fromLTRB(24, 20, 24, 20),
         // 기본 색상
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: white400, width: 1),
+          borderSide: BorderSide(color: black500, width: 0.1),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: white400, width: 1),
+          borderSide: BorderSide(color: black500, width: 0.1),
         ),
         errorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: white400, width: 1),
+          borderSide: BorderSide(color: black500, width: 0.1),
         ),
         focusedErrorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: white400, width: 1),
+          borderSide: BorderSide(color: black500, width: 0.1),
         ),
       ),
       validator: (v) { return null; },
@@ -128,6 +129,7 @@ class _TagFormView extends StatelessWidget {
       enableInteractiveSelection: false,
       maxLength: 20,
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      style: primaryB1,
       decoration: InputDecoration(
         hintText: '태그 작성 최대 2개 ex) #주니어',
         counterText: '',
@@ -143,16 +145,16 @@ class _TagFormView extends StatelessWidget {
         contentPadding: const EdgeInsets.fromLTRB(24, 20, 24, 20),
         // 기본 색상
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: white400, width: 1),
+          borderSide: BorderSide(color: black500, width: 0.1),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: white400, width: 1),
+          borderSide: BorderSide(color: black500, width: 0.1),
         ),
         errorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: white400, width: 1),
+          borderSide: BorderSide(color: black500, width: 0.1),
         ),
         focusedErrorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: white400, width: 1),
+          borderSide: BorderSide(color: black500, width: 0.1),
         ),
       ),
       validator: (v) { return null; },
@@ -174,6 +176,7 @@ class _ContentFormView extends StatelessWidget {
       maxLength: 200,
       maxLines: 15,
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      style: primaryB1,
       decoration: InputDecoration(
         hintText: '''내용을 입력해주세요. 구체적일수록 좋습니다.
         
@@ -199,16 +202,16 @@ Java와 Spring로 하나의 프로젝트를 만들어 봤습니다.
         contentPadding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
         // 기본 색상
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: white400, width: 1),
+          borderSide: BorderSide(color: black500, width: 1),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: white400, width: 1),
+          borderSide: BorderSide(color: black500, width: 1),
         ),
         errorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: white400, width: 1),
+          borderSide: BorderSide(color: black500, width: 1),
         ),
         focusedErrorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: white400, width: 1),
+          borderSide: BorderSide(color: black500, width: 1),
         ),
       ),
       validator: (v) { return null; },

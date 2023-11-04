@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/home/bloc/home_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/request_modify/view/request_modify_page.dart';
 import 'package:mentos_flutter/src/presentation/page/request_post_detail/view/request_post_detail_page.dart';
+import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/line_check_button.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
@@ -42,14 +43,13 @@ class HomePage extends StatelessWidget {
       ),
       floatingActionButton: _ActionButton(),
       body: Container(
-        color: white,
         child: const Column(
           children: [
             // _CategoryListView(),
             Divider(
               height: 0.2,
               thickness: 0.2,
-              color: white800,
+              color: black300,
             ),
             _ContentListView()
           ],
@@ -78,9 +78,9 @@ class _ActionButton extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 spreadRadius: 4,
-                color: white500,
-                blurRadius: 8,
-                offset: Offset(2, 2)
+                color: black800,
+                blurRadius: 4,
+                offset: Offset(1, 1)
               )
             ]
         ),
@@ -138,6 +138,7 @@ class _ContentListView extends StatelessWidget {
         if (Platform.isAndroid) {
           return Expanded(
             child: RefreshIndicator(
+              color: white,
               onRefresh: () async { },
               child: ListView.builder(
               itemCount: state.list.length,
@@ -148,7 +149,6 @@ class _ContentListView extends StatelessWidget {
         } else {
           return Expanded(
             child: Container(
-              color: white100,
               child: CustomScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 slivers: [
@@ -191,26 +191,26 @@ class _ContentListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
-      padding: const EdgeInsets.all(0),
-      disabledColor: Colors.transparent,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      borderRadius: BorderRadius.circular(16),
       onPressed: () {
         Navigator.push(context, RequestPostDetailPage.route(1));
       },
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(0),
-          color: white,
+          borderRadius: BorderRadius.circular(16),
+          color: black800,
           boxShadow: [
-            BoxShadow(
-              color: white400.withOpacity(0.7),
-              spreadRadius: 6,
-              blurRadius: 6.0,
-              offset: const Offset(4, 4),
-            ),
+            // BoxShadow(
+            //   color: white400.withOpacity(0.7),
+            //   spreadRadius: 6,
+            //   blurRadius: 6.0,
+            //   offset: const Offset(4, 4),
+            // ),
           ],
         ),
 
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -242,19 +242,12 @@ class _ContentListItem extends StatelessWidget {
                     Text(
                       data.member.nickname,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: black1000
-                      ),
+                      style: primaryB4
                     ),
+                    SizedBox(height: 2,),
                     Text(
                       '32분 전',
-                      style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                          color: white1000
-                      ),
+                      style: primaryC2,
                     ),
                   ],
                 ),
@@ -276,23 +269,14 @@ class _ContentListItem extends StatelessWidget {
                           data.title,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                            color: black1000
-                          ),
+                          style: primaryT2,
                         ),
                         const SizedBox(height: 4,),
                         Text(
                           data.description,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: black1000,
-                              height: 1.4
-                          ),
+                          style: customColorTextStyle(primaryB2, null, height: 1.4),
                         ),
                         const SizedBox(height: 12,),
                         Row(
@@ -307,11 +291,7 @@ class _ContentListItem extends StatelessWidget {
                                     ),
                                     child: Text(
                                       '#${v}',
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          color: red1000
-                                      ),
+                                      style: customColorTextStyle(primaryB4, red1000),
                                     ),
                                   ),
                                   const SizedBox(width: 6,)

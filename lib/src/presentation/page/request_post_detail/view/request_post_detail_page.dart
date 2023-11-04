@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/request_post_detail/bloc/request_post_detail_bloc.dart';
+import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/routing_app_bar.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
 
@@ -31,7 +32,7 @@ class _RequestPostDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: RoutingAppBar(title: '로건님의 요청글',),
-      backgroundColor: white,
+      backgroundColor: backgroundColor,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -54,7 +55,7 @@ class _ContentListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
         physics: const AlwaysScrollableScrollPhysics(),
         scrollDirection: Axis.vertical,
         itemCount: 6,
@@ -70,22 +71,28 @@ class _PostItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+    return Container(
+      color: black800,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          // _buildProfileAndDateView(),
-          // const SizedBox(height: 40,),
-          _buildTagView(),
-          const SizedBox(height: 4,),
-          _buildContentView(),
-          const SizedBox(height: 32,),
-          _buildDateView(),
-          const SizedBox(height: 16,),
-          _buildMoreView(),
-          const SizedBox(height: 24,),
-
+          Padding(
+            padding: EdgeInsets.fromLTRB(24, 24, 24, 24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                // _buildProfileAndDateView(),
+                // const SizedBox(height: 40,),
+                _buildTagView(),
+                const SizedBox(height: 8,),
+                _buildContentView(),
+                const SizedBox(height: 56,),
+                _buildDateView(),
+                const SizedBox(height: 16,),
+                _buildMoreView(),
+              ],
+            ),
+          ),
+          Container(height: 16, color: backgroundColor,),
         ],
       ),
     );
@@ -121,11 +128,7 @@ class _PostItem extends StatelessWidget {
             Text(
               '로건',
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: black1000
-              ),
+              style: primaryB4,
             ),
             Text(
               '32분 전',
@@ -154,11 +157,7 @@ class _PostItem extends StatelessWidget {
                 ),
                 child: Text(
                   '#${v}',
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: red1000
-                  ),
+                  style: customColorTextStyle(primaryB4, red1000),
                 ),
               ),
               const SizedBox(width: 6,)
@@ -183,22 +182,13 @@ class _PostItem extends StatelessWidget {
                 Text(
                   '흔한 신입개발자의 고민을 풀어주실 멘토님을 구합니다!',
                   overflow: TextOverflow.visible,
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                      color: black1000
-                  ),
+                  style: primaryT1,
                 ),
                 const SizedBox(height: 24,),
                 Text(
                   '흔한 신입개발자입니다. 앞으로 어떤 공부를 하면 좋을지 어떤 방향으로 나아가는게 좋을지 너무 많은 것이 궁금합니다. 제 커리어 방향성을 함께 논의해주실 멘토님 계실까요?',
                   overflow: TextOverflow.visible,
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: black500,
-                      height: 1.5
-                  ),
+                  style: customColorTextStyle(primaryB1, null, height: 1.5),
                 ),
               ],
             ),
@@ -302,20 +292,12 @@ class _CommentItem extends StatelessWidget {
             Text(
               '록록',
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w500,
-                  color: black1000
-              ),
+              style: primaryB1,
             ),
             const SizedBox(height: 0,),
             Text(
               '네이버 • 백엔드 개발자',
-              style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: black300
-              ),
+              style: primaryB4,
             ),
           ],
         ),
@@ -330,11 +312,7 @@ class _CommentItem extends StatelessWidget {
         Expanded(
           child: Text(
             '훌륭한 마인드를 가지고 계시군요. 제가 아직 조언을 해드릴 짬은 아니라 응원 메시지만 남기고 갑니다. 화이팅!!',
-            style: TextStyle(
-                color: black500,
-                fontWeight: FontWeight.w500,
-                fontSize: 17
-            ),
+            style: customColorTextStyle(primaryB1, white700),
           ),
         )
       ],
@@ -394,125 +372,121 @@ class _CommentFormView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<RequestPostDetailBloc, RequestPostDetailState>(
       builder: (context, state) {
-        return Column(
-          children: [
-            Divider(thickness: 0.5, color: white500, height: 0.5,),
+        return Container(
+          child: Column(
+            children: [
+              const Divider(thickness: 0.5, color: black700, height: 0.5,),
 
-
-            if (state.replyCommentId != 0)
-              Container(
-                margin: EdgeInsets.fromLTRB(24, 8, 0, 0),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4)
-                ),
-                child: CupertinoButton(
-                  onPressed: () {
-                    context.read<RequestPostDetailBloc>().add(const RequestPostDetailCommentReplyCancel());
-                  },
-                  padding: EdgeInsets.symmetric(vertical: 4),
-                  minSize: 0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CachedNetworkImage(
-                        width: replyImageWidth,
-                        height: replyImageHeight,
-                        imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            color: blue300,
-                            borderRadius: BorderRadius.all(Radius.circular(replyImageWidth/2)),
-                            image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                                scale: 0.5
+              if (state.replyCommentId != 0)
+                Container(
+                  margin: EdgeInsets.fromLTRB(24, 8, 0, 0),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4)
+                  ),
+                  child: CupertinoButton(
+                    onPressed: () {
+                      context.read<RequestPostDetailBloc>().add(const RequestPostDetailCommentReplyCancel());
+                    },
+                    padding: EdgeInsets.symmetric(vertical: 4),
+                    minSize: 0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        CachedNetworkImage(
+                          width: replyImageWidth,
+                          height: replyImageHeight,
+                          imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
+                          imageBuilder: (context, imageProvider) => Container(
+                            decoration: BoxDecoration(
+                              color: blue300,
+                              borderRadius: BorderRadius.all(Radius.circular(replyImageWidth/2)),
+                              image: DecorationImage(
+                                  image: imageProvider,
+                                  fit: BoxFit.cover,
+                                  scale: 0.5
+                              ),
                             ),
                           ),
+                          placeholder: (context, url) => Container(width: replyImageWidth, height: replyImageHeight,),
                         ),
-                        placeholder: (context, url) => Container(width: replyImageWidth, height: replyImageHeight,),
-                      ),
-                      const SizedBox(width: 6,),
-                      Text(
-                        'rokwon',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: black700,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16
+                        const SizedBox(width: 6,),
+                        Text(
+                          'rokwon',
+                          textAlign: TextAlign.center,
+                          style: customColorTextStyle(primaryB2, white500),
                         ),
-                      ),
-                      const SizedBox(width: 6,),
-                      Text(
-                        '님에게 답장 중',
-                        style: TextStyle(
-                            color: black700,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16
+                        const SizedBox(width: 6,),
+                        Text(
+                          '님에게 답장 중',
+                          style: customColorTextStyle(primaryB2, white500),
                         ),
-                      ),
 
-                      const SizedBox(width: 6,),
-                      Icon(Icons.cancel, size: 16, color: white900,)
-                    ],
+                        const SizedBox(width: 6,),
+                        Icon(Icons.cancel, size: 16, color: white900,)
+                      ],
+                    ),
                   ),
                 ),
-              ),
 
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: white200
+                      ),
+                      margin: const EdgeInsets.fromLTRB(24, 12, 0, 8),
+                      alignment: Alignment.centerLeft,
+                      child: TextFormField(
+                        onChanged: (text) {
+                          context.read<RequestPostDetailBloc>().add(RequestPostDetailCommentWrite(comment: text));
+                        },
+                        maxLength: 100,
+                        minLines: 1,
+                        maxLines: 3,
+                        style: customColorTextStyle(primaryB2, black800),
+                        cursorColor: black800,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                          counterText: '',
+                          contentPadding: EdgeInsets.only(
+                              left: 16, bottom: 10, top: 10, right: 16),
+                          hintText: '댓글을 작성해주세요',
+                          hintStyle: TextStyle(color: white1000),
+
+                        ),
+                      ),
+                    ),
+                  ),
+                  CupertinoButton(
+                    onPressed: state.canSend ? () {
+
+                    } : null,
+                    padding: EdgeInsets.zero,
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(0,6,0,8),
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.fromLTRB(12, 12, 24, 12),
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        color: white200
-                    ),
-                    margin: const EdgeInsets.fromLTRB(24, 6, 0, 8),
-                    alignment: Alignment.centerLeft,
-                    child: TextFormField(
-                      onChanged: (text) {
-                        context.read<RequestPostDetailBloc>().add(RequestPostDetailCommentWrite(comment: text));
-                      },
-                      maxLength: 100,
-                      minLines: 1,
-                      maxLines: 3,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none,
-                        counterText: '',
-                        contentPadding: EdgeInsets.only(
-                            left: 16, bottom: 10, top: 10, right: 16),
-                        hintText: '댓글을 작성해주세요',
-                        hintStyle: TextStyle(color: white1000)
+                      ),
+                      child: Icon(
+                        Icons.send_rounded,
+                        color: state.canSend ? blue700  : black300,
                       ),
                     ),
                   ),
-                ),
-                CupertinoButton(
-                  onPressed: state.canSend ? () {
-
-                  } : null,
-                  padding: EdgeInsets.zero,
-                  child: Container(
-                    margin: const EdgeInsets.fromLTRB(0,6,0,8),
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.fromLTRB(12, 12, 24, 12),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Icon(
-                      Icons.send_rounded,
-                      color: state.canSend ? mainColor : disableBackgroundColor,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         );
       },
     );
