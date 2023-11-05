@@ -14,15 +14,15 @@ enum HomeCategoryType {
 class HomeState extends Equatable {
   const HomeState({
     this.selectedHomeCategroyId = 0,
-    this.list = const <MockMentoringData>[]
+    this.list = const <PostResponse>[]
   });
 
   final int selectedHomeCategroyId;
-  final List<MockMentoringData> list;
+  final List<PostResponse> list;
 
   HomeState copyWith({
     int? selectedHomeCategroyId,
-    List<MockMentoringData>? list
+    List<PostResponse>? list
   }) => HomeState(
     selectedHomeCategroyId: selectedHomeCategroyId ?? this.selectedHomeCategroyId,
     list: list ?? this.list

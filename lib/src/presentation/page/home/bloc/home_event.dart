@@ -7,6 +7,10 @@ abstract class HomeEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class HomeLoadPostListEvent extends HomeEvent {
+  const HomeLoadPostListEvent();
+}
+
 class HomeSelectCategory extends HomeEvent {
   const HomeSelectCategory({
     required this.selectedHomeCategroyId
