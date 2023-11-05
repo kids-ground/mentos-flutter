@@ -145,8 +145,8 @@ class _ImageSelectView extends StatelessWidget {
   Widget _showImageConditional(BuildContext context, ProfileModifyState state) {
     if (state.newProfileImageFile != null) {
       return _buildLocalImage(state.newProfileImageFile!);
-    } else if (state.memberResponse?.profile_thumbnail_image != null) {
-      return _buildNetworkImage(context, state.memberResponse!.profile_thumbnail_image);
+    } else if (state.memberResponse?.thumbnailUrl != null) {
+      return _buildNetworkImage(context, state.memberResponse!.thumbnailUrl!);
     } else {
       return _buildDefaultImage();
     }

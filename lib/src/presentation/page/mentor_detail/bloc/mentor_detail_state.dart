@@ -6,11 +6,11 @@ class MentorDetailState extends Equatable {
     this.mentorProfileResponse
   });
 
-  final MentorProfileResponse? mentorProfileResponse;
+  final MentorResponse? mentorProfileResponse;
   final bool isBookmarked;
 
   MentorDetailState copyWith({
-    MentorProfileResponse? mentorProfileResponse,
+    MentorResponse? mentorProfileResponse,
     bool? isBookmarked
   }) => MentorDetailState(
     mentorProfileResponse: mentorProfileResponse ?? this.mentorProfileResponse,

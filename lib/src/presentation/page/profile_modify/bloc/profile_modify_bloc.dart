@@ -22,13 +22,13 @@ class ProfileModifyBloc extends Bloc<ProfileModifyEvent, ProfileModifyState> {
     Emitter<ProfileModifyState> emit,
   ) async {
     // localDB에서 Member 가져오기
-    const memberResponse = MemberResponse(
-      profile_image: 'https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png',
-      profile_thumbnail_image: 'https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png',
-      nickname: '로건'
-    );
-
-    emit(state.copyWith(memberResponse: memberResponse));
+    // const memberResponse = MemberResponse(
+    //   profile_image: 'https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png',
+    //   profile_thumbnail_image: 'https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png',
+    //   nickname: '로건'
+    // );
+    //
+    // emit(state.copyWith(memberResponse: memberResponse));
   }
 
   Future<void> _selectedImage(

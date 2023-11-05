@@ -1,12 +1,20 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class MemberResponse {
-  const MemberResponse({
-    required this.profile_image,
-    required this.profile_thumbnail_image,
-    required this.nickname
-  });
+part 'member_response.g.dart';
+part 'member_response.freezed.dart';
 
-  final String profile_image;
-  final String profile_thumbnail_image;
-  final String nickname;
+@freezed
+class MemberResponse with _$MemberResponse {
+  @JsonSerializable()
+  factory MemberResponse({
+    required int memberId,
+    required String nickname,
+    String? profileUrl,
+    String? thumbnailUrl,
+    bool? alarmOn,
+    String? currentCorporationName,
+    String? currentJobDetail,
+  }) = _MemberResponse;
+
+  factory MemberResponse.fromJson(Map<String, dynamic> json) => _$MemberResponseFromJson(json);
 }
