@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentos_flutter/src/data/dto/response/post/post_response.dart';
 import 'package:mentos_flutter/src/presentation/page/home/bloc/home_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/request_modify/view/request_modify_page.dart';
 import 'package:mentos_flutter/src/presentation/page/request_post_detail/view/request_post_detail_page.dart';
@@ -12,6 +13,7 @@ import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/line_check_button.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:mentos_flutter/src/util/constant/date.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -137,7 +139,10 @@ class _ContentListView extends StatelessWidget {
           return Expanded(
             child: RefreshIndicator(
               color: white,
-              onRefresh: () async { },
+              onRefresh: () {
+                context.read<HomeBloc>().add(const HomeLoadPostListEvent());
+                return Future.delayed(const Duration(milliseconds: 500));
+              },
               child: ListView.builder(
               itemCount: state.list.length,
               itemBuilder: (context, index) => _ContentListItem(data: state.list[index],)
@@ -152,7 +157,8 @@ class _ContentListView extends StatelessWidget {
                 slivers: [
                   CupertinoSliverRefreshControl(
                     onRefresh: () {
-                      return Future.delayed(const Duration(milliseconds: 1000));
+                      context.read<HomeBloc>().add(const HomeLoadPostListEvent());
+                      return Future.delayed(const Duration(milliseconds: 500));
                     },
                   ),
                   const SliverPadding(padding: EdgeInsets.fromLTRB(0, 0, 0, 16),),
@@ -181,7 +187,7 @@ class _ContentListItem extends StatelessWidget {
     required this.data
   }) : super(key: key);
 
-  final MockMentoringData data;
+  final PostResponse data;
 
   final double width = 30;
   final double height = 30;
@@ -192,165 +198,142 @@ class _ContentListItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       borderRadius: BorderRadius.circular(16),
       onPressed: () {
-        Navigator.push(context, RequestPostDetailPage.route(1));
+        Navigator.push(context, RequestPostDetailPage.route(data.postId));
       },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           color: black800,
-          boxShadow: [
-            // BoxShadow(
-            //   color: white400.withOpacity(0.7),
-            //   spreadRadius: 6,
-            //   blurRadius: 6.0,
-            //   offset: const Offset(4, 4),
-            // ),
-          ],
         ),
-
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CachedNetworkImage(
-                  width: width,
-                  height: height,
-                  imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
-                  imageBuilder: (context, imageProvider) => Container(
-                    decoration: BoxDecoration(
-                      color: blue300,
-                      borderRadius: BorderRadius.all(Radius.circular(width/2)),
-                      image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                          scale: 0.5
-                      ),
-                    ),
-                  ),
-                  placeholder: (context, url) => Container(width: width, height: height,),
-                ),
-                const SizedBox(width: 8,),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      data.member.nickname,
-                      overflow: TextOverflow.ellipsis,
-                      style: primaryB4
-                    ),
-                    SizedBox(height: 2,),
-                    Text(
-                      '32분 전',
-                      style: primaryC2,
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            buildProfileView(),
             const SizedBox(height: 16,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          data.title,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: primaryT2,
-                        ),
-                        const SizedBox(height: 4,),
-                        Text(
-                          data.description,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: customColorTextStyle(primaryB2, null, height: 1.4),
-                        ),
-                        const SizedBox(height: 12,),
-                        Row(
-                          children: data.tagList.map((v) =>
-                              Row(
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                    decoration: BoxDecoration(
-                                        color: red100,
-                                        borderRadius: BorderRadius.circular(16)
-                                    ),
-                                    child: Text(
-                                      '#${v}',
-                                      style: customColorTextStyle(primaryB4, red1000),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 6,)
-                                ],
-                              )
-                          ).toList(),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-
-                if (data.thumbnail != null)
-                  CachedNetworkImage(
-                    imageUrl: data.thumbnail!,
-                    width: 80,
-                    height: 80,
-                    fadeInDuration: const Duration(milliseconds: 200),
-                    imageBuilder: (context, imageProvider) => Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          image: DecorationImage(
-                              image: imageProvider, fit: BoxFit.cover)),
-                    ),
-                    placeholder: (context, url) => Container(
-                      width: 80,
-                      height: 80,
-                    ),
-                  ),
-              ],
-            ),
+            buildContentView(),
             const SizedBox(height: 16,),
-            Row(
-              children: [
-                Image.asset('assets/images/eye.png', width: 18, color: white800,),
-                const SizedBox(width: 6,),
-                Text(
-                  '${data.hit}',
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: white1000
-                  ),
-                ),
-                const SizedBox(width: 24,),
-                Image.asset('assets/images/chat_dots.png', width: 18, color: white800,),
-                const SizedBox(width: 6,),
-                Text(
-                  '${data.chatCount}',
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: white1000
-                  ),
-                ),
-              ],
-            ),
+            buildFooter()
           ],
         )
       ),
+    );
+  }
+
+  Widget buildProfileView() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CachedNetworkImage(
+          width: width,
+          height: height,
+          imageUrl: data.writer!.thumbnailUrl!,
+          imageBuilder: (context, imageProvider) => Container(
+            decoration: BoxDecoration(
+              color: blue300,
+              borderRadius: BorderRadius.all(Radius.circular(width/2)),
+              image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.cover,
+                  scale: 0.5
+              ),
+            ),
+          ),
+          placeholder: (context, url) => Container(width: width, height: height,),
+        ),
+        const SizedBox(width: 8,),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(data.writer!.nickname, style: primaryB4),
+            const SizedBox(height: 2,),
+            Text(timeAgo(data.createdAt), style: primaryC2,),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget buildContentView() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  data.title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: primaryT2,
+                ),
+                const SizedBox(height: 8,),
+                Text(
+                  data.description,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: customColorTextStyle(primaryB2, null, height: 1.5),
+                ),
+                const SizedBox(height: 12,),
+                Row(
+                  children: data.tags.map((v) =>
+                      Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                                color: red100,
+                                borderRadius: BorderRadius.circular(16)
+                            ),
+                            child: Text(
+                              '#${v}',
+                              style: customColorTextStyle(primaryB4, red1000),
+                            ),
+                          ),
+                          const SizedBox(width: 6,)
+                        ],
+                      )
+                  ).toList(),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildFooter() {
+    return Row(
+      children: [
+        Image.asset('assets/images/eye.png', width: 18, color: white800,),
+        const SizedBox(width: 6,),
+        Text(
+          '${data.hit}',
+          style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: white1000
+          ),
+        ),
+        const SizedBox(width: 24,),
+        Image.asset('assets/images/chat_dots.png', width: 18, color: white800,),
+        const SizedBox(width: 6,),
+        Text(
+          '${data.commentCount}',
+          style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: white1000
+          ),
+        ),
+      ],
     );
   }
 }

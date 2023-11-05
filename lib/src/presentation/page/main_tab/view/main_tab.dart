@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentos_flutter/src/config/config.dart';
+import 'package:mentos_flutter/src/data/repository/network/network.dart';
 import 'package:mentos_flutter/src/presentation/page/chat_list/view/chat_list.dart';
 import 'package:mentos_flutter/src/presentation/page/home/bloc/home_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/home/view/home.dart';
@@ -23,8 +25,12 @@ class MainTabPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => HomeBloc()..add(const HomeSelectCategory(selectedHomeCategroyId: 0)))
-        // MainTab에 포함되는 Page
+        BlocProvider(
+            create: (context) => HomeBloc(
+              postRepository: getIt.get<PostRepository>()
+            )
+              ..add(const HomeLoadPostListEvent())
+        )
       ],
       child: _MainTabView()
     );
@@ -49,7 +55,7 @@ class _MainTabView extends StatelessWidget {
           child: Scaffold(
             body: pageInfoList.elementAt(state.selectedIndex).page,
             bottomNavigationBar: BottomNavigationBar(
-              backgroundColor: backgroundColor.withOpacity(0.1),
+              backgroundColor: backgroundColor.withOpacity(0.5),
               type: BottomNavigationBarType.fixed,
               elevation: 0.1,
               showSelectedLabels: true,
