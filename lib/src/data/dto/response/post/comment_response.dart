@@ -12,7 +12,7 @@ class CommentResponse with _$CommentResponse {
     required String content,
     DateTime? createdAt,
     required MemberResponse writer,
-    MemberResponse? taggedMemer
+    MemberResponse? taggedMember
   }) = _CommentResponse;
 
   factory CommentResponse.fromJson(Map<String, dynamic> json) => _$CommentResponseFromJson(json);

@@ -21,7 +21,7 @@ abstract class MentorRepository {
   Future<SimpleResponse> modifyMentorProfile(@Body() MentorModifyRequest request);
 
   @GET("/mentors/{mentorId}")
-  Future<MentorResponse> getMentorProfile(@Path() String postId);
+  Future<MentorResponse> getMentorProfile(@Path() int mentorId);
 
   @GET("/mentors")
   Future<MentorListResponse> getMentorList(@Queries() MentorListRequest queries);

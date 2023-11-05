@@ -21,20 +21,20 @@ abstract class PostRepository {
   Future<PostWriteResponse> writePost(@Body() PostWriteRequest request);
 
   @PATCH("/posts/{postId}")
-  Future<SimpleResponse> modifyPost(@Path() String postId, @Body() PostModifyRequest request);
+  Future<SimpleResponse> modifyPost(@Path() int postId, @Body() PostModifyRequest request);
 
   @DELETE("/posts/{postId}")
-  Future<SimpleResponse> deletePost(@Path() String postId);
+  Future<SimpleResponse> deletePost(@Path() int postId);
 
   @GET("/posts/{postId}")
-  Future<PostResponse> getPost(@Path() String postId);
+  Future<PostResponse> getPost(@Path() int postId);
 
   @GET("/posts")
   Future<PostListResponse> getPostList(@Queries() PostListRequest queries);
 
   @POST("/posts/{postId}/comments")
-  Future<CommentWriteResponse> writeComment(@Path() String postId, @Body() CommentWriteRequest request);
+  Future<CommentWriteResponse> writeComment(@Path() int postId, @Body() CommentWriteRequest request);
 
   @GET("/posts/{postId}/comments")
-  Future<CommentListResponse> getCommentList(@Path() String postId);
+  Future<CommentListResponse> getCommentList(@Path() int postId);
 }
