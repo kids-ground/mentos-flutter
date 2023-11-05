@@ -49,6 +49,7 @@ dependencies:
   flutter_dotenv: ^5.1.0 # env
   permission_handler: ^11.0.1 # 권한 요청 관리
   app_settings: ^5.1.1 # 앱 셋팅으로 바로가기
+  timeago: ^3.6.0 # ~ 분 전 계산
 
   # Firebase
   firebase_core: ^2.20.0

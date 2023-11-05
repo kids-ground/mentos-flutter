@@ -2,10 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentos_flutter/src/config/config.dart';
+import 'package:mentos_flutter/src/data/dto/response/post/comment_response.dart';
+import 'package:mentos_flutter/src/data/dto/response/post/post_response.dart';
+import 'package:mentos_flutter/src/data/repository/network/network.dart';
 import 'package:mentos_flutter/src/presentation/page/request_post_detail/bloc/request_post_detail_bloc.dart';
 import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/routing_app_bar.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
+import 'package:mentos_flutter/src/util/constant/date.dart';
 
 class RequestPostDetailPage extends StatelessWidget {
   const RequestPostDetailPage({Key? key}) : super(key: key);
@@ -13,7 +18,12 @@ class RequestPostDetailPage extends StatelessWidget {
   static Route<void> route(int postId) {
     return MaterialPageRoute(
       builder: (context) => BlocProvider(
-        create: (context) => RequestPostDetailBloc(),
+        create: (context) => RequestPostDetailBloc(
+          postRepository: getIt.get<PostRepository>()
+        )
+          ..add(RequestPostDetailLoadPost(postId: postId))
+          ..add(RequestPostDetailLoadCommentList(postId: postId))
+        ,
         child: const RequestPostDetailPage(),
       ),
     );
@@ -30,21 +40,25 @@ class _RequestPostDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: RoutingAppBar(title: '로건님의 요청글',),
-      backgroundColor: backgroundColor,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          onVerticalDragStart: (_) => FocusScope.of(context).unfocus(),
-          child: Column(
-            children: [
-              Expanded(child: _ContentListView()),
-              _CommentFormView()
-            ],
+    return BlocBuilder<RequestPostDetailBloc, RequestPostDetailState>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar: RoutingAppBar(title: '${state.post?.writer?.nickname}님의 요청글',),
+          backgroundColor: backgroundColor,
+          body: SafeArea(
+            child: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              onVerticalDragStart: (_) => FocusScope.of(context).unfocus(),
+              child: const Column(
+                children: [
+                  Expanded(child: _ContentListView()),
+                  _CommentFormView()
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
@@ -54,20 +68,30 @@ class _ContentListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return BlocBuilder<RequestPostDetailBloc, RequestPostDetailState>(
+      buildWhen: (pre, cur) => pre.post != cur.post || pre.commentList != cur.commentList,
+      builder: (context, state) => ListView.builder(
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
         physics: const AlwaysScrollableScrollPhysics(),
         scrollDirection: Axis.vertical,
-        itemCount: 6,
+        itemCount: state.commentList.length + 1,
         itemBuilder: (context, index) =>
-            index == 0 ? _PostItem() : _CommentItem()
+            index == 0 ?
+              (state.post != null ? _PostItem(post: state.post!,) : Container()) :
+            _CommentItem(comment: state.commentList[index - 1],)
+        )
     );
   }
 }
 
 
 class _PostItem extends StatelessWidget {
-  const _PostItem({Key? key}) : super(key: key);
+  const _PostItem({
+    Key? key,
+    required this.post
+  }) : super(key: key);
+
+  final PostResponse post;
 
   @override
   Widget build(BuildContext context) {
@@ -80,12 +104,10 @@ class _PostItem extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                // _buildProfileAndDateView(),
-                // const SizedBox(height: 40,),
                 _buildTagView(),
                 const SizedBox(height: 8,),
                 _buildContentView(),
-                const SizedBox(height: 56,),
+                const SizedBox(height: 48,),
                 _buildDateView(),
                 const SizedBox(height: 16,),
                 _buildMoreView(),
@@ -98,55 +120,9 @@ class _PostItem extends StatelessWidget {
     );
   }
 
-  Widget _buildProfileAndDateView() {
-    const double width = 40;
-    const double height = 40;
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        CachedNetworkImage(
-          width: width,
-          height: height,
-          imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
-          imageBuilder: (context, imageProvider) => Container(
-            decoration: BoxDecoration(
-              color: blue300,
-              borderRadius: BorderRadius.all(Radius.circular(width/2)),
-              image: DecorationImage(
-                  image: imageProvider,
-                  fit: BoxFit.cover,
-                  scale: 0.5
-              ),
-            ),
-          ),
-          placeholder: (context, url) => Container(width: width, height: height,),
-        ),
-        const SizedBox(width: 8,),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '로건',
-              overflow: TextOverflow.ellipsis,
-              style: primaryB4,
-            ),
-            Text(
-              '32분 전',
-              style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: white1000
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
   Widget _buildTagView() {
     return Row(
-      children: ['신입', '백엔드'].map((v) =>
+      children: post.tags.map((v) =>
           Row(
             children: [
               Container(
@@ -180,15 +156,15 @@ class _PostItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '흔한 신입개발자의 고민을 풀어주실 멘토님을 구합니다!',
+                  post.title,
                   overflow: TextOverflow.visible,
                   style: primaryT1,
                 ),
                 const SizedBox(height: 24,),
                 Text(
-                  '흔한 신입개발자입니다. 앞으로 어떤 공부를 하면 좋을지 어떤 방향으로 나아가는게 좋을지 너무 많은 것이 궁금합니다. 제 커리어 방향성을 함께 논의해주실 멘토님 계실까요?',
+                  post.description,
                   overflow: TextOverflow.visible,
-                  style: customColorTextStyle(primaryB1, null, height: 1.5),
+                  style: customColorTextStyle(primaryB1, null, height: 1.7),
                 ),
               ],
             ),
@@ -202,12 +178,8 @@ class _PostItem extends StatelessWidget {
     return Container(
       alignment: Alignment.centerLeft,
       child: Text(
-        '32분 전',
-        style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-            color: white1000
-        ),
+        timeAgo(post.createdAt),
+        style: customColorTextStyle(primaryB4, white1000),
       ),
     );
   }
@@ -217,33 +189,23 @@ class _PostItem extends StatelessWidget {
       children: [
         Image.asset('assets/images/eye.png', width: 20, color: white800,),
         const SizedBox(width: 6,),
-        Text(
-          '17',
-          style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              color: white1000
-          ),
-        ),
+        Text('${post.hit}', style: customColorTextStyle(primaryB2, white1000),),
         const SizedBox(width: 32,),
         Image.asset('assets/images/chat_dots.png', width: 20, color: white800,),
         const SizedBox(width: 6,),
-        Text(
-          '2',
-          style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              color: white1000
-          ),
-        ),
+        Text('${post.commentCount}', style: customColorTextStyle(primaryB2, white1000),),
       ],
     );
   }
 }
 
 class _CommentItem extends StatelessWidget {
-  const _CommentItem({Key? key}) : super(key: key);
+  const _CommentItem({
+    Key? key,
+    required this.comment
+  }) : super(key: key);
 
+  final CommentResponse comment;
   final double imageWidth = 40;
   final double imageHeight = 40;
   final double imageInterval = 12;
@@ -271,7 +233,7 @@ class _CommentItem extends StatelessWidget {
         CachedNetworkImage(
           width: imageWidth,
           height: imageHeight,
-          imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
+          imageUrl: comment.writer.thumbnailUrl!,
           imageBuilder: (context, imageProvider) => Container(
             decoration: BoxDecoration(
               color: blue300,
@@ -289,15 +251,11 @@ class _CommentItem extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(comment.writer.nickname, style: primaryB1,),
+            const SizedBox(height: 2,),
             Text(
-              '록록',
-              overflow: TextOverflow.ellipsis,
-              style: primaryB1,
-            ),
-            const SizedBox(height: 0,),
-            Text(
-              '네이버 • 백엔드 개발자',
-              style: primaryB4,
+              '${comment.writer.currentCorporationName} • ${comment.writer.currentJobDetail}',
+              style: customColorTextStyle(primaryB4, white1000),
             ),
           ],
         ),
@@ -310,10 +268,21 @@ class _CommentItem extends StatelessWidget {
       children: [
         SizedBox(width: imageWidth + imageInterval,),
         Expanded(
-          child: Text(
-            '훌륭한 마인드를 가지고 계시군요. 제가 아직 조언을 해드릴 짬은 아니라 응원 메시지만 남기고 갑니다. 화이팅!!',
-            style: customColorTextStyle(primaryB1, white700),
-          ),
+          child: Text.rich(
+            TextSpan(
+              children: [
+                if (comment.taggedMember != null)
+                  TextSpan(
+                    text: '@${comment.taggedMember!.nickname} ',
+                    style: customColorTextStyle(primaryB1, blue700),
+                  ),
+                TextSpan(
+                  text: comment.content,
+                  style: customColorTextStyle(primaryB1, white300),
+                ),
+              ]
+            )
+          )
         )
       ],
     );
@@ -327,36 +296,14 @@ class _CommentItem extends StatelessWidget {
           onPressed: () {
             context.read<RequestPostDetailBloc>().add(RequestPostDetailCommentReply(commentId: 1));
           },
-          padding: EdgeInsets.fromLTRB(0, 2, 0, 0),
+          padding: EdgeInsets.zero,
           minSize: 0,
-          child: Row(
-            children: [
-              Text(
-                  '답글쓰기',
-                  style: TextStyle(
-                      color: white1000,
-                      fontSize: 14
-                  )
-              )
-            ],
-          ),
+          child: Text('답글쓰기', style: customColorTextStyle(primaryB4, black100))
         ),
         const SizedBox(width: 6,),
-        Text('•', style: TextStyle(
-            color: white300,
-            fontSize: 14
-        )),
+        Text('•',style: customColorTextStyle(primaryB4, black100)),
         const SizedBox(width: 6,),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-          child: Text(
-              '21분 전',
-              style: TextStyle(
-                  color: white1000,
-                  fontSize: 14
-              )
-          ),
-        ),
+        Text(timeAgo(comment.createdAt), style: customColorTextStyle(primaryB4, black100)),
       ],
     );
   }
@@ -447,12 +394,20 @@ class _CommentFormView extends StatelessWidget {
                         maxLength: 100,
                         minLines: 1,
                         maxLines: 3,
-                        style: customColorTextStyle(primaryB2, black800),
-                        cursorColor: black800,
-                        decoration: const InputDecoration(
+                        style: primaryB2,
+                        cursorColor: white1000,
+                        decoration: InputDecoration(
+                          fillColor: black500,
+                          filled: true,
                           border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(width: 0, color: Colors.transparent), //<-- SEE HERE
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(width: 0, color: Colors.transparent), //<-- SEE HERE
+                            borderRadius: BorderRadius.circular(4),
+                          ),
                           errorBorder: InputBorder.none,
                           disabledBorder: InputBorder.none,
                           counterText: '',
@@ -460,7 +415,6 @@ class _CommentFormView extends StatelessWidget {
                               left: 16, bottom: 10, top: 10, right: 16),
                           hintText: '댓글을 작성해주세요',
                           hintStyle: TextStyle(color: white1000),
-
                         ),
                       ),
                     ),
@@ -479,7 +433,7 @@ class _CommentFormView extends StatelessWidget {
                       ),
                       child: Icon(
                         Icons.send_rounded,
-                        color: state.canSend ? blue700  : black300,
+                        color: state.canSend ? blue700  : black700,
                       ),
                     ),
                   ),

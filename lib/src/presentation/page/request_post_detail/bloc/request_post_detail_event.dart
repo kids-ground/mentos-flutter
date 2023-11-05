@@ -7,6 +7,22 @@ abstract class RequestPostDetailEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class RequestPostDetailLoadPost extends RequestPostDetailEvent {
+  const RequestPostDetailLoadPost({
+    required this.postId
+  });
+
+  final int postId;
+}
+
+class RequestPostDetailLoadCommentList extends RequestPostDetailEvent {
+  const RequestPostDetailLoadCommentList({
+    this.postId
+  });
+
+  final int? postId;
+}
+
 class RequestPostDetailCommentWrite extends RequestPostDetailEvent {
   const RequestPostDetailCommentWrite({
     required this.comment
