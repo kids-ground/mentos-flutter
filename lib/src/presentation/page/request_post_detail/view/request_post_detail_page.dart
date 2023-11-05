@@ -31,12 +31,13 @@ class RequestPostDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const _RequestPostDetailView();
+    return _RequestPostDetailView();
   }
 }
 
 class _RequestPostDetailView extends StatelessWidget {
-  const _RequestPostDetailView({Key? key}) : super(key: key);
+  _RequestPostDetailView({Key? key}) : editingController = TextEditingController(), super(key: key);
+  final TextEditingController editingController;
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +50,10 @@ class _RequestPostDetailView extends StatelessWidget {
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
               onVerticalDragStart: (_) => FocusScope.of(context).unfocus(),
-              child: const Column(
+              child: Column(
                 children: [
                   Expanded(child: _ContentListView()),
-                  _CommentFormView()
+                  _CommentFormView(editingController: editingController)
                 ],
               ),
             ),
@@ -294,7 +295,7 @@ class _CommentItem extends StatelessWidget {
         SizedBox(width: imageWidth + imageInterval,),
         CupertinoButton(
           onPressed: () {
-            context.read<RequestPostDetailBloc>().add(RequestPostDetailCommentReply(commentId: 1));
+            context.read<RequestPostDetailBloc>().add(RequestPostDetailCommentReply(taggedMember: comment.writer));
           },
           padding: EdgeInsets.zero,
           minSize: 0,
@@ -310,137 +311,143 @@ class _CommentItem extends StatelessWidget {
 }
 
 class _CommentFormView extends StatelessWidget {
-  const _CommentFormView({Key? key}) : super(key: key);
+  _CommentFormView({
+    Key? key,
+    required this.editingController
+  }) : super(key: key);
 
   final double replyImageWidth = 20;
   final double replyImageHeight = 20;
+  final TextEditingController editingController;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RequestPostDetailBloc, RequestPostDetailState>(
       builder: (context, state) {
-        return Container(
-          child: Column(
-            children: [
-              const Divider(thickness: 0.5, color: black700, height: 0.5,),
+        return Column(
+          children: [
+            const Divider(thickness: 0.5, color: black700, height: 0.5,),
 
-              if (state.replyCommentId != 0)
-                Container(
-                  margin: EdgeInsets.fromLTRB(24, 8, 0, 0),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4)
-                  ),
-                  child: CupertinoButton(
-                    onPressed: () {
-                      context.read<RequestPostDetailBloc>().add(const RequestPostDetailCommentReplyCancel());
-                    },
-                    padding: EdgeInsets.symmetric(vertical: 4),
-                    minSize: 0,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        CachedNetworkImage(
-                          width: replyImageWidth,
-                          height: replyImageHeight,
-                          imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
-                          imageBuilder: (context, imageProvider) => Container(
-                            decoration: BoxDecoration(
-                              color: blue300,
-                              borderRadius: BorderRadius.all(Radius.circular(replyImageWidth/2)),
-                              image: DecorationImage(
-                                  image: imageProvider,
-                                  fit: BoxFit.cover,
-                                  scale: 0.5
-                              ),
+            if (state.taggedMember != null)
+              Container(
+                margin: const EdgeInsets.fromLTRB(24, 8, 0, 0),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4)
+                ),
+                child: CupertinoButton(
+                  onPressed: () {
+                    context.read<RequestPostDetailBloc>().add(const RequestPostDetailCommentReplyCancel());
+                  },
+                  padding: EdgeInsets.symmetric(vertical: 4),
+                  minSize: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CachedNetworkImage(
+                        width: replyImageWidth,
+                        height: replyImageHeight,
+                        imageUrl: state.taggedMember!.thumbnailUrl!,
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            color: blue300,
+                            borderRadius: BorderRadius.all(Radius.circular(replyImageWidth/2)),
+                            image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                                scale: 0.5
                             ),
                           ),
-                          placeholder: (context, url) => Container(width: replyImageWidth, height: replyImageHeight,),
                         ),
-                        const SizedBox(width: 6,),
-                        Text(
-                          'rokwon',
-                          textAlign: TextAlign.center,
-                          style: customColorTextStyle(primaryB2, white500),
-                        ),
-                        const SizedBox(width: 6,),
-                        Text(
-                          '님에게 답장 중',
-                          style: customColorTextStyle(primaryB2, white500),
-                        ),
+                        placeholder: (context, url) => Container(width: replyImageWidth, height: replyImageHeight,),
+                      ),
+                      const SizedBox(width: 6,),
+                      Text(
+                        state.taggedMember!.nickname,
+                        textAlign: TextAlign.center,
+                        style: customColorTextStyle(primaryB2, white500),
+                      ),
+                      const SizedBox(width: 6,),
+                      Text(
+                        '님에게 답장 중',
+                        style: customColorTextStyle(primaryB2, white500),
+                      ),
 
-                        const SizedBox(width: 6,),
-                        Icon(Icons.cancel, size: 16, color: white900,)
-                      ],
+                      const SizedBox(width: 6,),
+                      Icon(Icons.cancel, size: 16, color: white900,)
+                    ],
+                  ),
+                ),
+              ),
+
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: white200
+                    ),
+                    margin: const EdgeInsets.fromLTRB(24, 12, 0, 8),
+                    alignment: Alignment.centerLeft,
+                    child: TextFormField(
+                      controller: editingController,
+                      onChanged: (text) {
+                        context.read<RequestPostDetailBloc>().add(RequestPostDetailCommentWrite(comment: text));
+                      },
+                      maxLength: 100,
+                      minLines: 1,
+                      maxLines: 3,
+                      style: primaryB2,
+                      cursorColor: white1000,
+                      decoration: InputDecoration(
+                        fillColor: black500,
+                        filled: true,
+                        border: InputBorder.none,
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(width: 0, color: Colors.transparent), //<-- SEE HERE
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(width: 0, color: Colors.transparent), //<-- SEE HERE
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        errorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        counterText: '',
+                        contentPadding: EdgeInsets.only(
+                            left: 16, bottom: 10, top: 10, right: 16),
+                        hintText: '댓글을 작성해주세요',
+                        hintStyle: TextStyle(color: white1000),
+                      ),
                     ),
                   ),
                 ),
-
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: white200
-                      ),
-                      margin: const EdgeInsets.fromLTRB(24, 12, 0, 8),
-                      alignment: Alignment.centerLeft,
-                      child: TextFormField(
-                        onChanged: (text) {
-                          context.read<RequestPostDetailBloc>().add(RequestPostDetailCommentWrite(comment: text));
-                        },
-                        maxLength: 100,
-                        minLines: 1,
-                        maxLines: 3,
-                        style: primaryB2,
-                        cursorColor: white1000,
-                        decoration: InputDecoration(
-                          fillColor: black500,
-                          filled: true,
-                          border: InputBorder.none,
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(width: 0, color: Colors.transparent), //<-- SEE HERE
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(width: 0, color: Colors.transparent), //<-- SEE HERE
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          counterText: '',
-                          contentPadding: EdgeInsets.only(
-                              left: 16, bottom: 10, top: 10, right: 16),
-                          hintText: '댓글을 작성해주세요',
-                          hintStyle: TextStyle(color: white1000),
-                        ),
-                      ),
+                CupertinoButton(
+                  onPressed: state.canSend ? () {
+                    final commentText = editingController.text;
+                    context.read<RequestPostDetailBloc>().add(RequestPostDetailCommentSend(commentText: commentText));
+                    FocusScope.of(context).unfocus();
+                    editingController.text = "";
+                  } : null,
+                  padding: EdgeInsets.zero,
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(0,6,0,8),
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.fromLTRB(12, 12, 24, 12),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Icon(
+                      Icons.send_rounded,
+                      color: state.canSend ? blue700  : black700,
                     ),
                   ),
-                  CupertinoButton(
-                    onPressed: state.canSend ? () {
-
-                    } : null,
-                    padding: EdgeInsets.zero,
-                    child: Container(
-                      margin: const EdgeInsets.fromLTRB(0,6,0,8),
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.fromLTRB(12, 12, 24, 12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Icon(
-                        Icons.send_rounded,
-                        color: state.canSend ? blue700  : black700,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
+          ],
         );
       },
     );

@@ -33,10 +33,10 @@ class RequestPostDetailCommentWrite extends RequestPostDetailEvent {
 
 class RequestPostDetailCommentReply extends RequestPostDetailEvent {
   const RequestPostDetailCommentReply({
-    required this.commentId
+    required this.taggedMember
   });
 
-  final int commentId;
+  final MemberResponse? taggedMember;
 }
 
 class RequestPostDetailCommentReplyCancel extends RequestPostDetailEvent {
@@ -44,5 +44,9 @@ class RequestPostDetailCommentReplyCancel extends RequestPostDetailEvent {
 }
 
 class RequestPostDetailCommentSend extends RequestPostDetailEvent {
-  const RequestPostDetailCommentSend();
+  const RequestPostDetailCommentSend({
+    required this.commentText
+  });
+
+  final String commentText;
 }

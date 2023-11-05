@@ -2,10 +2,13 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mentos_flutter/src/data/dto/request/post/comment_write_request.dart';
+import 'package:mentos_flutter/src/data/dto/response/member/member_response.dart';
 import 'package:mentos_flutter/src/data/dto/response/post/comment_list_response.dart';
 import 'package:mentos_flutter/src/data/dto/response/post/comment_response.dart';
 import 'package:mentos_flutter/src/data/dto/response/post/post_response.dart';
 import 'package:mentos_flutter/src/data/repository/network/network.dart';
+import 'package:mentos_flutter/src/util/resource/logger.dart';
 
 part 'request_post_detail_event.dart';
 part 'request_post_detail_state.dart';
@@ -39,6 +42,7 @@ class RequestPostDetailBloc extends Bloc<RequestPostDetailEvent, RequestPostDeta
   ) async {
     if (event.postId == null && state.post?.postId == null) return;
     final commentList = await _postRepository.getCommentList(event.postId ?? state.post!.postId);
+
     emit(state.copyWith(commentList: commentList.result));
   }
 
@@ -53,18 +57,25 @@ class RequestPostDetailBloc extends Bloc<RequestPostDetailEvent, RequestPostDeta
     RequestPostDetailCommentReply event,
     Emitter<RequestPostDetailState> emit
   ) async {
-    emit(state.copyWith(replyCommentId: event.commentId));
+
+    emit(state.copyWith(taggedMember: event.taggedMember));
   }
 
   Future<void> _onPressedReplyCancel(
     RequestPostDetailCommentReplyCancel event,
     Emitter<RequestPostDetailState> emit
   ) async {
-    emit(state.copyWith(replyCommentId: 0));
+    emit(state.removeTagged());
   }
 
   Future<void> _onPressedSend(
     RequestPostDetailCommentSend event,
     Emitter<RequestPostDetailState> emit
-  ) async {}
+  ) async {
+    final request = CommentWriteRequest(comment: event.commentText, taggingMemberId: state.taggedMember?.memberId);
+    emit(state.sendComment());
+    final response = await _postRepository.writeComment(state.post!.postId, request);
+
+    add(const RequestPostDetailLoadCommentList());
+  }
 }
