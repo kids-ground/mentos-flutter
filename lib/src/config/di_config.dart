@@ -25,11 +25,12 @@ void _setupData() {
 }
 
 void _setupRepository() {
-  // network
   getIt.registerLazySingleton(() => TestRepository(baseApiDio, baseUrl: baseUrl));
   getIt.registerLazySingleton(() => AuthRepository(baseApiDio, baseUrl: baseUrl));
-
-  // local
+  getIt.registerLazySingleton(() => MemberRepository(baseApiDio, baseUrl: baseUrl));
+  getIt.registerLazySingleton(() => MentorRepository(baseApiDio, baseUrl: baseUrl));
+  getIt.registerLazySingleton(() => PostRepository(baseApiDio, baseUrl: baseUrl));
+  getIt.registerLazySingleton(() => ImageRepository(baseApiDio, baseUrl: baseUrl));
 }
 
 void _setupService() {
