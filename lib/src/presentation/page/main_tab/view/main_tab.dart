@@ -6,6 +6,7 @@ import 'package:mentos_flutter/src/presentation/page/chat_list/view/chat_list.da
 import 'package:mentos_flutter/src/presentation/page/home/bloc/home_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/home/view/home.dart';
 import 'package:mentos_flutter/src/presentation/page/main_tab/bloc/main_tab_bloc.dart';
+import 'package:mentos_flutter/src/presentation/page/mentor_main/bloc/mentor_main_bloc.dart';
 import 'package:mentos_flutter/src/presentation/page/mentor_main/view/mentor_main_page.dart';
 import 'package:mentos_flutter/src/presentation/page/mypage/view/mypage.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
@@ -30,7 +31,13 @@ class MainTabPage extends StatelessWidget {
               postRepository: getIt.get<PostRepository>()
             )
               ..add(const HomeLoadPostListEvent())
-        )
+        ),
+        BlocProvider(
+            create: (context) => MentorMainBloc(
+                mentorRepository: getIt.get<MentorRepository>()
+            )
+              ..add(const MentorMainListLoad())
+        ),
       ],
       child: _MainTabView()
     );

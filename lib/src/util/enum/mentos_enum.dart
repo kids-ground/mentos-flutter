@@ -32,5 +32,11 @@ enum JobYear {
 }
 
 enum JobGroup {
-  develop, design, marketing, hr
+  develop("엔지니어"),
+  design("디자이너"),
+  marketing("마케터"),
+  hr("HR");
+
+  const JobGroup(this.korean);
+  final String korean;
 }

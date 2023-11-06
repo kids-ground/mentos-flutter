@@ -1,10 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentos_flutter/src/data/dto/response/mentor/mentor_response.dart';
 import 'package:mentos_flutter/src/presentation/page/mentor_detail/view/mentor_detail_page.dart';
+import 'package:mentos_flutter/src/presentation/page/mentor_main/bloc/mentor_main_bloc.dart';
 import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/app_bar.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
+import 'package:mentos_flutter/src/util/enum/mentos_enum.dart';
 
 class MentorMainPage extends StatelessWidget {
   const MentorMainPage({Key? key}) : super(key: key);
@@ -51,7 +55,6 @@ class _MentorFilterView extends StatelessWidget {
             color: white1000
           ),
         )
-
       ),
       child: Row(
         children: [
@@ -129,23 +132,29 @@ class _MentorListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 30,
-      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
-      itemBuilder: (context, idx) => Column(
-        children: [
-          const _MentorProfileItemView(),
-          const SizedBox(height: 16,)
-        ],
-      )
+    return BlocBuilder<MentorMainBloc, MentorMainState>(
+      builder: (context, state) => ListView.builder(
+        itemCount: state.list.length,
+        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
+        itemBuilder: (context, idx) => Column(
+          children: [
+            _MentorProfileItemView(mentorProfile: state.list[idx],),
+            const SizedBox(height: 16,)
+          ],
+        )
+      ),
     );
   }
 }
 
 
 class _MentorProfileItemView extends StatelessWidget {
-  const _MentorProfileItemView({Key? key}) : super(key: key);
+  const _MentorProfileItemView({
+    Key? key,
+    required this.mentorProfile
+  }) : super(key: key);
 
+  final MentorResponse mentorProfile;
   final double width = 54;
   final double height = 54;
 
@@ -158,85 +167,92 @@ class _MentorProfileItemView extends StatelessWidget {
         Navigator.push(context, MentorDetailPage.route(1));
       },
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         decoration: BoxDecoration(
           color: black800,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: black500
           ),
-          boxShadow: [
-            // BoxShadow(
-            //   color: white400.withOpacity(0.7),
-            //   spreadRadius: 6,
-            //   blurRadius: 6.0,
-            //   offset: const Offset(4, 4),
-            // ),
-          ],
         ),
         child: Column(
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CachedNetworkImage(
-                  width: width,
-                  height: height,
-                  imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
-                  imageBuilder: (context, imageProvider) => Container(
-                    decoration: BoxDecoration(
-                      color: blue300,
-                      borderRadius: BorderRadius.all(Radius.circular(width/2)),
-                      image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                          scale: 0.5
-                      ),
-                    ),
-                  ),
-                  placeholder: (context, url) => Container(width: width, height: height,),
-                ),
-                const SizedBox(width: 16,),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "로건",
-                      style: primaryB1,
+                    CachedNetworkImage(
+                      width: width,
+                      height: height,
+                      imageUrl: mentorProfile.member.thumbnailUrl!,
+                      imageBuilder: (context, imageProvider) => Container(
+                        decoration: BoxDecoration(
+                          color: blue300,
+                          borderRadius: BorderRadius.all(Radius.circular(width/2)),
+                          image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                              scale: 0.5
+                          ),
+                        ),
+                      ),
+                      placeholder: (context, url) => Container(width: width, height: height,),
                     ),
-                    const SizedBox(height: 2,),
-                    Text(
-                      "Google",
-                      style: primaryB3,
-                    ),
-                    const SizedBox(height: 4,),
-                    Row(
-                      children: [
-                        Text(
-                          "연구개발",
-                          style: customColorTextStyle(primaryB4, white1000),
-                        ),
-                        Text(' ∙ '),
-                        Text(
-                          "AI",
-                          style: customColorTextStyle(primaryB4, white1000),
-                        ),
-                        Text('  '),
-                        Text(
-                          "4년차",
-                          style: customColorTextStyle(primaryB4, white1000),
-                        ),
-                      ],
+                    const SizedBox(height: 6,),
+                    Container(
+                        constraints: BoxConstraints(minWidth: width, maxWidth: width),
+                        alignment: Alignment.center,
+                        child: Text(
+                          mentorProfile.member.nickname,
+                          style: customColorTextStyle(primaryB2, white1000),
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        )
                     ),
                   ],
+                ),
+                const SizedBox(width: 24,),
+                Expanded(
+                  child: Text(
+                    '" ${mentorProfile.introduce} 그리고 여기저기서 많이 일해본 경험이 있습니다. "',
+                    maxLines: 3,
+                    style: customColorTextStyle(primaryB1, white500, height: 1.4),
+                  ),
                 ),
               ],
             ),
             const SizedBox(height: 12,),
-            Text(
-              '" 안녕하세요. Google 5년차 소프트웨어 엔지니어입니다. Google에 대해 궁금하신게 있으시다면 주저말고 연락주세요! "',
-              style: customColorTextStyle(primaryB1, white500, height: 1.4),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(width: 0.5, color: white1000)
+                  ),
+                  child: Text(mentorProfile.member.currentCorporationName!, style: customColorTextStyle(primaryB3, white800),),
+                ),
+                const SizedBox(width: 8,),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    // color: red100,
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(width: 0.5, color: red500)
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                      '${mentorProfile.member.currentJobDetail!}  ${JobGroup.values[mentorProfile.jobGroup].korean}' ,
+                        style: customColorTextStyle(primaryB3, red500),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ],
         ),

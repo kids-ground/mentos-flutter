@@ -18,7 +18,7 @@ class MentorResponse with _$MentorResponse {
     int? bookmarkCount,
     int? reviewCount,
     int? mentoringCount,
-    int? reviewScore,
+    double? reviewScore,
     required MemberResponse member
   }) = _MentorResponse;
 
