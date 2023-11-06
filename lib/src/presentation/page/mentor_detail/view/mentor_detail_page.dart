@@ -337,7 +337,9 @@ class _ContactView extends StatelessWidget {
               child: CupertinoButton(
                 color: mainColor,
                 padding: EdgeInsets.zero,
-                onPressed: () { },
+                onPressed: () {
+                  context.read<MentorDetailBloc>().add(const MentorDetailOpenTalkLink());
+                },
                 child: Container(
                   alignment: Alignment.center,
                   height: 52,

@@ -6,6 +6,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:mentos_flutter/src/data/data_source/data_source.dart';
 import 'package:mentos_flutter/src/data/dto/response/mentor/mentor_response.dart';
 import 'package:mentos_flutter/src/data/repository/network/mentor_repository.dart';
+import 'package:mentos_flutter/src/util/resource/logger.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 part 'mentor_detail_event.dart';
 part 'mentor_detail_state.dart';
@@ -18,6 +21,7 @@ class MentorDetailBloc extends Bloc<MentorDetailEvent, MentorDetailState> {
         _localKeyValueDataSource = localKeyValueDataSource,
         super(const MentorDetailState()) {
     on<MentorDetailEventBookmarked>(_onPressedBookmark);
+    on<MentorDetailOpenTalkLink>(_openTalkLink);
     on<MentorDetailLoadMentorProfile>(_loadMentorProfile);
   }
 
@@ -34,6 +38,18 @@ class MentorDetailBloc extends Bloc<MentorDetailEvent, MentorDetailState> {
       .toList() ?? <int>[];
 
     emit(state.copyWith(mentorProfileResponse: response, isBookmarked: bookMarkedList.contains(event.mentorId)));
+  }
+
+  Future<void> _openTalkLink(
+      MentorDetailOpenTalkLink event,
+      Emitter<MentorDetailState> emit,
+  ) async {
+    if (state.mentorProfileResponse == null) return;
+    final Uri url = Uri.parse(state.mentorProfileResponse!.kakaoChatLink);
+
+    if (!await launchUrl(url)) {
+      logger.e('브라우저 열기 실패');
+    }
   }
 
   Future<void> _onPressedBookmark(

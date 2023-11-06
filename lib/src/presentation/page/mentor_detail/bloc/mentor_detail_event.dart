@@ -15,6 +15,10 @@ class MentorDetailLoadMentorProfile extends MentorDetailEvent {
   final int mentorId;
 }
 
+class MentorDetailOpenTalkLink extends MentorDetailEvent {
+  const MentorDetailOpenTalkLink();
+}
+
 class MentorDetailEventBookmarked extends MentorDetailEvent {
   const MentorDetailEventBookmarked({
     required this.isBookmarked
