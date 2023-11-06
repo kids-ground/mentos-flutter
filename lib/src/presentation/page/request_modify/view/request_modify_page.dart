@@ -219,6 +219,38 @@ Java와 Spring로 하나의 프로젝트를 만들어 봤습니다.
   }
 }
 
+class _SaveButtonView extends StatelessWidget {
+  const _SaveButtonView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<RequestModifyBloc, RequestModifyState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: CupertinoButton(
+            color: mainColor,
+            padding: EdgeInsets.zero,
+            disabledColor: black300,
+            onPressed: state.canComplete ? () { } : null,
+            child: Container(
+              alignment: Alignment.center,
+              height: 56,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                '작성 완료',
+                style: customColorTextStyle(primaryB1, state.canComplete ? white : black100)
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
 class _ImageListView extends StatelessWidget {
   const _ImageListView({Key? key}) : super(key: key);
 
@@ -238,8 +270,8 @@ class _ImageListView extends StatelessWidget {
               width: 70,
               height: 70,
               decoration: BoxDecoration(
-                color: white300,
-                borderRadius: BorderRadius.circular(8)
+                  color: white300,
+                  borderRadius: BorderRadius.circular(8)
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -248,8 +280,8 @@ class _ImageListView extends StatelessWidget {
                   Text(
                     '0/3',
                     style: TextStyle(
-                      color: black100,
-                      fontSize: 14
+                        color: black100,
+                        fontSize: 14
                     ),
                   )
                 ],
@@ -268,41 +300,5 @@ class _ImageListView extends StatelessWidget {
     if (selectedImages.isEmpty) return;
     if (selectedImages.length > maxCount) {}
     else { }
-  }
-}
-
-class _SaveButtonView extends StatelessWidget {
-  const _SaveButtonView({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<RequestModifyBloc, RequestModifyState>(
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: CupertinoButton(
-            color: mainColor,
-            padding: EdgeInsets.zero,
-            disabledColor: disableBackgroundColor,
-            onPressed: state.canComplete ? () { } : null,
-            child: Container(
-              alignment: Alignment.center,
-              height: 52,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: const Text(
-                  '작성 완료',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: white,
-                  )
-              ),
-            ),
-          ),
-        );
-      },
-    );
   }
 }
