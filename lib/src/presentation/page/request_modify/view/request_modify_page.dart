@@ -2,10 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mentos_flutter/src/config/config.dart';
+import 'package:mentos_flutter/src/data/repository/network/network.dart';
 import 'package:mentos_flutter/src/presentation/page/request_modify/bloc/request_modify_bloc.dart';
+import 'package:mentos_flutter/src/presentation/page/request_post_detail/view/request_post_detail_page.dart';
 import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/routing_app_bar.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
+import 'package:mentos_flutter/src/presentation/widget/dialog/loading_dialog.dart';
+import 'package:mentos_flutter/src/util/enum/mentos_enum.dart';
 
 class RequestModifyPage extends StatelessWidget {
   const RequestModifyPage({Key? key}) : super(key: key);
@@ -14,7 +19,9 @@ class RequestModifyPage extends StatelessWidget {
   static Route<void> route() {
     return MaterialPageRoute(
       builder: (context) => BlocProvider(
-        create: (context) => RequestModifyBloc(),
+        create: (context) => RequestModifyBloc(
+          postRepository: getIt.get<PostRepository>()
+        ),
         child: const RequestModifyPage(),
       ),
     );
@@ -22,7 +29,26 @@ class RequestModifyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _RequestModifyView();
+    return BlocListener<RequestModifyBloc, RequestModifyState>(
+      listenWhen: (pre, cur) => pre.writeLoadingStatus != cur.writeLoadingStatus,
+      listener: (context, state) {
+        switch (state.writeLoadingStatus) {
+          case LoadingStatus.loading:
+            showLoadingDialog(context);
+          case LoadingStatus.success:
+            Navigator.pop(context);
+            if (state.newPostId != null) {
+              Navigator.pushReplacement(context, RequestPostDetailPage.route(state.newPostId!));
+            }
+            return;
+          case LoadingStatus.failure:
+            Navigator.pop(context);
+          default:
+            return;
+        }
+      },
+      child: _RequestModifyView()
+    );
   }
 }
 
@@ -232,7 +258,10 @@ class _SaveButtonView extends StatelessWidget {
             color: mainColor,
             padding: EdgeInsets.zero,
             disabledColor: black300,
-            onPressed: state.canComplete ? () { } : null,
+            onPressed: state.canComplete ? () {
+              FocusScope.of(context).unfocus();
+              context.read<RequestModifyBloc>().add(const RequestModifyPressedComplete());
+            } : null,
             child: Container(
               alignment: Alignment.center,
               height: 56,
