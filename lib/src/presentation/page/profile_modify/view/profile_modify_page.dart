@@ -7,6 +7,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mentos_flutter/src/config/config.dart';
+import 'package:mentos_flutter/src/data/repository/network/image_repository.dart';
+import 'package:mentos_flutter/src/data/repository/network/member_repository.dart';
 import 'package:mentos_flutter/src/presentation/page/profile_modify/bloc/profile_modify_bloc.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/routing_app_bar.dart';
 import 'package:mentos_flutter/src/presentation/widget/button/full_filled_button.dart';
@@ -22,7 +25,10 @@ class ProfileModifyPage extends StatelessWidget {
   static Route<void> route() {
     return MaterialPageRoute(
       builder: (context) => BlocProvider(
-        create: (context) => ProfileModifyBloc()..add(const ProfileModifyGetProfile()),
+        create: (context) => ProfileModifyBloc(
+          memberRepository: getIt.get<MemberRepository>(),
+          imageRepository: getIt.get<ImageRepository>(),
+        )..add(const ProfileModifyGetProfile()),
         child: const ProfileModifyPage(),
       ),
     );
