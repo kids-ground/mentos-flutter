@@ -4,10 +4,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentos_flutter/src/config/config.dart';
+import 'package:mentos_flutter/src/data/data_source/data_source.dart';
+import 'package:mentos_flutter/src/data/dto/response/member/member_response.dart';
+import 'package:mentos_flutter/src/data/dto/response/mentor/mentor_response.dart';
+import 'package:mentos_flutter/src/data/repository/network/mentor_repository.dart';
 import 'package:mentos_flutter/src/presentation/page/mentor_detail/bloc/mentor_detail_bloc.dart';
 import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/routing_app_bar.dart';
 import 'package:mentos_flutter/src/presentation/style/color_style.dart';
+import 'package:mentos_flutter/src/util/enum/mentos_enum.dart';
 
 class MentorDetailPage extends StatelessWidget {
   const MentorDetailPage({Key? key}) : super(key: key);
@@ -15,7 +21,12 @@ class MentorDetailPage extends StatelessWidget {
   static Route<void> route(int mentorId) {
     return MaterialPageRoute(
       builder: (context) => BlocProvider(
-        create: (context) => MentorDetailBloc(),
+        create: (context) => MentorDetailBloc(
+          mentorRepository: getIt.get<MentorRepository>(),
+          localKeyValueDataSource: getIt.get<LocalKeyValueDataSource>()
+        )
+          ..add(MentorDetailLoadMentorProfile(mentorId: mentorId))
+        ,
         child: const MentorDetailPage(),
       ),
     );
@@ -32,43 +43,50 @@ class _MentorDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const RoutingAppBar(title: '멘토 상세',),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _ProfileView(),
-                    const SizedBox(height: 32,),
-                    _StatisticsView(),
-                    const SizedBox(height: 32,),
-                    _IntroductionView(),
-                    const SizedBox(height: 32,),
-                    _DescriptionView(),
-                    const SizedBox(height: 16,),
-                  ],
-                )
-              ),
-            ),
-            const _ContactView()
-          ],
+    return BlocBuilder<MentorDetailBloc, MentorDetailState>(
+      buildWhen: (pre, cur) => pre.mentorProfileResponse != cur.mentorProfileResponse,
+      builder: (context, state) => Scaffold(
+          appBar: const RoutingAppBar(title: '멘토 상세',),
+          body: SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _ProfileView(mentor: state.mentorProfileResponse,),
+                        const SizedBox(height: 32,),
+                        _StatisticsView(mentor: state.mentorProfileResponse,),
+                        const SizedBox(height: 32,),
+                        _IntroductionView(mentor: state.mentorProfileResponse,),
+                        const SizedBox(height: 32,),
+                        _DescriptionView(mentor: state.mentorProfileResponse),
+                        const SizedBox(height: 16,),
+                      ],
+                    )
+                  ),
+                ),
+                const _ContactView()
+              ],
+            )
+          ),
         )
-      ),
     );
   }
 }
 
 class _ProfileView extends StatelessWidget {
-  const _ProfileView({Key? key}) : super(key: key);
+  const _ProfileView({
+    Key? key,
+    this.mentor
+  }) : super(key: key);
 
   final double width = 64;
   final double height = 64;
+  final MentorResponse? mentor;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +95,7 @@ class _ProfileView extends StatelessWidget {
         CachedNetworkImage(
           width: width,
           height: height,
-          imageUrl: "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
+          imageUrl: mentor?.member.thumbnailUrl ?? "https://images.velog.io/images/chang626/post/c9533c4f-adbb-4411-bce4-b09293d64fbf/A03EACB4-4DFA-439A-A3FE-084635A89FE6.png",
           imageBuilder: (context, imageProvider) => Container(
             decoration: BoxDecoration(
               color: blue300,
@@ -95,14 +113,14 @@ class _ProfileView extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "로건",
+            Text(
+              mentor?.member.nickname ?? '',
               style: primaryT2,
             ),
             Row(
               children: [
                 Text(
-                  "Google",
+                  mentor?.member.currentCorporationName ?? '',
                   style: primaryB2,
                 ),
                 Padding(
@@ -117,25 +135,13 @@ class _ProfileView extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 4,),
 
             Row(
               children: [
                 Text(
-                  "연구개발",
-                  style: customColorTextStyle(primaryB2, white1000),
-                ),
-                Text(
-                  ' ∙ ',
-                  style: customColorTextStyle(primaryB2, white1000),
-                ),
-                Text(
-                  "AI",
-                  style: customColorTextStyle(primaryB2, white1000),
-                ),
-                Text('  '),
-                Text(
-                  "4년차",
-                  style: customColorTextStyle(primaryB2, white1000),
+                  "${mentor?.member.currentJobDetail ?? ''} ${JobGroup.values[mentor?.jobGroup ?? 0].korean}",
+                  style: customColorTextStyle(primaryB2, black100),
                 ),
               ],
             ),
@@ -147,7 +153,12 @@ class _ProfileView extends StatelessWidget {
 }
 
 class _StatisticsView extends StatelessWidget {
-  const _StatisticsView({Key? key}) : super(key: key);
+  const _StatisticsView({
+    Key? key,
+    this.mentor
+  }) : super(key: key);
+
+  final MentorResponse? mentor;
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +184,7 @@ class _StatisticsView extends StatelessWidget {
                     ),
                     const SizedBox(height: 4,),
                     Text(
-                      "5번",
+                      "${mentor?.mentoringCount ?? 0}번",
                       style: primaryB1,
                     ),
                   ],
@@ -199,7 +210,7 @@ class _StatisticsView extends StatelessWidget {
                     ),
                     const SizedBox(height: 4,),
                     Text(
-                      "12개",
+                      "${mentor?.reviewCount ?? 0}개",
                       style: primaryB1,
                     ),
                   ],
@@ -225,7 +236,7 @@ class _StatisticsView extends StatelessWidget {
                     ),
                     const SizedBox(height: 4,),
                     Text(
-                      "4.5",
+                      "${mentor?.reviewScore ?? 0.0}",
                       style: primaryB1,
                     ),
                   ],
@@ -239,7 +250,12 @@ class _StatisticsView extends StatelessWidget {
 }
 
 class _IntroductionView extends StatelessWidget {
-  const _IntroductionView({Key? key}) : super(key: key);
+  const _IntroductionView({
+    Key? key,
+    this.mentor
+  }) : super(key: key);
+
+  final MentorResponse? mentor;
 
   @override
   Widget build(BuildContext context) {
@@ -253,12 +269,13 @@ class _IntroductionView extends StatelessWidget {
         const SizedBox(height: 12),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          width: double.infinity,
           decoration: BoxDecoration(
             color: blue700,
             borderRadius: BorderRadius.circular(8)
           ),
           child: Text(
-            '안녕하세요. Google 5년차 소프트웨어 엔지니어입니다. Google에 대해 궁금하신게 있으시다면 주저말고 연락주세요!',
+            mentor?.introduce ?? '',
             style: primaryB1,
           ),
         ),
@@ -268,7 +285,12 @@ class _IntroductionView extends StatelessWidget {
 }
 
 class _DescriptionView extends StatelessWidget {
-  const _DescriptionView({Key? key}) : super(key: key);
+  const _DescriptionView({
+    Key? key,
+    this.mentor
+  }) : super(key: key);
+
+  final MentorResponse? mentor;
 
   @override
   Widget build(BuildContext context) {
@@ -287,18 +309,7 @@ class _DescriptionView extends StatelessWidget {
               color: black500,
               borderRadius: BorderRadius.circular(8)
           ),
-          child: Text('''
-간단하게 제 소개를 해볼게요ㅎㅎ
-
-- 삼성 사내 벤쳐 스타트업 '앱플' 대표
-- '애플'에 매각 
-- 아이폰 15 디자인 리드
-- 아이폰 16 디자인 리드 어쩌면?
-- 구글 코리아 L4 엔지니어
-- 구글 코리아 본부장 각
-
-제 프로필을 보시고 궁금하신 점이 있으시다면 언제든 연락주세요  
-            ''',
+          child: Text('${mentor?.description ?? ''}',
             style: primaryB2,
           ),
         ),

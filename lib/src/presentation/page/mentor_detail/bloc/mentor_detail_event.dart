@@ -7,6 +7,14 @@ abstract class MentorDetailEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class MentorDetailLoadMentorProfile extends MentorDetailEvent {
+  const MentorDetailLoadMentorProfile({
+    required this.mentorId
+  });
+
+  final int mentorId;
+}
+
 class MentorDetailEventBookmarked extends MentorDetailEvent {
   const MentorDetailEventBookmarked({
     required this.isBookmarked
