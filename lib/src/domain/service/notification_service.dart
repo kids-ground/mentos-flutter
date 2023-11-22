@@ -143,7 +143,7 @@ class NotificationService {
 
 enum LocalNotificationType {
   post(0, '새로운 게시글', '새로운 게시글을 확인해 볼까요?'),
-  repost(1, '새로운 답글', '새로운 답글이 달렸습니다.');
+  repost(1, '새로운 댓글', '회원님의 게시글에 새로운 댓글이 달렸습니다.');
 
   const LocalNotificationType(this.id, this.title, this.description);
 

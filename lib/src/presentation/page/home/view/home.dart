@@ -315,7 +315,7 @@ class _ContentListItem extends StatelessWidget {
         Image.asset('assets/images/eye.png', width: 18, color: white800,),
         const SizedBox(width: 6,),
         Text(
-          '${data.hit}',
+          '${data.hit ?? 0}',
           style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w400,
@@ -326,7 +326,7 @@ class _ContentListItem extends StatelessWidget {
         Image.asset('assets/images/chat_dots.png', width: 18, color: white800,),
         const SizedBox(width: 6,),
         Text(
-          '${data.commentCount}',
+          '${data.commentCount ?? 0}',
           style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w400,

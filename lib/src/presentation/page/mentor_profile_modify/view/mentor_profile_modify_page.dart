@@ -71,6 +71,18 @@ class _MentorProfileModifyView extends StatelessWidget {
   }
 }
 
+class _EmailAuthentication extends StatelessWidget {
+  const _EmailAuthentication({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+
+    );
+  }
+}
+
+
 class _EmailForm extends StatelessWidget {
   const _EmailForm({Key? key}) : super(key: key);
 

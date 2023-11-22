@@ -8,6 +8,7 @@ import 'package:mentos_flutter/src/data/dto/response/post/comment_list_response.
 import 'package:mentos_flutter/src/data/dto/response/post/comment_response.dart';
 import 'package:mentos_flutter/src/data/dto/response/post/post_response.dart';
 import 'package:mentos_flutter/src/data/repository/network/network.dart';
+import 'package:mentos_flutter/src/domain/service/notification_service.dart';
 import 'package:mentos_flutter/src/util/resource/logger.dart';
 
 part 'request_post_detail_event.dart';
@@ -15,8 +16,11 @@ part 'request_post_detail_state.dart';
 
 class RequestPostDetailBloc extends Bloc<RequestPostDetailEvent, RequestPostDetailState> {
   RequestPostDetailBloc({
-    required PostRepository postRepository
-  }) : _postRepository = postRepository, super(const RequestPostDetailState()) {
+    required PostRepository postRepository,
+    required NotificationService notificationService
+  }) : _postRepository = postRepository,
+      _notificationService = notificationService,
+        super(const RequestPostDetailState()) {
     on<RequestPostDetailLoadPost>(_loadPost);
     on<RequestPostDetailLoadCommentList>(_loadCommentList);
     on<RequestPostDetailCommentWrite>(_onWritingComment);
@@ -26,6 +30,7 @@ class RequestPostDetailBloc extends Bloc<RequestPostDetailEvent, RequestPostDeta
   }
 
   final PostRepository _postRepository;
+  final NotificationService _notificationService;
 
   Future<void> _loadPost(
     RequestPostDetailLoadPost event,
@@ -72,10 +77,12 @@ class RequestPostDetailBloc extends Bloc<RequestPostDetailEvent, RequestPostDeta
     RequestPostDetailCommentSend event,
     Emitter<RequestPostDetailState> emit
   ) async {
-    final request = CommentWriteRequest(comment: event.commentText, taggingMemberId: state.taggedMember?.memberId);
+    final request = CommentWriteRequest(content: event.commentText, taggingMemberId: state.taggedMember?.memberId);
     emit(state.sendComment());
     final response = await _postRepository.writeComment(state.post!.postId, request);
 
     add(const RequestPostDetailLoadCommentList());
+
+    _notificationService.immediatelySendLocalNotification(type: LocalNotificationType.repost, data: {'commentId': response.commentId});
   }
 }

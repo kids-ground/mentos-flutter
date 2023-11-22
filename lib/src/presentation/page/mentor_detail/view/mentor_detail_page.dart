@@ -1,5 +1,4 @@
 
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -305,6 +304,7 @@ class _DescriptionView extends StatelessWidget {
 
         Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          width: double.infinity,
           decoration: BoxDecoration(
               color: black500,
               borderRadius: BorderRadius.circular(8)

@@ -6,6 +6,7 @@ import 'package:mentos_flutter/src/config/config.dart';
 import 'package:mentos_flutter/src/data/dto/response/post/comment_response.dart';
 import 'package:mentos_flutter/src/data/dto/response/post/post_response.dart';
 import 'package:mentos_flutter/src/data/repository/network/network.dart';
+import 'package:mentos_flutter/src/domain/service/notification_service.dart';
 import 'package:mentos_flutter/src/presentation/page/request_post_detail/bloc/request_post_detail_bloc.dart';
 import 'package:mentos_flutter/src/presentation/style/text_style.dart';
 import 'package:mentos_flutter/src/presentation/widget/app_bar/routing_app_bar.dart';
@@ -19,7 +20,8 @@ class RequestPostDetailPage extends StatelessWidget {
     return MaterialPageRoute(
       builder: (context) => BlocProvider(
         create: (context) => RequestPostDetailBloc(
-          postRepository: getIt.get<PostRepository>()
+          postRepository: getIt.get<PostRepository>(),
+          notificationService: getIt.get<NotificationService>()
         )
           ..add(RequestPostDetailLoadPost(postId: postId))
           ..add(RequestPostDetailLoadCommentList(postId: postId))
@@ -190,11 +192,11 @@ class _PostItem extends StatelessWidget {
       children: [
         Image.asset('assets/images/eye.png', width: 20, color: white800,),
         const SizedBox(width: 6,),
-        Text('${post.hit}', style: customColorTextStyle(primaryB2, white1000),),
+        Text('${post.hit ?? 0}', style: customColorTextStyle(primaryB2, white1000),),
         const SizedBox(width: 32,),
         Image.asset('assets/images/chat_dots.png', width: 20, color: white800,),
         const SizedBox(width: 6,),
-        Text('${post.commentCount}', style: customColorTextStyle(primaryB2, white1000),),
+        Text('${post.commentCount ?? 0}', style: customColorTextStyle(primaryB2, white1000),),
       ],
     );
   }

@@ -13,6 +13,7 @@ Future<void> setupNotificationConfig(NotificationService notificationService, De
       foregroundHandler: localNotificationHandlerFromForeground,
       backgroundHandler: localNotificationHandlerFromBackground
   );
+  notificationService.requestPermissionIfNotDetermined();
 }
 
 Future<void> _setupRemoteNotificationHandler(DeepLinkingService deepLinkingService) async {

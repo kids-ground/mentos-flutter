@@ -38,7 +38,7 @@ class ProfileModifyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<ProfileModifyBloc, ProfileModifyState>(
       listenWhen: (pre, cur) => pre.loadingStatus != cur.loadingStatus,
-      listener: (pre, cur) {
+      listener: (context, cur) {
         switch (cur.loadingStatus) {
           case LoadingStatus.loading:
             showLoadingDialog(context);
@@ -86,6 +86,55 @@ class _ProfileModifyView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _NicknameChangeView extends StatelessWidget {
+  _NicknameChangeView({Key? key}) : super(key: key);
+
+  final _controller = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<ProfileModifyBloc, ProfileModifyState>(
+      listenWhen: (pre, cur) => pre.memberResponse?.nickname != cur.memberResponse?.nickname,
+      listener: (pre, cur) {
+        _controller.text = cur.memberResponse?.nickname ?? "";
+      },
+      child: DefaultTextFormField(
+          label: '닉네임',
+          hintText: '닉네임을 입력해주세요',
+          controller: _controller,
+          maxLength: 8,
+          onSaved: (v) {
+            _controller.text = v;
+          },
+          onChanged: (v) {
+            context.read<ProfileModifyBloc>().add(ProfileModifyNickname(nickname: v));
+          },
+          validator: (v) {
+            if (v.length < 2) {
+              return '2자 이상이어야 합니다';
+            }
+            return null;
+          }
+        )
+    );
+  }
+}
+
+class _SaveButton extends StatelessWidget {
+  const _SaveButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FullFilledButton(
+        height: 52,
+        title: '저장하기',
+        onPressed: () {
+          context.read<ProfileModifyBloc>().add(const ProfileModifySave());
+        }
     );
   }
 }
@@ -197,55 +246,6 @@ class _ImageSelectView extends StatelessWidget {
         color: white200,
         borderRadius: BorderRadius.all(Radius.circular(width/2)),
       ),
-    );
-  }
-}
-
-class _NicknameChangeView extends StatelessWidget {
-  _NicknameChangeView({Key? key}) : super(key: key);
-
-  final _controller = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocListener<ProfileModifyBloc, ProfileModifyState>(
-      listenWhen: (pre, cur) => pre.memberResponse?.nickname != cur.memberResponse?.nickname,
-      listener: (pre, cur) {
-        _controller.text = cur.memberResponse?.nickname ?? "";
-      },
-      child: DefaultTextFormField(
-          label: '닉네임',
-          hintText: '닉네임을 입력해주세요',
-          controller: _controller,
-          maxLength: 8,
-          onSaved: (v) {
-            _controller.text = v;
-          },
-          onChanged: (v) {
-            context.read<ProfileModifyBloc>().add(ProfileModifyNickname(nickname: v));
-          },
-          validator: (v) {
-            if (v.length < 2) {
-              return '2자 이상이어야 합니다';
-            }
-            return null;
-          }
-        )
-    );
-  }
-}
-
-class _SaveButton extends StatelessWidget {
-  const _SaveButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return FullFilledButton(
-        height: 52,
-        title: '저장하기',
-        onPressed: () {
-          context.read<ProfileModifyBloc>().add(const ProfileModifySave());
-        }
     );
   }
 }

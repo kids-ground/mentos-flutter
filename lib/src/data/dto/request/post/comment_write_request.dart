@@ -7,7 +7,7 @@ part 'comment_write_request.freezed.dart';
 class CommentWriteRequest with _$CommentWriteRequest {
   @JsonSerializable()
   factory CommentWriteRequest({
-    required String comment,
+    required String content,
     int? taggingMemberId
   }) = _CommentWriteRequest;
 
